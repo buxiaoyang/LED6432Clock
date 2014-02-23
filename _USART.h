@@ -1,7 +1,7 @@
 /***************************************************************************/
 // 程序：LED3264电子日历
-// 模块：光敏电阻调节亮度模块	
-// 文件：_Dimming.h
+// 模块：串口
+// 文件：_USART.h
 // 作者：卜晓旸
 // 版本：1.9.7
 // 日期：2012年2月10日
@@ -28,38 +28,27 @@
 //				PA0: 光敏电阻
 /***************************************************************************/
 
-#ifndef _DIMMING_H_
-#define _DIMMING_H_
+#ifndef _USART_H_
+#define _USART_H_
 
-uint16 AD_time_count;
-
-void StartAD()
+void USART_Init()
 {
-	ADCSRA=0x00;
-	ADMUX=0x40;
-	ADCSRA=(1<<ADEN)|(1<<ADSC)|(1<<ADIF)|0x07;   //128分频，连续转换
+	// 通信参数: 8 Data, 1 Stop, No Parity  
+	// 波特率: 
+	//晶振8M时波特率设置  UBRRL=0x33; 
+	UCSRB=0x00;  
+	UCSRA=0x00; 	     //控制寄存器清零 
+	UCSRB = (1<<RXEN)|(1<<TXEN)|(1<<RXCIE);  //允许发送和接收 
+	UCSRC = (1<<URSEL)|(1<<UCSZ1)|(1<<UCSZ0); //8位数据位+1位停止位 
+	UCSRA=0x01; 
+	UBRRH=0x00;  
+	UBRRL=0x33;//波特率设置为9600 
 }
 
-void GetDispalyLight()
+void uart_send_char( unsigned char data )
 {
-	uint8 ten_1;
-	uint16 adc_data0,adc_l0,adc_h0;
-	adc_l0=ADCL;
-	adc_h0=ADCH;
-	adc_data0=adc_h0<<8|adc_l0;                  
-	adc_data0=adc_data0>>1;               //放弃一位的精度
-	adc_data0-=35;                        //修正
-	ten_1=(adc_data0)/60;
-	display_light = 8 - ten_1;
-	if(display_light > 8)
-	{
-		display_light = 8;
-	}
-	else if(display_light < 1)
-	{
-		display_light = 1;
-	}
-	SET_DISPLAY_LIGHT;
+    UDR = data;   
+    while(!(UCSRA&(1<<UDRE)));    
 }
 
 #endif

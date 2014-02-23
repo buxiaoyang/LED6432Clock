@@ -1,3 +1,33 @@
+/***************************************************************************/
+// 程序：LED3264电子日历
+// 模块：点阵屏显示模块	
+// 文件：_Display.h
+// 作者：卜晓旸
+// 版本：1.9.7
+// 日期：2012年2月10日
+// 功能：时分数字静态显示，年月日周温度滚动显示。可选亮度模式，时间补偿。
+// 芯片：Atmega8
+// 容丝：低位0x24 高位0xD1
+// 编译：AVR GCC
+// 引脚定义：	PD0：按键MODE 
+//				PD1: 按键显示模式
+//				PD2：显示屏控制LAT
+//				PD3：显示屏控制SCK
+//				PD4：显示屏信号R1
+//				PD5：显示屏信号R2
+// 				PD7：温度传感器DS18B20
+//				PC6：按键UP
+//				PC7：按键DOWN
+//				PB0：显示屏控制A
+//				PB1：显示屏控制B
+//				PB2：显示屏控制C
+//				PB3：显示屏控制EN
+//				PB4：显示屏控制D
+//				PB6：显示屏数据G1
+//				PB7：显示屏数据G2
+//				PA0: 光敏电阻
+/***************************************************************************/
+
 #ifndef _DISPLAY_H_
 #define _DISPLAY_H_
 
@@ -8,7 +38,6 @@ uint16 	halfSecondCount; /*半秒定时计数器*/
 uint8 	isSecondCountShow;
 uint8 	currentMoveLeft;
 uint16  moveSpeedTimerCount;
-
 uint16 FreshDisplayBufferCount; /*刷新显示缓存时间计数器*/
 
 void LED_SCREEN_INI()
@@ -20,6 +49,8 @@ void LED_SCREEN_INI()
 	LS138_D_DDR |= 1<<LS138_D_BIT;
 	HC595_D0_DDR |= 1<<HC595_D0_BIT;
 	HC595_D1_DDR |= 1<<HC595_D1_BIT;
+	HC595_D2_DDR |= 1<<HC595_D2_BIT;
+	HC595_D3_DDR |= 1<<HC595_D3_BIT;
 	HC595_LAT_DDR |= 1<<HC595_LAT_BIT;
 	HC595_SCK_DDR |= 1<<HC595_SCK_BIT;
 
@@ -40,7 +71,6 @@ void fullScreen()
 {
 	memset(display_buffer,0xFF,256);
 }
-
 
 void writeCloclColon(uint8 isSecondCountShow)
 {
@@ -77,7 +107,7 @@ void writeCloclColon(uint8 isSecondCountShow)
 		display_buffer[123] &= 0xFE;
 	}
 }
-/*
+
 void writeOneChinese(uint8 x, uint8 y,uint8 index)
 {
 	uint8 temp;
@@ -91,7 +121,7 @@ void writeOneChinese(uint8 x, uint8 y,uint8 index)
 	}
 	
 }
-*/
+
 void writeOneUnSCROLL(uint8 x, uint8 y,uint8 index)
 {
 	uint8 temp;
@@ -142,71 +172,26 @@ void FreshDisplayComment(uint8 *tenValue, uint8 *oneValue, uint8 matrixIndex)
 void FreshDisplayBufferAjustYear()
 {
 	FreshDisplayComment(&YearTen, &YearOne, 10);
-	/*
-	clearScreen();
-	writeOneUnSCROLL(0,0,28);
-	writeOneUnSCROLL(1,0,29);
-	writeOneUnSCROLL(2,0,30);
-	wirteOneBigNumber(3,0,YearTen ); 
-	wirteOneBigNumber(5,0,YearOne );
-	writeOneUnSCROLL(7,11,10);
-	*/
 }
 
 void FreshDisplayBufferAjustMonth()
 {
 	FreshDisplayComment(&MonthTen, &MonthOne, 11);
-	/*
-	clearScreen();
-	writeOneUnSCROLL(0,0,28);
-	writeOneUnSCROLL(1,0,29);
-	writeOneUnSCROLL(2,0,30);
-	wirteOneBigNumber(3,0,MonthTen ); 
-	wirteOneBigNumber(5,0,MonthOne );
-	writeOneUnSCROLL(7,11,11);
-	*/
 }
 
 void FreshDisplayBufferAjustDay()
 {
 	FreshDisplayComment(&DayTen, &DayOne, 20);
-	/*
-	clearScreen();
-	writeOneUnSCROLL(0,0,28);
-	writeOneUnSCROLL(1,0,29);
-	writeOneUnSCROLL(2,0,30);
-	wirteOneBigNumber(3,0,DayTen ); 
-	wirteOneBigNumber(5,0,DayOne );
-	writeOneUnSCROLL(7,11,20);
-	*/
 }
 
 void FreshDisplayBufferAjustHour()
 {
 	FreshDisplayComment(&HourTen, &HourOne, 23);
-	/*
-	clearScreen();
-	writeOneUnSCROLL(0,0,28);
-	writeOneUnSCROLL(1,0,29);
-	writeOneUnSCROLL(2,0,30);
-	wirteOneBigNumber(3,0,HourTen ); 
-	wirteOneBigNumber(5,0,HourOne );
-	writeOneUnSCROLL(7,11,23);
-	*/
 }
 
 void FreshDisplayBufferAjustMinute()
 {
 	FreshDisplayComment(&MinuteTen, &MinuteOne, 24);
-	/*
-	clearScreen();
-	writeOneUnSCROLL(0,0,28);
-	writeOneUnSCROLL(1,0,29);
-	writeOneUnSCROLL(2,0,30);
-	wirteOneBigNumber(3,0,MinuteTen ); 
-	wirteOneBigNumber(5,0,MinuteOne );
-	writeOneUnSCROLL(7,11,24);
-	*/
 }
 
 void FreshDisplayBufferAjustWeek()
@@ -219,57 +204,60 @@ void FreshDisplayBufferAjustWeek()
 	wirteOneBigNumber(5,0,Week );
 }
 
-
 void FreshDisplayBufferAjustLightMode() //亮度模式
 {
 	clearScreen();
 	writeOneUnSCROLL(0,0,28);
 	writeOneUnSCROLL(1,0,29);
-	writeOneUnSCROLL(2,0,30);
+	writeOneUnSCROLL(2,0,25);	
+	writeOneUnSCROLL(3,0,13);
+	writeOneUnSCROLL(4,0,30);
+
 	if(display_light_Mode) //手动
 	{
-		wirteOneBigNumber(3,0,display_light_Mode); 
-		writeOneUnSCROLL(5,0,32);
+		writeOneChinese(3, 12, 1);
 	}
 	else
 	{
-		wirteOneBigNumber(3,0,display_light_Mode); 
-		writeOneUnSCROLL(5,0,31);	
+		writeOneChinese(3, 12, 0);	
 	}
-	writeOneUnSCROLL(7,0,33);	
-	writeOneUnSCROLL(5,13,25);	
-	writeOneUnSCROLL(7,13,13);	
+	writeOneChinese(5, 12, 2);
 }
 
 void FreshDisplayBufferAjustProofTime() //校对时间模式
 {
 	clearScreen();
-	writeOneUnSCROLL(0,0,28);
-	writeOneUnSCROLL(1,0,29);
-	writeOneUnSCROLL(2,0,30);
-	writeOneUnSCROLL(0,11,26);
-	writeOneUnSCROLL(1,11,11);
+	writeOneUnSCROLL(0,0,28);  //设
+	writeOneUnSCROLL(1,0,29);  //置
+	writeOneUnSCROLL(0,11,34);  //校
+	writeOneUnSCROLL(1,11,23);  //时
+	
+	writeOneUnSCROLL(2,11,30);  //:
+	writeOneUnSCROLL(6,22,26); //每
+	writeOneUnSCROLL(7,22,11);	//月
 	if(AjustTimeMode) // 加
 	{
-		writeOneUnSCROLL(2,11,27);	
+		writeOneUnSCROLL(2,22,27);	 //加
 	}
 	else
 	{
-		writeOneUnSCROLL(2,11,14);	
+		writeOneUnSCROLL(2,22,33);	//减
 	}
 	wirteOneBigNumber(3,0,AjustTimeTen); 
 	wirteOneBigNumber(5,0,AjustTimeOne);
-	writeOneUnSCROLL(7,11,24);
+	writeOneUnSCROLL(7,11,24); //分
 }
 
 void FreshDisplayBufferNormal()
 {
 	clearScreen();
 	///// 10年 11月 12周 13度 14一 15二 16三 17四 18五 19六 20日 21点 22空格
+	
 	wirteOneBigNumber(0,0,HourTen ); 	//8 时十位
 	wirteOneBigNumber(2,0,HourOne );	//9 时个位
 	wirteOneBigNumber(4,3,MinuteTen );	//10 分十位
 	wirteOneBigNumber(6,3,MinuteOne );	//11 分个位
+	
 	writeOneSCROLL(0,23,YearThousand );		//0 年千位
 	writeOneSCROLL(1,23,YearHundred );		//1 年百位
 	writeOneSCROLL(2,23,YearTen );		//2 年十位
@@ -290,7 +278,6 @@ void FreshDisplayBufferNormal()
 	writeOneSCROLL(2,25,TemperatureDecimal );		//17 温度小数	
 	writeOneSCROLL(3,25,13);	
 }
-
 
 void display()
 {
@@ -331,16 +318,16 @@ void display()
 	{
 		if(Mode == 0) //正常显示模式 日期温度滚动
 		{
-		uint8 temp1 = currentMoveLeft>>3;
-		uint8 temp2 = currentMoveLeft<<5;
-		temp2 = temp2>>5;
-		uint16 temp3 = 176+(display_cnt-6)*24+temp1;
-		ptr0 = &display_buffer[0+display_cnt*8];
-		for(k=0; k<8; k++)
-		{
-			display_buffer_temp[k] = (display_buffer[temp3+k]<<temp2) | (display_buffer[temp3+k+1]>>(8-temp2));
-		}
-		ptr1 = display_buffer_temp;
+			uint8 temp1 = currentMoveLeft>>3;
+			uint8 temp2 = currentMoveLeft<<5;
+			temp2 = temp2>>5;
+			uint16 temp3 = 176+(display_cnt-6)*24+temp1;
+			ptr0 = &display_buffer[0+display_cnt*8];
+			for(k=0; k<8; k++)
+			{
+				display_buffer_temp[k] = (display_buffer[temp3+k]<<temp2) | (display_buffer[temp3+k+1]>>(8-temp2));
+			}
+			ptr1 = display_buffer_temp;
 		}
 		else //设置模式 不滚动
 		{
@@ -353,29 +340,147 @@ void display()
 		ptr0 = &display_buffer[0+display_cnt*8];
 		ptr1 = &display_buffer[128+display_cnt*8];	
 	}
-
-	for(i=0;i<8;i++)
-	{
-		for(j=7;j>=0;j--)
-		{
-			HC595_D0_H;
-			HC595_D1_H;
-
-			if(*ptr0 & 1<<j)
-				HC595_D0_L;
-			if(*ptr1 & 1<<j)
-				HC595_D1_L;
 	
-			HC595_SCK_L;
-			//_delay_us(1);
-			HC595_SCK_H;
+	if(Display_color == 0)
+	{
+	/* 单红	*/
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_D0_H;
+				HC595_D1_H;
+				HC595_D2_H;
+				HC595_D3_H;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_D0_L;
+				}
+				if(*ptr1 & 1<<j)
+				{
+					HC595_D1_L;
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
 		}
-		ptr0++;
-		ptr1++;
+		
+	}
+	else if(Display_color == 1)
+	{
+	/*单绿	*/
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_D0_H;
+				HC595_D1_H;
+				HC595_D2_H;
+				HC595_D3_H;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_D2_L;
+				}
+				if(*ptr1 & 1<<j)
+				{
+					HC595_D3_L;
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
+	}
+	else if(Display_color == 2)
+	{
+	/*单黄*/
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_D0_H;
+				HC595_D1_H;
+				HC595_D2_H;
+				HC595_D3_H;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_D0_L;
+					HC595_D2_L;
+				}
+				if(*ptr1 & 1<<j)
+				{
+					HC595_D1_L;
+					HC595_D3_L;
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+			
+	}
+	else if(Display_color == 3)
+	{
+	/*红底黄字*/
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_D0_L;
+				HC595_D1_L;
+				HC595_D2_H;
+				HC595_D3_H;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_D2_L;
+				}
+				if(*ptr1 & 1<<j)
+				{
+					HC595_D3_L;
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+	}
+	else if(Display_color == 4)
+	{
+	/* 绿底黄字*/
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_D0_H;
+				HC595_D1_H;
+				HC595_D2_L;
+				HC595_D3_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_D0_L;
+				}
+				if(*ptr1 & 1<<j)
+				{
+					HC595_D1_L;
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+	
 	}
 	//LS138_E_T_H;
 	HC595_LAT_L;
 	HC595_LAT_H;
+
 	switch(display_cnt)
 	{
 		case 0: 
@@ -433,6 +538,30 @@ void display()
 	//LS138_E_T_L;
 	display_cnt++;
 	if(display_cnt==16)display_cnt=0;
+}
+
+void Show_welcome()
+{
+	uint16 timer_count;
+	Mode = 28;
+	writeOneChinese(1, 0, 3); //M	
+	writeOneChinese(3, 0, 4); //T
+	writeOneChinese(5, 0, 5); //2
+	writeOneUnSCROLL(0,20,35); //电
+	writeOneUnSCROLL(1,20,36); //子
+	writeOneUnSCROLL(2,20,42); //日
+	writeOneUnSCROLL(3,20,37); //历
+	writeOneUnSCROLL(4,20,38); //-
+	writeOneUnSCROLL(5,20,39); //B
+	writeOneUnSCROLL(6,20,40); //X
+	writeOneUnSCROLL(7,20,41); //Y
+	for(timer_count=0; timer_count< 5000; timer_count++)
+	{
+		display();
+		s_10us(10); //延迟10ms
+	}
+	clearScreen();
+	Mode = 0;
 }
 
 #endif

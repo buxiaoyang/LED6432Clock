@@ -1,6 +1,37 @@
+/***************************************************************************/
+// 程序：LED3264电子日历
+// 模块：按键扫描
+// 文件：_Key.h
+// 作者：卜晓旸
+// 版本：1.9.7
+// 日期：2012年2月10日
+// 功能：时分数字静态显示，年月日周温度滚动显示。可选亮度模式，时间补偿。
+// 芯片：Atmega8
+// 容丝：低位0x24 高位0xD1
+// 编译：AVR GCC
+// 引脚定义：	PD0：按键MODE 
+//				PD1: 按键显示模式
+//				PD2：显示屏控制LAT
+//				PD3：显示屏控制SCK
+//				PD4：显示屏信号R1
+//				PD5：显示屏信号R2
+// 				PD7：温度传感器DS18B20
+//				PC6：按键UP
+//				PC7：按键DOWN
+//				PB0：显示屏控制A
+//				PB1：显示屏控制B
+//				PB2：显示屏控制C
+//				PB3：显示屏控制EN
+//				PB4：显示屏控制D
+//				PB6：显示屏数据G1
+//				PB7：显示屏数据G2
+//				PA0: 光敏电阻
+/***************************************************************************/
+
 #ifndef _KEY_H_
 #define _KEY_H_
 
+uint16 KEY_Time_count;
 
 void Key_Init()
 {
@@ -10,6 +41,8 @@ void Key_Init()
 	KEY_DOWN_DDR  &= ~(1<<KEY_DOWN_BIT);
 	KEY_MODE_PORT |= 1<<KEY_MODE_BIT;
 	KEY_MODE_DDR  &= ~(1<<KEY_MODE_BIT);
+	KEY_DISPLAY_COLOR_PORT |= 1<<KEY_DISPLAY_COLOR_BIT;
+	KEY_DISPLAY_COLOR_DDR  &= ~(1<<KEY_DISPLAY_COLOR_BIT);
 }
 
 void Key_Operation(uint8 maxNum, uint8 minNum, uint8 *tenValue, uint8 *oneValue, void (*FunP)())
@@ -52,21 +85,51 @@ void Key_Operation(uint8 maxNum, uint8 minNum, uint8 *tenValue, uint8 *oneValue,
 
 void Scan_Key()
 {
+	if(Mode != 0 && KEY_Time_count > 21000)
+	{
+		Mode = 0;
+		//保存时间到时钟芯片
+		Write_time();
+		//保存运行参数到eepROM
+		SaveRunParameter();
+		clearScreen(); //清屏
+		FreshDisplayBufferNormal(); //加载正常走时模式
+	}
+
+	if(KEY_DISPLAY_COLOR_L) //显示颜色调节
+	{
+		_delay_ms(10);
+		if(KEY_DISPLAY_COLOR_L)
+		{
+			Display_color ++;
+			if(Display_color > 4)
+			{
+				Display_color = 0;
+			}
+			SaveRunParameter();
+		}
+		while(KEY_DISPLAY_COLOR_L);	
+	}
+
 	if(Mode == 0) //正常运行模式
 	{
-		if(KEY_UP_L) //亮度调节
+		if(display_light_Mode)
 		{
-			_delay_ms(10);
-			if(KEY_UP_L)
+			if(KEY_UP_L) //亮度调节
 			{
-				display_light ++;
-				if(display_light > 8)
+				_delay_ms(10);
+				if(KEY_UP_L)
 				{
-					display_light = 1;
+					display_light ++;
+					if(display_light > 8)
+					{
+						display_light = 1;
+					}
+					SET_DISPLAY_LIGHT;//OCR0置初值,占空比50%，调整OCR0的值用来调整占空比
+					SaveRunParameter();
 				}
-				SET_DISPLAY_LIGHT;//OCR0置初值,占空比50%，调整OCR0的值用来调整占空比
+				while(KEY_UP_L);	
 			}
-			while(KEY_UP_L);	
 		}
 		if(KEY_DOWN_L) //速度调节
 		{
@@ -78,6 +141,7 @@ void Scan_Key()
 				{
 					moveSpeed = 1;
 				}
+				SaveRunParameter();
 			}
 			while(KEY_DOWN_L);	
 		}
@@ -156,6 +220,7 @@ void Scan_Key()
 		_delay_ms(10);
 		if(KEY_MODE_L)
 		{
+			KEY_Time_count = 0;
 			Mode ++;
 			if(Mode > 8)
 			{
@@ -166,7 +231,7 @@ void Scan_Key()
 					//保存时间到时钟芯片
 					Write_time();
 					//保存运行参数到eepROM
-
+					SaveRunParameter();
 					clearScreen(); //清屏
 					FreshDisplayBufferNormal(); //加载正常走时模式
 					break; 
