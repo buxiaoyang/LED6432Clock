@@ -5,27 +5,6 @@
 // 作者：卜晓旸
 // 版本：1.9.7
 // 日期：2012年2月10日
-// 功能：时分数字静态显示，年月日周温度滚动显示。可选亮度模式，时间补偿。
-// 芯片：Atmega16
-// 容丝：低位0xA4 10100100 高位0xD1 11010001
-// 编译：AVR GCC
-// 引脚定义：	PD0：按键MODE 
-//				PD1: 按键显示模式
-//				PD2：显示屏控制LAT
-//				PD3：显示屏控制SCK
-//				PD4：显示屏信号R1
-//				PD5：显示屏信号R2
-// 				PD7：温度传感器DS18B20
-//				PC6：按键UP
-//				PC7：按键DOWN
-//				PB0：显示屏控制A
-//				PB1：显示屏控制B
-//				PB2：显示屏控制C
-//				PB3：显示屏控制EN
-//				PB4：显示屏控制D
-//				PB6：显示屏数据G1
-//				PB7：显示屏数据G2
-//				PA0: 光敏电阻
 /***************************************************************************/
 
 #ifndef _PINSVALUES_H_
@@ -75,15 +54,15 @@
 #define HC595_D1_H		HC595_D1_PORT |= (1<<HC595_D1_BIT)
 #define HC595_D1_L		HC595_D1_PORT &= ~(1<<HC595_D1_BIT)
 
-#define HC595_D2_DDR		DDRB
-#define HC595_D2_PORT		PORTB
-#define HC595_D2_BIT		PB6
+#define HC595_D2_DDR		DDRA
+#define HC595_D2_PORT		PORTA
+#define HC595_D2_BIT		PA1
 #define HC595_D2_H		HC595_D2_PORT |= (1<<HC595_D2_BIT)
 #define HC595_D2_L		HC595_D2_PORT &= ~(1<<HC595_D2_BIT)
 
-#define HC595_D3_DDR		DDRB
-#define HC595_D3_PORT		PORTB
-#define HC595_D3_BIT		PB7
+#define HC595_D3_DDR		DDRA
+#define HC595_D3_PORT		PORTA
+#define HC595_D3_BIT		PA2
 #define HC595_D3_H		HC595_D3_PORT |= (1<<HC595_D3_BIT)
 #define HC595_D3_L		HC595_D3_PORT &= ~(1<<HC595_D3_BIT)
 

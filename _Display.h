@@ -5,27 +5,6 @@
 // 作者：卜晓旸
 // 版本：1.9.7
 // 日期：2012年2月10日
-// 功能：时分数字静态显示，年月日周温度滚动显示。可选亮度模式，时间补偿。
-// 芯片：Atmega16
-// 容丝：低位0xA4 10100100 高位0xD1 11010001
-// 编译：AVR GCC
-// 引脚定义：	PD0：按键MODE 
-//				PD1: 按键显示模式
-//				PD2：显示屏控制LAT
-//				PD3：显示屏控制SCK
-//				PD4：显示屏信号R1
-//				PD5：显示屏信号R2
-// 				PD7：温度传感器DS18B20
-//				PC6：按键UP
-//				PC7：按键DOWN
-//				PB0：显示屏控制A
-//				PB1：显示屏控制B
-//				PB2：显示屏控制C
-//				PB3：显示屏控制EN
-//				PB4：显示屏控制D
-//				PB6：显示屏数据G1
-//				PB7：显示屏数据G2
-//				PA0: 光敏电阻
 /***************************************************************************/
 
 #ifndef _DISPLAY_H_
@@ -202,78 +181,78 @@ void wirteOneBigNumber(uint8 x, uint8 y,uint8 index)
 void FreshDisplayComment(uint8 *tenValue, uint8 *oneValue, uint8 matrixIndex)
 {
 	clearScreen();
-	writeOneUnSCROLL(0,0,28);
-	writeOneUnSCROLL(1,0,29);
-	writeOneUnSCROLL(2,0,30);
-	wirteOneBigNumber(3,0,*tenValue); 
-	wirteOneBigNumber(5,0,*oneValue);
-	writeOneUnSCROLL(7,11,matrixIndex);
+	
+	writeOneChinese(0, 0, 8);	
+	writeOneChinese(0, 16, 9);
+	wirteOneBigNumber(2,0,*tenValue); 
+	wirteOneBigNumber(4,0,*oneValue);
+	writeOneChinese(6, 16, matrixIndex);
 }
 
 void FreshDisplayBufferAjustYear()
 {
-	FreshDisplayComment(&YearTen, &YearOne, 10);
+	FreshDisplayComment(&YearTen, &YearOne, 15);
 }
 
 void FreshDisplayBufferAjustMonth()
 {
-	FreshDisplayComment(&MonthTen, &MonthOne, 11);
+	FreshDisplayComment(&MonthTen, &MonthOne, 16);
 }
 
 void FreshDisplayBufferAjustDay()
 {
-	FreshDisplayComment(&DayTen, &DayOne, 20);
+	FreshDisplayComment(&DayTen, &DayOne, 17);
 }
 
 void FreshDisplayBufferAjustHour()
 {
-	FreshDisplayComment(&HourTen, &HourOne, 23);
+	FreshDisplayComment(&HourTen, &HourOne, 13);
 }
 
 void FreshDisplayBufferAjustMinute()
 {
-	FreshDisplayComment(&MinuteTen, &MinuteOne, 24);
+	FreshDisplayComment(&MinuteTen, &MinuteOne, 18);
 }
 
 void FreshDisplayBufferAjustWeek()
 {
 	clearScreen();
-	writeOneUnSCROLL(0,0,28);
-	writeOneUnSCROLL(1,0,29);
-	writeOneUnSCROLL(2,0,30);
-	writeOneUnSCROLL(3,11,12); 
-	wirteOneBigNumber(5,0,Week );
+	writeOneChinese(0, 0, 8);	
+	writeOneChinese(2, 0, 9);
+	writeOneChinese(0, 16, 21);
+	writeOneChinese(2, 16, 22);
+	writeOneUnSCROLL(4,22,30);
+	wirteOneBigNumber(5,0,Week);
 }
 
 void FreshDisplayBufferAjustSpeed()
 {
 	clearScreen();
-	writeOneUnSCROLL(0,0,28);
-	writeOneUnSCROLL(1,0,29);
-	writeOneUnSCROLL(2,0,43);	
-	writeOneUnSCROLL(3,0,13);
-	writeOneUnSCROLL(4,0,30);
+	writeOneChinese(0, 0, 8);	
+	writeOneChinese(2, 0, 9);
+	writeOneChinese(0, 16, 10);
+	writeOneChinese(2, 16, 11);
+	writeOneUnSCROLL(4,22,30);
 	wirteOneBigNumber(5,0,moveSpeed);
 }
 
 void FreshDisplayBufferAjustLightMode() //亮度模式
 {
 	clearScreen();
-	writeOneUnSCROLL(0,0,28);
-	writeOneUnSCROLL(1,0,29);
-	writeOneUnSCROLL(2,0,25);	
-	writeOneUnSCROLL(3,0,13);
-	writeOneUnSCROLL(4,0,30);
-
+	writeOneChinese(0, 0, 8);	
+	writeOneChinese(2, 0, 9);
+	writeOneChinese(0, 16, 12);
+	writeOneChinese(2, 16, 11);
+	writeOneUnSCROLL(4,22,30);
 	if(display_light_Mode) //手动
 	{
-		writeOneChinese(3, 12, 1);
+		writeOneChinese(6, 0, 25);
 	}
 	else
 	{
-		writeOneChinese(3, 12, 0);	
+		writeOneChinese(6, 0, 24);
 	}
-	writeOneChinese(5, 12, 2);
+	writeOneChinese(6, 16, 26);
 }
 
 void FreshDisplayBufferAjustLight()
@@ -281,11 +260,11 @@ void FreshDisplayBufferAjustLight()
 	clearScreen();
 	if(display_light_Mode)
 	{
-		writeOneUnSCROLL(0,0,28);
-		writeOneUnSCROLL(1,0,29);
-		writeOneUnSCROLL(2,0,25);	
-		writeOneUnSCROLL(3,0,13);
-		writeOneUnSCROLL(4,0,30);
+		writeOneChinese(0, 0, 8);	
+		writeOneChinese(2, 0, 9);
+		writeOneChinese(0, 16, 12);
+		writeOneChinese(2, 16, 11);
+		writeOneUnSCROLL(4,22,30);
 		wirteOneBigNumber(5,0,display_light);
 	}
 	else
@@ -297,23 +276,19 @@ void FreshDisplayBufferAjustLight()
 void FreshDisplayBufferChangeFont()
 {
 	clearScreen();
-	writeOneUnSCROLL(0,0,28);
-	writeOneUnSCROLL(1,0,29);
-	writeOneUnSCROLL(2,0,44);	
-	writeOneUnSCROLL(3,0,45);
-	writeOneUnSCROLL(4,0,30);
+	writeOneChinese(0, 0, 8);	
+	writeOneChinese(2, 0, 9);
+	writeOneChinese(0, 16, 27);
+	writeOneChinese(2, 16, 28);
+	writeOneUnSCROLL(4,22,30);
 	wirteOneBigNumber(5,0,3);
 }
 
 void FreshDisplayBufferAjustProofTime() //校对时间模式
 {
 	clearScreen();
-	writeOneUnSCROLL(0,0,28);  //设
-	writeOneUnSCROLL(1,0,29);  //置
-	writeOneUnSCROLL(0,11,34);  //校
-	writeOneUnSCROLL(1,11,23);  //时
-	
-	writeOneUnSCROLL(2,11,30);  //:
+	writeOneChinese(0, 0, 29);
+	writeOneChinese(0, 16,13);	
 	writeOneUnSCROLL(6,22,26); //每
 	writeOneUnSCROLL(7,22,11);	//月
 	if(AjustTimeMode) // 加
@@ -625,17 +600,14 @@ void Show_welcome()
 {
 	uint16 timer_count;
 	Mode = 28;
-	writeOneChinese(1, 0, 3); //M	
-	writeOneChinese(3, 0, 4); //T
-	writeOneChinese(5, 0, 5); //2
-	writeOneUnSCROLL(0,20,35); //电
-	writeOneUnSCROLL(1,20,36); //子
-	writeOneUnSCROLL(2,20,42); //日
-	writeOneUnSCROLL(3,20,37); //历
-	writeOneUnSCROLL(4,20,38); //-
-	writeOneUnSCROLL(5,20,39); //B
-	writeOneUnSCROLL(6,20,40); //X
-	writeOneUnSCROLL(7,20,41); //Y
+	writeOneChinese(0, 0, 0);	
+	writeOneChinese(2, 0, 1);
+	writeOneChinese(4, 0, 2);
+	writeOneChinese(6, 0, 3);
+	writeOneChinese(0, 16, 4);	
+	writeOneChinese(2, 16, 5);
+	writeOneChinese(4, 16, 6);
+	writeOneChinese(6, 16, 7);
 	for(timer_count=0; timer_count< 5000; timer_count++)
 	{
 		display();
