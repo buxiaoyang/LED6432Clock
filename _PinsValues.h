@@ -145,6 +145,7 @@
 #define AjustTimeIsAjusted  RunParameter[25]
 #define Display_color  RunParameter[26]
 #define Display_BigNumber_Font  RunParameter[27]
+#define Voice_Mode  RunParameter[28]
 
 #define SET_DISPLAY_LIGHT OCR0= (display_light-1)*25+1
 
@@ -158,9 +159,9 @@
 //uint8 display_light; /* 屏幕亮度 1 到 8 */
 //uint8 moveSpeed; /* 日期左移速度 1 到 8 */
 //uint8 Mode; /* 运行模式 0：正常运行 1：调节年 2：调节月 3：调节日 4：调节时 5：调节分 6：调节星期  */
-			  /* 7：调节亮度模式 8：调节字体  9：调节校队时间 26：调节速度 27：调节亮度 28：显示欢迎界面 */
+			  /* 7：调节亮度模式 8：调节字体  9：调节校队时间 10：设置报时 26：调节速度 27：调节亮度 28：显示欢迎界面 */
 
-uint8 RunParameter[28] = {	2,	//0 年千位
+uint8 RunParameter[29] = {	2,	//0 年千位
 							0, 	//1 年百位
 							1, 	//2 年十位
 							2, 	//3 年个位
@@ -187,7 +188,8 @@ uint8 RunParameter[28] = {	2,	//0 年千位
 							0,	//24 校队时间 个位
 							0,	//25 是否已经校时状态位 0：未校时 1：已校时
 							0,	//26 显示模式 0：单红 1：单绿 2：单黄 3：红底黄字 4：绿底黄字
-							0   //27 大数字字体 0 1 2
+							0,  //27 大数字字体 0 1 2
+							0	//28 语音报时模式 0:正常 1:勿扰 2:关闭 
 						};
 
 #endif

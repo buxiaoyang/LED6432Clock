@@ -24,6 +24,7 @@ void SaveRunParameter()
 		eeprom_write_byte(0x07, AjustTimeOne);
 		eeprom_write_byte(0x08, Display_color);
 		eeprom_write_byte(0x09, Display_BigNumber_Font);
+		eeprom_write_byte(0x10, Voice_Mode);
 	}
 	sei(); //Ê¹ÄÜÖÐ¶Ï
 }
@@ -44,6 +45,7 @@ void ReadRunParameter()
 			AjustTimeOne = 			eeprom_read_byte(0x07);	
 			Display_color = 		eeprom_read_byte(0x08);
 			Display_BigNumber_Font = eeprom_read_byte(0x09);
+			Voice_Mode = 			eeprom_read_byte(0x10);
 		}
 		SET_DISPLAY_LIGHT;
 	}

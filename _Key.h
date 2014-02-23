@@ -32,6 +32,8 @@ void Key_Operation(uint8 maxNum, uint8 minNum, uint8 *tenValue, uint8 *oneValue,
 		_delay_ms(10);
 		if(KEY_UP_L)
 		{
+			SPEEK_TIME_Status = 100; //按键音
+			KEY_Time_count = 0;
 			uint8 value = *tenValue*10 + *oneValue;
 			value ++;
 			if(value > maxNum)
@@ -49,6 +51,8 @@ void Key_Operation(uint8 maxNum, uint8 minNum, uint8 *tenValue, uint8 *oneValue,
 		_delay_ms(10);
 		if(KEY_DOWN_L)
 		{
+			SPEEK_TIME_Status = 100; //按键音
+			KEY_Time_count = 0;
 			uint8 value = *tenValue*10 + *oneValue;
 			value --;
 			if((value > maxNum) | (value < minNum))
@@ -91,6 +95,7 @@ void Scan_Key()
 		_delay_ms(10);
 		if(KEY_DISPLAY_COLOR_L)
 		{
+			SPEEK_TIME_Status = 1;
 			Display_color ++;
 			if(Display_color > 4)
 			{
@@ -109,6 +114,7 @@ void Scan_Key()
 			_delay_ms(10);
 			if(KEY_UP_L)
 			{
+				SPEEK_TIME_Status = 100; //按键音
 				if(display_light_Mode) //手动调节亮度模式
 				{
 					display_light ++;
@@ -134,6 +140,7 @@ void Scan_Key()
 			_delay_ms(10);
 			if(KEY_DOWN_L)
 			{
+				SPEEK_TIME_Status = 100; //按键音
 				moveSpeed ++;
 				if(moveSpeed > 8)
 				{
@@ -188,6 +195,8 @@ void Scan_Key()
 			_delay_ms(10);
 			if(KEY_UP_L)
 			{
+				KEY_Time_count = 0;
+				SPEEK_TIME_Status = 100; //按键音
 				uint8 value = AjustTimeTen*10 + AjustTimeOne;
 				value ++;
 				if(value > 20)
@@ -205,6 +214,8 @@ void Scan_Key()
 			_delay_ms(10);
 			if(KEY_DOWN_L)
 			{
+				KEY_Time_count = 0;
+				SPEEK_TIME_Status = 100; //按键音
 				if(AjustTimeMode)
 				{
 					AjustTimeMode = 0;
@@ -218,15 +229,21 @@ void Scan_Key()
 			while(KEY_DOWN_L);	
 		}
 	}
+	else if(Mode == 10) //报时
+	{
+		uint8 temp = 0;
+		Key_Operation(2, 0, &temp, &Voice_Mode, &FreshDisplayBufferVoiceMode);
+	}
 	//////////////////////////////////////////////////////////
 	if(KEY_MODE_L) //模式调节
 	{
 		_delay_ms(10);
 		if(KEY_MODE_L)
 		{
+			SPEEK_TIME_Status = 100; //按键音
 			KEY_Time_count = 0;
 			Mode ++;
-			if(Mode > 9)
+			if(Mode > 10)
 			{
 				Mode = 0;
 			}
@@ -265,7 +282,10 @@ void Scan_Key()
 					break;
 				case 9:	//调节校队时间
 					FreshDisplayBufferAjustProofTime();
-					break;  
+					break; 
+				case 10://调节语音报时
+					FreshDisplayBufferVoiceMode();
+					break;
 				default:
 					break; 
 			} 

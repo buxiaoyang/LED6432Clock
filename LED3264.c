@@ -41,6 +41,7 @@
 #include "_Display.h"
 #include "_TWI.h"
 #include "_PCF8563.h"
+#include "_Voice.h"
 #include "_Key.h"
 #include "_Dimming.h"
 #include "_Timers.h"
@@ -54,6 +55,7 @@ void init_devices()
 	GICR   = 0x00;//关闭外部中断
 	LED_SCREEN_INI(); //初始化LED点阵
 	Key_Init();
+	Voice_Init();
 	//USART_Init();
 	timer0_init(); //初始化定时器
 	timer2_init();
@@ -68,6 +70,7 @@ void init_devices()
 
 int main()
 {
+	uint8 currentlyHourVoice;//当前小时数，用于语音报时
 	init_devices();
 	ds1820_start();   
 	_delay_100ms(6);   
@@ -94,12 +97,39 @@ int main()
 	Show_welcome();
 	Updata_time();
 	FreshDisplayBufferNormal();
+	SPEEK_TIME_Status = 1;
 	while(1)
 	{
 		//675 us 0.000675s
 		if( Mode == 0)
 		{
 			Updata_time();
+			//语音报时开始
+			if(Voice_Mode == 0)//正常模式
+			{
+				if(MinuteTen == 0 && MinuteOne == 0 && SecondTen == 0 && SecondOne < 10 && inVoice == 0)
+				{
+					inVoice = 1;
+					SPEEK_TIME_Status = 1;
+				}
+			}
+			else if(Voice_Mode == 1) //勿扰模式
+			{
+				currentlyHourVoice = HourTen*10 + HourOne;
+				if(currentlyHourVoice > 6 && currentlyHourVoice <= 23)
+				{
+					if(MinuteTen == 0 && MinuteOne == 0 && SecondTen == 0 && SecondOne < 10 && inVoice == 0)
+					{
+						inVoice = 1;
+						SPEEK_TIME_Status = 1;
+					}
+				}
+			}
+			else //关闭模式
+			{
+			
+			}
+			//语音报时结束
 			FreshDisplayBufferCount ++;
 			if(FreshDisplayBufferCount > 10000)
 			{

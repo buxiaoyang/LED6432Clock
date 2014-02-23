@@ -236,6 +236,31 @@ void FreshDisplayBufferAjustSpeed()
 	wirteOneBigNumber(5,0,moveSpeed);
 }
 
+void FreshDisplayBufferVoiceMode()
+{
+	clearScreen();
+	writeOneChinese(0, 0,40);	
+	writeOneChinese(2, 0, 41);
+	writeOneChinese(0, 16, 42);
+	writeOneChinese(2, 16, 13);
+	writeOneUnSCROLL(4,22,30);
+	if(Voice_Mode == 0)
+	{
+		writeOneChinese(6, 0, 43);
+		writeOneChinese(6, 16, 44);
+	}
+	else if(Voice_Mode == 1)
+	{
+		writeOneChinese(6, 0, 45);
+		writeOneChinese(6, 16, 46);
+	}
+	else
+	{
+		writeOneChinese(6, 0, 47);
+		writeOneChinese(6, 16, 48);
+	}
+}
+
 void FreshDisplayBufferAjustLightMode() //亮度模式
 {
 	clearScreen();
@@ -355,7 +380,7 @@ void display()
 	if(Mode == 0)
 	{
 		halfSecondCount ++;
-		if(halfSecondCount > 740) //到0.5s
+		if(halfSecondCount > 940) //到0.5s
 		{
 			halfSecondCount = 0;
 			if(isSecondCountShow)

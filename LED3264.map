@@ -27,16 +27,22 @@ display_buffer      0x1f0             LED3264.o
 AD_time_count       0x2               LED3264.o
 ReadDS18B20Count    0x2               LED3264.o
 halfSecondCount     0x2               LED3264.o
+PLUSE_Number        0x1               LED3264.o
 isSecondCountShow   0x1               LED3264.o
 display_cnt         0x1               LED3264.o
+PLUSE_Status        0x1               LED3264.o
 KEY_Time_count      0x2               LED3264.o
 currentMoveLeft     0x1               LED3264.o
 read_buff           0x8               LED3264.o
+SPEEK_TIME_Delay    0x2               LED3264.o
 syserr              0x1               LED3264.o
+inVoice             0x1               LED3264.o
 FreshDisplayBufferCount
                     0x2               LED3264.o
+PLUSE_Delay         0x1               LED3264.o
 KEY_Time_count_speed_color
                     0x2               LED3264.o
+SPEEK_TIME_Status   0x1               LED3264.o
 write_buff          0x8               LED3264.o
 
 Memory Configuration
@@ -146,7 +152,7 @@ LOAD C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x2ace
+.text           0x00000000     0x317a
  *(.vectors)
  .vectors       0x00000000       0x54 C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm16.o
                 0x00000000                __vectors
@@ -207,75 +213,79 @@ LOAD C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a
                 0x00001014                __vector_16
                 0x00001014                __vector_18
                 0x00001014                __vector_20
- .text          0x00001018     0x1a3a LED3264.o
-                0x00001840                FreshDisplayBufferAjustHour
+ .text          0x00001018     0x20e6 LED3264.o
+                0x0000185c                FreshDisplayBufferAjustHour
                 0x0000110e                ds1820_start
-                0x00001850                FreshDisplayBufferAjustMinute
-                0x00001860                FreshDisplayBufferAjustWeek
-                0x0000287c                timer2_init
+                0x0000186c                FreshDisplayBufferAjustMinute
+                0x0000187c                FreshDisplayBufferAjustWeek
+                0x00002e74                timer2_init
                 0x00001080                ds1820_read_byte
-                0x00002002                i2crd
-                0x0000137c                LED_SCREEN_INI
-                0x0000152a                writeOneSCROLL
-                0x0000221e                Write_time
-                0x000023c0                Key_Init
-                0x000017ba                FreshDisplayComment
+                0x00002090                i2crd
+                0x00002458                SPEEK_Time
+                0x00001398                LED_SCREEN_INI
+                0x00001546                writeOneSCROLL
+                0x000022ac                Write_time
+                0x0000292e                Key_Init
+                0x000017d6                FreshDisplayComment
                 0x00001018                s_10us
-                0x00001fce                twi_init
-                0x000020c8                PCF8536_rd
-                0x00002026                PCF8536_wt
+                0x0000205c                twi_init
+                0x00002156                PCF8536_rd
+                0x000020b4                PCF8536_wt
                 0x000010ce                ds1820_write_byte
-                0x00001b40                display
-                0x00001a3a                FreshDisplayBufferNormal
-                0x000018a4                FreshDisplayBufferAjustSpeed
-                0x000027f8                StartAD
-                0x000013c8                fullScreen
-                0x0000296e                init_devices
-                0x00002018                clear
-                0x000024a0                Scan_Key
-                0x0000206c                PCF8536_wt_p
-                0x000018e8                FreshDisplayBufferAjustLightMode
-                0x00001830                FreshDisplayBufferAjustDay
-                0x00001940                FreshDisplayBufferAjustLight
-                0x000014a2                writeOneChinese
-                0x00001fea                i2cwt
-                0x00001992                FreshDisplayBufferChangeFont
-                0x00001820                FreshDisplayBufferAjustMonth
+                0x00001bce                display
+                0x00001ac8                FreshDisplayBufferNormal
+                0x000018c0                FreshDisplayBufferAjustSpeed
+                0x00002df0                StartAD
+                0x000013e4                fullScreen
+                0x00001904                FreshDisplayBufferVoiceMode
+                0x00002f86                init_devices
+                0x000020a6                clear
+                0x00002a34                Scan_Key
+                0x000020fa                PCF8536_wt_p
+                0x00001976                FreshDisplayBufferAjustLightMode
+                0x0000184c                FreshDisplayBufferAjustDay
+                0x000019ce                FreshDisplayBufferAjustLight
+                0x000014be                writeOneChinese
+                0x00002078                i2cwt
+                0x00001a20                FreshDisplayBufferChangeFont
+                0x0000183c                FreshDisplayBufferAjustMonth
                 0x00001120                ReadTemputer
-                0x00001f50                Show_welcome
-                0x000029ac                main
-                0x00002012                i2cstop
-                0x00002888                __vector_4
-                0x00002804                GetDispalyLight
-                0x00002856                timer0_init
-                0x000015e0                wirteOneBigNumber
-                0x000019d4                FreshDisplayBufferAjustProofTime
-                0x000023d2                Key_Operation
+                0x00001fde                Show_welcome
+                0x0000244e                Voice_Init
+                0x00002fc8                main
+                0x000020a0                i2cstop
+                0x00002e8c                __vector_4
+                0x00002dfc                GetDispalyLight
+                0x00002e4e                timer0_init
+                0x000015fc                wirteOneBigNumber
+                0x00001a62                FreshDisplayBufferAjustProofTime
+                0x00002940                Key_Operation
+                0x00002884                PLUSE_Out
                 0x0000102e                _delay_100ms
-                0x000013da                writeCloclColon
-                0x000022ec                AjustTimerMonthly
-                0x000014f2                writeOneUnSCROLL
-                0x00001810                FreshDisplayBufferAjustYear
-                0x00002168                Updata_time
-                0x00001fde                i2cstart
+                0x000013f6                writeCloclColon
+                0x0000237a                AjustTimerMonthly
+                0x0000150e                writeOneUnSCROLL
+                0x0000182c                FreshDisplayBufferAjustYear
+                0x000021f6                Updata_time
+                0x0000206c                i2cstart
                 0x00001242                SaveRunParameter
-                0x000013b8                clearScreen
+                0x000013d4                clearScreen
                 0x0000104a                ds1820_reset
-                0x000012dc                ReadRunParameter
-                0x0000213e                PCF8563_init
- .text          0x00002a52       0x14 C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(memset.o)
-                0x00002a52                memset
-                0x00002a66                . = ALIGN (0x2)
+                0x000012ea                ReadRunParameter
+                0x000021cc                PCF8563_init
+ .text          0x000030fe       0x14 C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(memset.o)
+                0x000030fe                memset
+                0x00003112                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00002a66       0x18 C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_udivmodqi4.o)
-                0x00002a66                __udivmodqi4
- .text.libgcc   0x00002a7e       0x28 C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_udivmodhi4.o)
-                0x00002a7e                __udivmodhi4
- .text.eeprom   0x00002aa6       0x10 C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(ee_rb.1C1D1E.o)
-                0x00002aa6                __eeprom_read_byte_1C1D1E
- .text.eeprom   0x00002ab6       0x18 C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(ee_wb.1C1D1E.o)
-                0x00002ab6                __eeprom_write_byte_1C1D1E
-                0x00002ace                . = ALIGN (0x2)
+ .text.libgcc   0x00003112       0x18 C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_udivmodqi4.o)
+                0x00003112                __udivmodqi4
+ .text.libgcc   0x0000312a       0x28 C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_udivmodhi4.o)
+                0x0000312a                __udivmodhi4
+ .text.eeprom   0x00003152       0x10 C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(ee_rb.1C1D1E.o)
+                0x00003152                __eeprom_read_byte_1C1D1E
+ .text.eeprom   0x00003162       0x18 C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5\libc.a(ee_wb.1C1D1E.o)
+                0x00003162                __eeprom_write_byte_1C1D1E
+                0x0000317a                . = ALIGN (0x2)
  *(.fini9)
  *(.fini8)
  *(.fini7)
@@ -286,27 +296,26 @@ LOAD C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a
  *(.fini2)
  *(.fini1)
  *(.fini0)
-                0x00002ace                _etext = .
+                0x0000317a                _etext = .
 
-.data           0x00800060       0x24 load address 0x00002ace
+.data           0x00800060       0x24 load address 0x0000317a
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
- .data          0x00800060       0x23 LED3264.o
+ .data          0x00800060       0x24 LED3264.o
                 0x00800060                time
                 0x00800067                RunParameter
  *(.gnu.linkonce.d*)
                 0x00800084                . = ALIGN (0x2)
- *fill*         0x00800083        0x1 00
                 0x00800084                _edata = .
                 0x00800084                PROVIDE (__data_end, .)
 
-.bss            0x00800084      0x21d
+.bss            0x00800084      0x224
                 0x00800084                PROVIDE (__bss_start, .)
  *(.bss)
  .bss           0x00800084        0x2 LED3264.o
                 0x00800084                freshTimeCount
  *(COMMON)
- COMMON         0x00800086      0x21b LED3264.o
+ COMMON         0x00800086      0x222 LED3264.o
                 0x00800086                display_buffer_temp
                 0x0080008e                moveSpeedTimerCount
                 0x00800090                init_f
@@ -314,25 +323,31 @@ LOAD C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a
                 0x00800281                AD_time_count
                 0x00800283                ReadDS18B20Count
                 0x00800285                halfSecondCount
-                0x00800287                isSecondCountShow
-                0x00800288                display_cnt
-                0x00800289                KEY_Time_count
-                0x0080028b                currentMoveLeft
-                0x0080028c                read_buff
-                0x00800294                syserr
-                0x00800295                FreshDisplayBufferCount
-                0x00800297                KEY_Time_count_speed_color
-                0x00800299                write_buff
-                0x008002a1                PROVIDE (__bss_end, .)
-                0x00002ace                __data_load_start = LOADADDR (.data)
-                0x00002af2                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800287                PLUSE_Number
+                0x00800288                isSecondCountShow
+                0x00800289                display_cnt
+                0x0080028a                PLUSE_Status
+                0x0080028b                KEY_Time_count
+                0x0080028d                currentMoveLeft
+                0x0080028e                read_buff
+                0x00800296                SPEEK_TIME_Delay
+                0x00800298                syserr
+                0x00800299                inVoice
+                0x0080029a                FreshDisplayBufferCount
+                0x0080029c                PLUSE_Delay
+                0x0080029d                KEY_Time_count_speed_color
+                0x0080029f                SPEEK_TIME_Status
+                0x008002a0                write_buff
+                0x008002a8                PROVIDE (__bss_end, .)
+                0x0000317a                __data_load_start = LOADADDR (.data)
+                0x0000319e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008002a1        0x0
-                0x008002a1                PROVIDE (__noinit_start, .)
+.noinit         0x008002a8        0x0
+                0x008002a8                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x008002a1                PROVIDE (__noinit_end, .)
-                0x008002a1                _end = .
-                0x008002a1                PROVIDE (__heap_start, .)
+                0x008002a8                PROVIDE (__noinit_end, .)
+                0x008002a8                _end = .
+                0x008002a8                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -379,31 +394,31 @@ LOAD C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a
                 0x00000000       0x14 LED3264.o
 
 .debug_pubnames
-                0x00000000      0x652
+                0x00000000      0x707
  *(.debug_pubnames)
  .debug_pubnames
-                0x00000000      0x652 LED3264.o
+                0x00000000      0x707 LED3264.o
 
-.debug_info     0x00000000     0x1470
+.debug_info     0x00000000     0x15a3
  *(.debug_info)
- .debug_info    0x00000000     0x1470 LED3264.o
+ .debug_info    0x00000000     0x15a3 LED3264.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev   0x00000000      0x297
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x297 LED3264.o
 
-.debug_line     0x00000000     0x1577
+.debug_line     0x00000000     0x1a3e
  *(.debug_line)
- .debug_line    0x00000000     0x1577 LED3264.o
+ .debug_line    0x00000000     0x1a3e LED3264.o
 
 .debug_frame
  *(.debug_frame)
 
-.debug_str      0x00000000      0x6b2
+.debug_str      0x00000000      0x75b
  *(.debug_str)
- .debug_str     0x00000000      0x6b2 LED3264.o
-                                0x73c (size before relaxing)
+ .debug_str     0x00000000      0x75b LED3264.o
+                                0x7e5 (size before relaxing)
 
 .debug_loc
  *(.debug_loc)
@@ -434,6 +449,7 @@ FreshDisplayBufferAjustYear                       LED3264.o
 FreshDisplayBufferChangeFont                      LED3264.o
 FreshDisplayBufferCount                           LED3264.o
 FreshDisplayBufferNormal                          LED3264.o
+FreshDisplayBufferVoiceMode                       LED3264.o
 FreshDisplayComment                               LED3264.o
 GetDispalyLight                                   LED3264.o
 KEY_Time_count                                    LED3264.o
@@ -445,6 +461,10 @@ PCF8536_rd                                        LED3264.o
 PCF8536_wt                                        LED3264.o
 PCF8536_wt_p                                      LED3264.o
 PCF8563_init                                      LED3264.o
+PLUSE_Delay                                       LED3264.o
+PLUSE_Number                                      LED3264.o
+PLUSE_Out                                         LED3264.o
+PLUSE_Status                                      LED3264.o
 ReadDS18B20Count                                  LED3264.o
 ReadRunParameter                                  LED3264.o
 ReadTemputer                                      LED3264.o
@@ -453,11 +473,15 @@ SCROLL                                            LED3264.o
 SCROLL_STYLE1                                     LED3264.o
 SCROLL_STYLE2                                     LED3264.o
 SCROLL_STYLE3                                     LED3264.o
+SPEEK_TIME_Delay                                  LED3264.o
+SPEEK_TIME_Status                                 LED3264.o
+SPEEK_Time                                        LED3264.o
 SaveRunParameter                                  LED3264.o
 Scan_Key                                          LED3264.o
 Show_welcome                                      LED3264.o
 StartAD                                           LED3264.o
 Updata_time                                       LED3264.o
+Voice_Init                                        LED3264.o
 Write_time                                        LED3264.o
 __bad_interrupt                                   C:/WinAVR/bin/../lib/gcc/avr/3.4.6/../../../../avr/lib/avr5/crtm16.o
 __bss_end                                         C:/WinAVR/lib/gcc/avr/3.4.6/avr5\libgcc.a(_clear_bss.o)
@@ -523,6 +547,7 @@ i2crd                                             LED3264.o
 i2cstart                                          LED3264.o
 i2cstop                                           LED3264.o
 i2cwt                                             LED3264.o
+inVoice                                           LED3264.o
 init_devices                                      LED3264.o
 init_f                                            LED3264.o
 isSecondCountShow                                 LED3264.o
