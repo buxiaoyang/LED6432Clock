@@ -30,6 +30,8 @@ void LED_SCREEN_INI()
 	HC595_D1_DDR |= 1<<HC595_D1_BIT;
 	HC595_D2_DDR |= 1<<HC595_D2_BIT;
 	HC595_D3_DDR |= 1<<HC595_D3_BIT;
+	HC595_D4_DDR |= 1<<HC595_D4_BIT;
+	HC595_D5_DDR |= 1<<HC595_D5_BIT;
 	HC595_LAT_DDR |= 1<<HC595_LAT_BIT;
 	HC595_SCK_DDR |= 1<<HC595_SCK_BIT;
 
@@ -377,6 +379,7 @@ void display()
 			currentMoveLeft = 0;
 		}
 	}
+	HC595_LAT_L;
 	if(Mode == 0)
 	{
 		halfSecondCount ++;
@@ -421,7 +424,6 @@ void display()
 		ptr0 = &display_buffer[0+display_cnt*8];
 		ptr1 = &display_buffer[128+display_cnt*8];	
 	}
-	
 	if(Display_color == 0)
 	{
 	/* µ¥ºì	*/
@@ -429,17 +431,19 @@ void display()
 		{
 			for(j=7;j>=0;j--)
 			{
-				HC595_D0_H;
-				HC595_D1_H;
-				HC595_D2_H;
-				HC595_D3_H;
+				HC595_D0_L;
+				HC595_D1_L;
+				HC595_D2_L;
+				HC595_D3_L;
+				HC595_D4_L;
+				HC595_D5_L;
 				if(*ptr0 & 1<<j)
 				{
-					HC595_D0_L;
+					HC595_D0_H;
 				}
 				if(*ptr1 & 1<<j)
 				{
-					HC595_D1_L;
+					HC595_D1_H;
 				}
 				HC595_SCK_L;
 				HC595_SCK_H;
@@ -456,17 +460,19 @@ void display()
 		{
 			for(j=7;j>=0;j--)
 			{
-				HC595_D0_H;
-				HC595_D1_H;
-				HC595_D2_H;
-				HC595_D3_H;
+				HC595_D0_L;
+				HC595_D1_L;
+				HC595_D2_L;
+				HC595_D3_L;
+				HC595_D4_L;
+				HC595_D5_L;
 				if(*ptr0 & 1<<j)
 				{
-					HC595_D2_L;
+					HC595_D2_H;
 				}
 				if(*ptr1 & 1<<j)
 				{
-					HC595_D3_L;
+					HC595_D3_H;
 				}
 				HC595_SCK_L;
 				HC595_SCK_H;
@@ -483,19 +489,19 @@ void display()
 		{
 			for(j=7;j>=0;j--)
 			{
-				HC595_D0_H;
-				HC595_D1_H;
-				HC595_D2_H;
-				HC595_D3_H;
+				HC595_D0_L;
+				HC595_D1_L;
+				HC595_D2_L;
+				HC595_D3_L;
 				if(*ptr0 & 1<<j)
 				{
-					HC595_D0_L;
-					HC595_D2_L;
+					HC595_D0_H;
+					HC595_D2_H;
 				}
 				if(*ptr1 & 1<<j)
 				{
-					HC595_D1_L;
-					HC595_D3_L;
+					HC595_D1_H;
+					HC595_D3_H;
 				}
 				HC595_SCK_L;
 				HC595_SCK_H;
@@ -507,22 +513,24 @@ void display()
 	}
 	else if(Display_color == 3)
 	{
-	/*ºìµ×»Æ×Ö*/
+	/*µ¥À¶*/
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
 			{
 				HC595_D0_L;
 				HC595_D1_L;
-				HC595_D2_H;
-				HC595_D3_H;
+				HC595_D2_L;
+				HC595_D3_L;
+				HC595_D4_L;
+				HC595_D5_L;
 				if(*ptr0 & 1<<j)
 				{
-					HC595_D2_L;
+					HC595_D4_H;
 				}
 				if(*ptr1 & 1<<j)
 				{
-					HC595_D3_L;
+					HC595_D5_H;
 				}
 				HC595_SCK_L;
 				HC595_SCK_H;
@@ -538,17 +546,17 @@ void display()
 		{
 			for(j=7;j>=0;j--)
 			{
-				HC595_D0_H;
-				HC595_D1_H;
-				HC595_D2_L;
-				HC595_D3_L;
+				HC595_D0_L;
+				HC595_D1_L;
+				HC595_D2_H;
+				HC595_D3_H;
 				if(*ptr0 & 1<<j)
 				{
-					HC595_D0_L;
+					HC595_D0_H;
 				}
 				if(*ptr1 & 1<<j)
 				{
-					HC595_D1_L;
+					HC595_D1_H;
 				}
 				HC595_SCK_L;
 				HC595_SCK_H;
@@ -559,7 +567,6 @@ void display()
 	
 	}
 	//LS138_E_T_H;
-	HC595_LAT_L;
 	HC595_LAT_H;
 
 	switch(display_cnt)
