@@ -1,11 +1,8 @@
-/***************************************************************************/
-// 程序：LED3264电子日历
-// 模块：PCF8563时钟芯片驱动
-// 文件：_PCF8563.h
-// 作者：卜晓旸
-// 版本：1.9.7
-// 日期：2012年2月10日
-/***************************************************************************/
+/************************************************
+文件：PCF8563.h
+用途：PCF8563函数头文件
+注意：系统时钟8M
+************************************************/
 
 #ifndef _PCF8563_H_
 #define _PCF8563_H_
@@ -24,8 +21,16 @@ unsigned char time[7]={
 };
 
 uint16 freshTimeCount = 0;
-
-//清除指定区域指定长度的数据
+/*************************************************************************
+** 函数名称: clear(unsigned char *p,unsigned char num)
+** 功能描述: 清除指定区域指定长度的数据
+** 输　入: unsigned char *p :起始地址   unsigned char num :零数据长度
+** 输出	 : 
+** 全局变量: 
+** 调用模块: 
+** 说明：
+** 注意：
+**************************************************************************/
 void clear(unsigned char *p,unsigned char num)
 {
  for(;num>0;num--)
@@ -34,8 +39,17 @@ void clear(unsigned char *p,unsigned char num)
 	 p++;
 	}
 }
-
-//功能描述: 向PCF8563指定地址写入一条数据
+/*************************************************************************
+** 函数名称: PCF8536_wt(unsigned int add,unsigned char data)
+** 功能描述: 向PCF8563指定地址写入一条数据
+** 输　入: unsigned int add    ：高八位为器件地址，低八位为内部寄存器地址
+   		   unsigned char data  ：需要写入的数据
+** 输出	 : 
+** 全局变量: 
+** 调用模块: 
+** 说明：
+** 注意：
+**************************************************************************/
 void PCF8536_wt(unsigned int add,unsigned char data)
 {
  unsigned char t;
@@ -50,8 +64,18 @@ void PCF8536_wt(unsigned int add,unsigned char data)
  else syserr=ERR_SLAW;
  i2cstop();
 }
-
-//功能描述: 向PCF8563地址连续的寄存器写入系列数据
+/*************************************************************************
+** 函数名称: PCF8536_wt_p(unsigned int add,unsigned char *p,unsigned char num)
+** 功能描述: 向PCF8563地址连续的寄存器写入系列数据
+** 输　入: unsigned int add    ：高八位为器件地址，低八位为内部寄存器地址
+   		   unsigned char *p    ：需要写入的数据域的起始地址
+		   unsigned char num   ：写入数据的个数
+** 输出	 : 
+** 全局变量: 
+** 调用模块: 
+** 说明：写入数据区域为地址连续的寄存器
+** 注意：
+**************************************************************************/
 void PCF8536_wt_p(unsigned int add,unsigned char *p,unsigned char num)
 {
  unsigned char t;
@@ -71,8 +95,18 @@ void PCF8536_wt_p(unsigned int add,unsigned char *p,unsigned char num)
  else syserr=ERR_SLAW;
  i2cstop();
 }
-
-//读PCF8563
+/*************************************************************************
+** 函数名称: PCF8536_rd(unsigned int add,unsigned char *p,unsigned char num)
+** 功能描述: 读PCF8563
+** 输　入: unsigned int add    ：高八位为器件地址，低八位为内部寄存器地址
+   		   unsigned char *p    ：读出的数据存放地址的起始地址
+		   unsigned char num   ：读出数据的个数
+** 输出	 : 
+** 全局变量: 
+** 调用模块: 
+** 说明：
+** 注意：
+**************************************************************************/
 void PCF8536_rd(unsigned int add,unsigned char *p,unsigned char num)
 {
  unsigned char t;
@@ -98,8 +132,16 @@ void PCF8536_rd(unsigned int add,unsigned char *p,unsigned char num)
 	 p++;
 	} 
 }
-
-//功能描述: PCF8563初始化
+/*************************************************************************
+** 函数名称: PCF8563_init(void)
+** 功能描述: PCF8563初始化
+** 输　入: 
+** 输出	 : 
+** 全局变量: 
+** 调用模块: 
+** 说明：
+** 注意：
+**************************************************************************/
 void PCF8563_init(void)
 {
  clear(write_buff,8);
@@ -109,8 +151,16 @@ void PCF8563_init(void)
  //PCF8536_wt_p(0x02,time,7);//设定时间
  PCF8536_wt(0x00,0x00);//写寄存器1，开始计时
 }
-
-//刷新时间寄存器及相关数组内容
+/*************************************************************************
+** 函数名称: Updata_time(void)
+** 功能描述: 刷新时间寄存器及相关数组内容
+** 输　入: 
+** 输出	 : 
+** 全局变量: 
+** 调用模块: 
+** 说明：
+** 注意：
+**************************************************************************/
 void Updata_time(void)
 {
 	PCF8536_rd(0x02,time,7);//读取时间
@@ -142,7 +192,7 @@ void Updata_time(void)
 
 void Write_time(void)
 {
-	uint8 timeWriteBuffer[7] = {(SecondTen<<4)| SecondOne, 
+	uint8 timeWriteBuffer[7] = {0x00, 
 								(MinuteTen<<4)| MinuteOne, 
 								(HourTen<<4)| HourOne,
 								(DayTen<<4)| DayOne,
@@ -151,42 +201,6 @@ void Write_time(void)
 								(YearTen <<4)| YearOne,
 	};
 	PCF8536_wt_p(0x02, timeWriteBuffer, 7);
-}
-
-void AjustTimerMonthly()
-{
-	if(DayTen == 0 && DayOne == 1) // 每个月的一号 
-	{
-		if(HourTen == 0 && HourOne == 3) //三点
-		{
-			if(MinuteTen  == 3 && MinuteOne  == 0) //30分
-			{
-				if(AjustTimeMode && !AjustTimeIsAjusted) //加时间
-				{
-					uint8 temp = MinuteTen*10 + MinuteOne;
-					temp = temp + AjustTimeTen*10 + AjustTimeOne;
-					MinuteTen = temp/10;
-					MinuteOne = temp%10;
-					Write_time();
-					AjustTimeIsAjusted = 1;
-				}
-				else if(!AjustTimeMode && !AjustTimeIsAjusted) //减时间
-				{
-					uint8 temp = MinuteTen*10 + MinuteOne;
-					temp = temp - AjustTimeTen*10 - AjustTimeOne;
-					MinuteTen = temp/10;
-					MinuteOne = temp%10;
-					Write_time();
-					AjustTimeIsAjusted = 1;
-				}
-			}
-			else if(MinuteTen  == 5)
-			{
-				AjustTimeIsAjusted = 0;
-			}
-
-		}
-	}
 }
 
 #endif

@@ -1,12 +1,3 @@
-/***************************************************************************/
-// 程序：LED3264电子日历
-// 模块：变量，引脚，宏定义
-// 文件：_PinsValues.h
-// 作者：卜晓旸
-// 版本：1.9.7
-// 日期：2012年2月10日
-/***************************************************************************/
-
 #ifndef _PINSVALUES_H_
 #define _PINSVALUES_H_
 /*数据类型定义*/
@@ -42,47 +33,17 @@
 #define LS138_D_H		LS138_D_PORT |= (1<<LS138_D_BIT)
 #define LS138_D_L		LS138_D_PORT &= ~(1<<LS138_D_BIT)
 
-#define HC595_RED1_DDR		DDRD
-#define HC595_RED1_PORT		PORTD
-#define HC595_RED1_BIT		PD4
-#define HC595_RED1_H		HC595_RED1_PORT |= (1<<HC595_RED1_BIT)
-#define HC595_RED1_L		HC595_RED1_PORT &= ~(1<<HC595_RED1_BIT)
+#define HC595_D0_DDR		DDRD
+#define HC595_D0_PORT		PORTD
+#define HC595_D0_BIT		PD4
+#define HC595_D0_H		HC595_D0_PORT |= (1<<HC595_D0_BIT)
+#define HC595_D0_L		HC595_D0_PORT &= ~(1<<HC595_D0_BIT)
 
-#define HC595_RED2_DDR		DDRD
-#define HC595_RED2_PORT		PORTD
-#define HC595_RED2_BIT		PD5
-#define HC595_RED2_H		HC595_RED2_PORT |= (1<<HC595_RED2_BIT)
-#define HC595_RED2_L		HC595_RED2_PORT &= ~(1<<HC595_RED2_BIT)
-
-#define HC595_GREEN1_DDR		DDRA
-#define HC595_GREEN1_PORT		PORTA
-#define HC595_GREEN1_BIT		PA1
-#define HC595_GREEN1_H		HC595_GREEN1_PORT |= (1<<HC595_GREEN1_BIT)
-#define HC595_GREEN1_L		HC595_GREEN1_PORT &= ~(1<<HC595_GREEN1_BIT)
-
-#define HC595_GREEN2_DDR		DDRA
-#define HC595_GREEN2_PORT		PORTA
-#define HC595_GREEN2_BIT		PA2
-#define HC595_GREEN2_H		HC595_GREEN2_PORT |= (1<<HC595_GREEN2_BIT)
-#define HC595_GREEN2_L		HC595_GREEN2_PORT &= ~(1<<HC595_GREEN2_BIT)
-
-#define HC595_BLUE1_DDR		DDRA
-#define HC595_BLUE1_PORT		PORTA
-#define HC595_BLUE1_BIT		PA3
-#define HC595_BLUE1_H		HC595_BLUE1_PORT |= (1<<HC595_BLUE1_BIT)
-#define HC595_BLUE1_L		HC595_BLUE1_PORT &= ~(1<<HC595_BLUE1_BIT)
-
-#define HC595_BLUE2_DDR		DDRA
-#define HC595_BLUE2_PORT		PORTA
-#define HC595_BLUE2_BIT		PA4
-#define HC595_BLUE2_H		HC595_BLUE2_PORT |= (1<<HC595_BLUE2_BIT)
-#define HC595_BLUE2_L		HC595_BLUE2_PORT &= ~(1<<HC595_BLUE2_BIT)
-
-#define INFR_DDR			DDRA
-#define INFR_PORT			PORTA
-#define INFR_BIT			PA7
-#define INFR_H				INFR_PORT |= (1<<INFR_BIT)
-#define INFR_L				INFR_PORT &= ~(1<<INFR_BIT)
+#define HC595_D1_DDR		DDRD
+#define HC595_D1_PORT		PORTD
+#define HC595_D1_BIT		PD5
+#define HC595_D1_H		HC595_D1_PORT |= (1<<HC595_D1_BIT)
+#define HC595_D1_L		HC595_D1_PORT &= ~(1<<HC595_D1_BIT)
 
 #define HC595_LAT_DDR		DDRD
 #define HC595_LAT_PORT		PORTD
@@ -116,13 +77,6 @@
 #define KEY_MODE_BIT		PD0
 #define KEY_MODE_H			KEY_MODE_PIN & (1<<KEY_MODE_BIT)
 #define KEY_MODE_L			!(KEY_MODE_PIN & (1<<KEY_MODE_BIT))
-
-#define KEY_DISPLAY_COLOR_DDR		DDRD
-#define KEY_DISPLAY_COLOR_PORT		PORTD
-#define KEY_DISPLAY_COLOR_PIN		PIND
-#define KEY_DISPLAY_COLOR_BIT		PD1
-#define KEY_DISPLAY_COLOR_H			KEY_DISPLAY_COLOR_PIN & (1<<KEY_DISPLAY_COLOR_BIT)
-#define KEY_DISPLAY_COLOR_L			!(KEY_DISPLAY_COLOR_PIN & (1<<KEY_DISPLAY_COLOR_BIT))
 
 #define DQ_DDR		DDRD
 #define DQ_PORT		PORTD
@@ -160,28 +114,19 @@
 #define AjustTimeMode RunParameter[22]
 #define AjustTimeTen RunParameter[23]
 #define AjustTimeOne RunParameter[24]
-#define AjustTimeIsAjusted  RunParameter[25]
-#define Display_color  RunParameter[26]
-#define Display_BigNumber_Font  RunParameter[27]
-#define Voice_Mode  RunParameter[28]
 
-//#define SET_DISPLAY_LIGHT OCR0= (display_light-1)*25+1
-
-#define SET_DISPLAY_LIGHT OCR0= (display_light-1)*25
+#define SET_DISPLAY_LIGHT OCR0= (display_light-1)*25+1
 
 #define W_ADD_COM 0xa2
 #define R_ADD_COM 0xa3
 #define SLAW 0x18
 #define ERR_SLAW 1
 
-#define DS18B20_Delay 5
-
 //uint8 display_light; /* 屏幕亮度 1 到 8 */
 //uint8 moveSpeed; /* 日期左移速度 1 到 8 */
-//uint8 Mode; /* 运行模式 0：正常运行 1：调节年 2：调节月 3：调节日 4：调节时 5：调节分 6：调节星期  */
-			  /* 7：调节亮度模式 8：调节字体  9：调节校队时间 10：设置报时 26：调节速度 27：调节亮度 28：显示欢迎界面 */
+//uint8 Mode; /* 运行模式 0：正常运行 1：调节年 2：调节月 3：调节日 4：调节时 5：调节分 6：调节星期 7：调节亮度模式 8：调节校队时间*/
 
-uint8 RunParameter[29] = {	2,	//0 年千位
+uint8 RunParameter[22] = {	2,	//0 年千位
 							0, 	//1 年百位
 							1, 	//2 年十位
 							2, 	//3 年个位
@@ -199,17 +144,13 @@ uint8 RunParameter[29] = {	2,	//0 年千位
 							2,	//15 温度十位
 							3,	//16 温度个位
 							4,	//17 温度小数
-							0, 	//18 亮度模式 0：自动 1：手动
-							7,	//19 亮度
+							1, 	//18 亮度模式 0：自动 1：手动
+							1,	//19 亮度
 							1,	//20 速度
-							0,	//21 运行模式 
+							0,	//21 模式
 							0,	//22 校对时间 0：减 1：加
 							0,	//23 校对时间 十位
 							0,	//24 校队时间 个位
-							0,	//25 是否已经校时状态位 0：未校时 1：已校时
-							0,	//26 显示模式 0：蓝 1：绿 2：红 3：青： 4：黄 5：粉 6：白
-							0,  //27 大数字字体 0 1 2
-							0	//28 语音报时模式 0:正常 1:勿扰 2:关闭 
-						};
+							};
 
 #endif
