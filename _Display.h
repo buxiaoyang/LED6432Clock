@@ -6,8 +6,8 @@
 // 版本：1.9.7
 // 日期：2012年2月10日
 // 功能：时分数字静态显示，年月日周温度滚动显示。可选亮度模式，时间补偿。
-// 芯片：Atmega8
-// 容丝：低位0x24 高位0xD1
+// 芯片：Atmega16
+// 容丝：低位0xA4 10100100 高位0xD1 11010001
 // 编译：AVR GCC
 // 引脚定义：	PD0：按键MODE 
 //				PD1: 按键显示模式
@@ -137,24 +137,65 @@ void writeOneSCROLL(uint8 x, uint8 y,uint8 index)
 {
 	uint8 temp;
 	uint8 i;
-	for(i=0;i<10;i++)
+	if(Display_BigNumber_Font == 0)
 	{
-		temp = pgm_read_byte(&SCROLL[index][i]);
-		display_buffer[(y+(i*3))*8+x] = temp;
+		for(i=0;i<10;i++)
+		{
+			temp = pgm_read_byte(&SCROLL_STYLE1[index][i]);
+			display_buffer[(y+(i*3))*8+x] = temp;
+		}
+	}	
+	else if(Display_BigNumber_Font == 1)
+	{
+		for(i=0;i<10;i++)
+		{
+			temp = pgm_read_byte(&SCROLL_STYLE2[index][i]);
+			display_buffer[(y+(i*3))*8+x] = temp;
+		}	
+	}
+	else
+	{
+		for(i=0;i<10;i++)
+		{
+			temp = pgm_read_byte(&SCROLL_STYLE3[index][i]);
+			display_buffer[(y+(i*3))*8+x] = temp;
+		}	
 	}	
 }
-
 
 void wirteOneBigNumber(uint8 x, uint8 y,uint8 index)
 {
 	uint8 temp,temp1;
 	uint8 i;
-	for(i=0;i<21;i++)
+	if(Display_BigNumber_Font == 0)
 	{
-		temp = pgm_read_byte(&BIG_NUMBER_L[index][i*2]);
-		display_buffer[i*8+x] = temp >> y;
-		temp1 = pgm_read_byte(&BIG_NUMBER_L[index][i*2+1]);
-		display_buffer[i*8+x+1] = (temp << (8-y))|(temp1>>y);
+		for(i=0;i<21;i++)
+		{
+			temp = pgm_read_byte(&BIG_NUMBER_STYLE1[index][i*2]);
+			display_buffer[i*8+x] = temp >> y;
+			temp1 = pgm_read_byte(&BIG_NUMBER_STYLE1[index][i*2+1]);
+			display_buffer[i*8+x+1] = (temp << (8-y))|(temp1>>y);
+		}
+	}
+	else if(Display_BigNumber_Font == 1)
+	{
+		for(i=0;i<21;i++)
+		{
+			temp = pgm_read_byte(&BIG_NUMBER_STYLE2[index][i*2]);
+			display_buffer[i*8+x] = temp >> y;
+			temp1 = pgm_read_byte(&BIG_NUMBER_STYLE2[index][i*2+1]);
+			display_buffer[i*8+x+1] = (temp << (8-y))|(temp1>>y);
+		}
+	}
+	else
+	{
+		for(i=0;i<21;i++)
+		{
+			temp = pgm_read_byte(&BIG_NUMBER_STYLE3[index][i*2]);
+			display_buffer[i*8+x] = temp >> y;
+			temp1 = pgm_read_byte(&BIG_NUMBER_STYLE3[index][i*2+1]);
+			display_buffer[i*8+x+1] = (temp << (8-y))|(temp1>>y);
+		}
 	}
 }
 
@@ -204,6 +245,17 @@ void FreshDisplayBufferAjustWeek()
 	wirteOneBigNumber(5,0,Week );
 }
 
+void FreshDisplayBufferAjustSpeed()
+{
+	clearScreen();
+	writeOneUnSCROLL(0,0,28);
+	writeOneUnSCROLL(1,0,29);
+	writeOneUnSCROLL(2,0,43);	
+	writeOneUnSCROLL(3,0,13);
+	writeOneUnSCROLL(4,0,30);
+	wirteOneBigNumber(5,0,moveSpeed);
+}
+
 void FreshDisplayBufferAjustLightMode() //亮度模式
 {
 	clearScreen();
@@ -222,6 +274,35 @@ void FreshDisplayBufferAjustLightMode() //亮度模式
 		writeOneChinese(3, 12, 0);	
 	}
 	writeOneChinese(5, 12, 2);
+}
+
+void FreshDisplayBufferAjustLight()
+{
+	clearScreen();
+	if(display_light_Mode)
+	{
+		writeOneUnSCROLL(0,0,28);
+		writeOneUnSCROLL(1,0,29);
+		writeOneUnSCROLL(2,0,25);	
+		writeOneUnSCROLL(3,0,13);
+		writeOneUnSCROLL(4,0,30);
+		wirteOneBigNumber(5,0,display_light);
+	}
+	else
+	{
+		FreshDisplayBufferAjustLightMode();
+	}
+}
+
+void FreshDisplayBufferChangeFont()
+{
+	clearScreen();
+	writeOneUnSCROLL(0,0,28);
+	writeOneUnSCROLL(1,0,29);
+	writeOneUnSCROLL(2,0,44);	
+	writeOneUnSCROLL(3,0,45);
+	writeOneUnSCROLL(4,0,30);
+	wirteOneBigNumber(5,0,3);
 }
 
 void FreshDisplayBufferAjustProofTime() //校对时间模式

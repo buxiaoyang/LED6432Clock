@@ -6,8 +6,8 @@
 // 版本：1.9.7
 // 日期：2012年2月10日
 // 功能：时分数字静态显示，年月日周温度滚动显示。可选亮度模式，时间补偿。
-// 芯片：Atmega8
-// 容丝：低位0x24 高位0xD1
+// 芯片：Atmega16
+// 容丝：低位0xA4 10100100 高位0xD1 11010001
 // 编译：AVR GCC
 // 引脚定义：	PD0：按键MODE 
 //				PD1: 按键显示模式
@@ -107,6 +107,7 @@ SIGNAL(SIG_OVERFLOW2)
 		}
 	}
 	KEY_Time_count ++;	
+	KEY_Time_count_speed_color ++;
 	TCNT2=0x00;	
 }
 

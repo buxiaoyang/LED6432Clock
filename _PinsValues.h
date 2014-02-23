@@ -6,8 +6,8 @@
 // 版本：1.9.7
 // 日期：2012年2月10日
 // 功能：时分数字静态显示，年月日周温度滚动显示。可选亮度模式，时间补偿。
-// 芯片：Atmega8
-// 容丝：低位0x24 高位0xD1
+// 芯片：Atmega16
+// 容丝：低位0xA4 10100100 高位0xD1 11010001
 // 编译：AVR GCC
 // 引脚定义：	PD0：按键MODE 
 //				PD1: 按键显示模式
@@ -165,6 +165,7 @@
 #define AjustTimeOne RunParameter[24]
 #define AjustTimeIsAjusted  RunParameter[25]
 #define Display_color  RunParameter[26]
+#define Display_BigNumber_Font  RunParameter[27]
 
 #define SET_DISPLAY_LIGHT OCR0= (display_light-1)*25+1
 
@@ -177,9 +178,10 @@
 
 //uint8 display_light; /* 屏幕亮度 1 到 8 */
 //uint8 moveSpeed; /* 日期左移速度 1 到 8 */
-//uint8 Mode; /* 运行模式 0：正常运行 1：调节年 2：调节月 3：调节日 4：调节时 5：调节分 6：调节星期 7：调节亮度模式 8：调节校队时间 28：显示欢迎界面*/
+//uint8 Mode; /* 运行模式 0：正常运行 1：调节年 2：调节月 3：调节日 4：调节时 5：调节分 6：调节星期  */
+			  /* 7：调节亮度模式 8：调节字体  9：调节校队时间 26：调节速度 27：调节亮度 28：显示欢迎界面 */
 
-uint8 RunParameter[27] = {	2,	//0 年千位
+uint8 RunParameter[28] = {	2,	//0 年千位
 							0, 	//1 年百位
 							1, 	//2 年十位
 							2, 	//3 年个位
@@ -205,7 +207,8 @@ uint8 RunParameter[27] = {	2,	//0 年千位
 							0,	//23 校对时间 十位
 							0,	//24 校队时间 个位
 							0,	//25 是否已经校时状态位 0：未校时 1：已校时
-							0	//26 显示模式 0：单红 1：单绿 2：单黄 3：红底黄字 4：绿底黄字
+							0,	//26 显示模式 0：单红 1：单绿 2：单黄 3：红底黄字 4：绿底黄字
+							0   //27 大数字字体 0 1 2
 						};
 
 #endif

@@ -6,8 +6,8 @@
 // 版本：1.9.7
 // 日期：2012年2月10日
 // 功能：时分数字静态显示，年月日周温度滚动显示。可选亮度模式，时间补偿。
-// 芯片：Atmega8
-// 容丝：低位0x24 高位0xD1
+// 芯片：Atmega16
+// 容丝：低位0xA4 10100100 高位0xD1 11010001
 // 编译：AVR GCC
 // 引脚定义：	PD0：按键MODE 
 //				PD1: 按键显示模式
@@ -69,11 +69,29 @@ void init_devices()
 int main()
 {
 	init_devices();
-	ReadRunParameter();
-	Show_welcome();
 	ds1820_start();   
 	_delay_100ms(6);   
-	ReadTemputer(); 
+	ReadTemputer();
+	if(KEY_MODE_L) //判断是否加载初始化参数
+	{
+		_delay_ms(10);
+		if(KEY_MODE_L)
+		{
+			display_light_Mode = 	1;
+			display_light = 		1;
+			moveSpeed = 			1;
+			Mode = 					0;
+			AjustTimeMode = 		0;
+			AjustTimeTen = 			0;
+			AjustTimeOne = 			0;	
+			Display_color = 		0;
+			Display_BigNumber_Font = 0;
+			SET_DISPLAY_LIGHT;
+			SaveRunParameter();
+		}
+	}
+	ReadRunParameter();
+	Show_welcome();
 	Updata_time();
 	FreshDisplayBufferNormal();
 	while(1)

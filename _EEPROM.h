@@ -6,8 +6,8 @@
 // 版本：1.9.7
 // 日期：2012年2月10日
 // 功能：时分数字静态显示，年月日周温度滚动显示。可选亮度模式，时间补偿。
-// 芯片：Atmega8
-// 容丝：低位0x24 高位0xD1
+// 芯片：Atmega16
+// 容丝：低位0xA4 10100100 高位0xD1 11010001
 // 编译：AVR GCC
 // 引脚定义：	PD0：按键MODE 
 //				PD1: 按键显示模式
@@ -44,6 +44,7 @@ void SaveRunParameter()
 		eeprom_write_byte(0x06, AjustTimeTen);
 		eeprom_write_byte(0x07, AjustTimeOne);
 		eeprom_write_byte(0x08, Display_color);
+		eeprom_write_byte(0x09, Display_BigNumber_Font);
 	}
 	sei(); //使能中断
 }
@@ -58,11 +59,12 @@ void ReadRunParameter()
 			display_light_Mode = 	eeprom_read_byte(0x01);
 			display_light = 		eeprom_read_byte(0x02);
 			moveSpeed = 			eeprom_read_byte(0x03);
-			Mode = 					eeprom_read_byte(0x04);
+			//Mode = 					eeprom_read_byte(0x04);
 			AjustTimeMode = 		eeprom_read_byte(0x05);
 			AjustTimeTen = 			eeprom_read_byte(0x06);
 			AjustTimeOne = 			eeprom_read_byte(0x07);	
 			Display_color = 		eeprom_read_byte(0x08);
+			Display_BigNumber_Font = eeprom_read_byte(0x09);
 		}
 		SET_DISPLAY_LIGHT;
 	}

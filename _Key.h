@@ -6,8 +6,8 @@
 // 版本：1.9.7
 // 日期：2012年2月10日
 // 功能：时分数字静态显示，年月日周温度滚动显示。可选亮度模式，时间补偿。
-// 芯片：Atmega8
-// 容丝：低位0x24 高位0xD1
+// 芯片：Atmega16
+// 容丝：低位0xA4 10100100 高位0xD1 11010001
 // 编译：AVR GCC
 // 引脚定义：	PD0：按键MODE 
 //				PD1: 按键显示模式
@@ -32,6 +32,7 @@
 #define _KEY_H_
 
 uint16 KEY_Time_count;
+uint16 KEY_Time_count_speed_color;
 
 void Key_Init()
 {
@@ -85,7 +86,7 @@ void Key_Operation(uint8 maxNum, uint8 minNum, uint8 *tenValue, uint8 *oneValue,
 
 void Scan_Key()
 {
-	if(Mode != 0 && KEY_Time_count > 21000)
+	if(Mode != 0 && Mode != 27 && Mode != 26 && KEY_Time_count > 21000)
 	{
 		Mode = 0;
 		//保存时间到时钟芯片
@@ -94,6 +95,16 @@ void Scan_Key()
 		SaveRunParameter();
 		clearScreen(); //清屏
 		FreshDisplayBufferNormal(); //加载正常走时模式
+	}
+	
+	if(Mode == 27 || Mode == 26)
+	{
+		if(KEY_Time_count_speed_color > 500)
+		{
+			Mode = 0;
+			SaveRunParameter();
+			FreshDisplayBufferNormal(); //加载正常走时模式
+		}
 	}
 
 	if(KEY_DISPLAY_COLOR_L) //显示颜色调节
@@ -111,14 +122,15 @@ void Scan_Key()
 		while(KEY_DISPLAY_COLOR_L);	
 	}
 
-	if(Mode == 0) //正常运行模式
+	if(Mode == 0 || Mode== 27 || Mode == 26) //正常运行模式 调节速度和亮度模式
 	{
-		if(display_light_Mode)
+
+		if(KEY_UP_L) //亮度调节
 		{
-			if(KEY_UP_L) //亮度调节
+			_delay_ms(10);
+			if(KEY_UP_L)
 			{
-				_delay_ms(10);
-				if(KEY_UP_L)
+				if(display_light_Mode) //手动调节亮度模式
 				{
 					display_light ++;
 					if(display_light > 8)
@@ -126,11 +138,18 @@ void Scan_Key()
 						display_light = 1;
 					}
 					SET_DISPLAY_LIGHT;//OCR0置初值,占空比50%，调整OCR0的值用来调整占空比
-					SaveRunParameter();
 				}
-				while(KEY_UP_L);	
+				else //自动调节亮度模式
+				{
+				
+				}
+				Mode = 27;
+				KEY_Time_count_speed_color = 0;
+				FreshDisplayBufferAjustLight();
 			}
+			while(KEY_UP_L);	
 		}
+	
 		if(KEY_DOWN_L) //速度调节
 		{
 			_delay_ms(10);
@@ -141,7 +160,9 @@ void Scan_Key()
 				{
 					moveSpeed = 1;
 				}
-				SaveRunParameter();
+				Mode = 26;
+				KEY_Time_count_speed_color = 0;
+				FreshDisplayBufferAjustSpeed();
 			}
 			while(KEY_DOWN_L);	
 		}
@@ -176,8 +197,12 @@ void Scan_Key()
 		uint8 temp = 0;
 		Key_Operation(1, 0, &temp, &display_light_Mode, &FreshDisplayBufferAjustLightMode);
 	}
-
-	else if(Mode == 8) //调节校对时间
+	else if(Mode == 8) //设置字体
+	{
+		uint8 temp = 0;
+		Key_Operation(2, 0, &temp, &Display_BigNumber_Font, &FreshDisplayBufferChangeFont);
+	}
+	else if(Mode == 9) //调节校对时间
 	{
 		if(KEY_UP_L) 
 		{
@@ -222,7 +247,7 @@ void Scan_Key()
 		{
 			KEY_Time_count = 0;
 			Mode ++;
-			if(Mode > 8)
+			if(Mode > 9)
 			{
 				Mode = 0;
 			}
@@ -256,7 +281,10 @@ void Scan_Key()
 				case 7:	//调节亮度模式
 					FreshDisplayBufferAjustLightMode();
 					break;
-				case 8:	//调节校队时间
+				case 8:	//设置字体
+					FreshDisplayBufferChangeFont();
+					break;
+				case 9:	//调节校队时间
 					FreshDisplayBufferAjustProofTime();
 					break;  
 				default:
