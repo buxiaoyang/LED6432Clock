@@ -60,6 +60,7 @@ void init_devices()
 	timer0_init(); //初始化定时器
 	timer2_init();
 	PCF8563_init();
+	INFRARED_INI();
 	ReadDS18B20Count = 0;
 	AD_time_count = 0;
 	KEY_Time_count = 0;

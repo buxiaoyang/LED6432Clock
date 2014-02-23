@@ -10,6 +10,11 @@
 #ifndef _INFRARED_H_
 #define _INFRARED_H_
 
+void INFRARED_INI()
+{
+	INFR_DDR |= 1<<INFR_BIT;
+
+}
 
 
 #endif

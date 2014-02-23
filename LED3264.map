@@ -1,17 +1,21 @@
 Archive member included because of file (symbol)
 
-c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodqi4.o)
+c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodqi4.o)
                               LED3264.o (__udivmodqi4)
-c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodhi4.o)
+c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
                               LED3264.o (__udivmodhi4)
-c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_exit.o)
-                              c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o (exit)
-c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_copy_data.o)
+c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+                              c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o (exit)
+c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
                               LED3264.o (__do_copy_data)
-c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
+c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
                               LED3264.o (__do_clear_bss)
-c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5\libc.a(memset.o)
+c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(memset.o)
                               LED3264.o (memset)
+c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_rb.1C1D1E.o)
+                              LED3264.o (__eeprom_read_byte_1C1D1E)
+c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_wb.1C1D1E.o)
+                              LED3264.o (__eeprom_write_byte_1C1D1E)
 
 Allocating common symbols
 Common symbol       size              file
@@ -56,12 +60,12 @@ signature        0x00840000         0x00000400         rw !x
 
 Linker script and memory map
 
-LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
+LOAD c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
 LOAD LED3264.o
-LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5\libm.a
-LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
-LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5\libc.a
-LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
+LOAD c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libm.a
+LOAD c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a
+LOAD c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a
+LOAD c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a
 
 .hash
  *(.hash)
@@ -153,9 +157,9 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x3218
+.text           0x00000000     0x30e8
  *(.vectors)
- .vectors       0x00000000       0x54 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
+ .vectors       0x00000000       0x54 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
                 0x00000000                __vectors
                 0x00000000                __vector_default
  *(.vectors)
@@ -189,20 +193,20 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x00000fde        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
+ .init0         0x00000fde        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
                 0x00000fde                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x00000fde        0xc c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
+ .init2         0x00000fde        0xc c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x00000fea       0x16 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_copy_data.o)
+ .init4         0x00000fea       0x16 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
                 0x00000fea                __do_copy_data
- .init4         0x00001000       0x10 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
+ .init4         0x00001000       0x10 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
                 0x00001000                __do_clear_bss
  *(.init4)
  *(.init5)
@@ -214,10 +218,10 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x00001010        0x8 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
+ .init9         0x00001010        0x8 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
  *(.init9)
  *(.text)
- .text          0x00001018        0x4 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
+ .text          0x00001018        0x4 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
                 0x00001018                __vector_1
                 0x00001018                __vector_12
                 0x00001018                __bad_interrupt
@@ -238,87 +242,94 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
                 0x00001018                __vector_16
                 0x00001018                __vector_18
                 0x00001018                __vector_20
- .text          0x0000101c     0x21aa LED3264.o
-                0x00002cb2                FreshDisplayBufferAjustHour
-                0x00001084                ds1820_start
-                0x00002ca0                FreshDisplayBufferAjustMinute
-                0x00002bd8                FreshDisplayBufferAjustWeek
-                0x0000255c                timer2_init
-                0x0000103a                ds1820_read_byte
-                0x00001baa                i2crd
-                0x00001f56                SPEEK_Time
-                0x0000136e                LED_SCREEN_INI
-                0x00001536                writeOneSCROLL
-                0x00001e02                Write_time
-                0x000023fa                Key_Init
-                0x00002c3a                FreshDisplayComment
+ .text          0x0000101c     0x2054 LED3264.o
+                0x00002a7c                FreshDisplayBufferAjustHour
+                0x00001112                ds1820_start
+                0x00002a6c                FreshDisplayBufferAjustMinute
+                0x000029d2                FreshDisplayBufferAjustWeek
+                0x000025c0                timer2_init
+                0x00001082                ds1820_read_byte
+                0x00001c3e                i2crd
+                0x00001fb8                SPEEK_Time
+                0x00001384                LED_SCREEN_INI
+                0x0000150e                writeOneSCROLL
+                0x00001e6c                Write_time
+                0x0000245c                Key_Init
+                0x00002a16                FreshDisplayComment
                 0x0000101c                s_10us
-                0x00001b7a                twi_init
-                0x00001c84                PCF8536_rd
-                0x00001bcc                PCF8536_wt
-                0x00001060                ds1820_write_byte
-                0x0000175c                display
-                0x000027aa                FreshDisplayBufferNormal
-                0x00002b76                FreshDisplayBufferAjustSpeed
-                0x000024de                StartAD
-                0x00002670                fullScreen
-                0x00002adc                FreshDisplayBufferVoiceMode
-                0x00002698                init_devices
-                0x00001bbe                clear
-                0x00002cfa                Scan_Key
-                0x00001c20                PCF8536_wt_p
-                0x000029f2                FreshDisplayBufferAjustLightMode
-                0x00002cc4                FreshDisplayBufferAjustDay
-                0x00002a6c                FreshDisplayBufferAjustLight
-                0x000014a2                writeOneChinese
-                0x00001b96                i2cwt
-                0x00002992                FreshDisplayBufferChangeFont
-                0x00002cd6                FreshDisplayBufferAjustMonth
-                0x00001096                ReadTemputer
-                0x00002720                Show_welcome
-                0x00001f4c                Voice_Init
-                0x0000309c                main
-                0x00001bb8                i2cstop
-                0x00002574                __vector_4
-                0x000024ea                GetDispalyLight
-                0x00002536                timer0_init
-                0x00001606                wirteOneBigNumber
-                0x000028be                FreshDisplayBufferAjustProofTime
-                0x0000240c                Key_Operation
-                0x00002350                PLUSE_Out
-                0x0000101e                _delay_100ms
-                0x000013ae                writeCloclColon
-                0x00001ea0                AjustTimerMonthly
-                0x000014f6                writeOneUnSCROLL
-                0x00002ce8                FreshDisplayBufferAjustYear
-                0x00001d4c                Updata_time
-                0x00001b8a                i2cstart
-                0x00001156                SaveRunParameter
-                0x00002682                clearScreen
-                0x00001020                ds1820_reset
-                0x0000128e                ReadRunParameter
-                0x00001d1a                PCF8563_init
- .text          0x000031c6        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodqi4.o)
- .text          0x000031c6        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodhi4.o)
- .text          0x000031c6        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_exit.o)
- .text          0x000031c6        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_copy_data.o)
- .text          0x000031c6        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
- .text          0x000031c6        0xe c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5\libc.a(memset.o)
-                0x000031c6                memset
-                0x000031d4                . = ALIGN (0x2)
+                0x00001c0a                twi_init
+                0x00001d02                PCF8536_rd
+                0x00001c62                PCF8536_wt
+                0x000010d0                ds1820_write_byte
+                0x00001724                display
+                0x000026c4                FreshDisplayBufferNormal
+                0x0000298e                FreshDisplayBufferAjustSpeed
+                0x00002540                StartAD
+                0x000025dc                fullScreen
+                0x0000291a                FreshDisplayBufferVoiceMode
+                0x000025fe                init_devices
+                0x00001c54                clear
+                0x00002abc                Scan_Key
+                0x00001ca6                PCF8536_wt_p
+                0x00002870                FreshDisplayBufferAjustLightMode
+                0x00002a8c                FreshDisplayBufferAjustDay
+                0x000028c8                FreshDisplayBufferAjustLight
+                0x0000148c                writeOneChinese
+                0x00001c26                i2cwt
+                0x0000282e                FreshDisplayBufferChangeFont
+                0x00002a9c                FreshDisplayBufferAjustMonth
+                0x00001124                ReadTemputer
+                0x00002642                Show_welcome
+                0x00001fae                Voice_Init
+                0x00002e46                main
+                0x00001c4e                i2cstop
+                0x00002f74                __vector_4
+                0x0000254c                GetDispalyLight
+                0x0000259a                timer0_init
+                0x000015d0                wirteOneBigNumber
+                0x000027c8                FreshDisplayBufferAjustProofTime
+                0x0000246e                Key_Operation
+                0x000023b2                PLUSE_Out
+                0x00001030                _delay_100ms
+                0x000025d8                INFRARED_INI
+                0x000013c4                writeCloclColon
+                0x00001f0a                AjustTimerMonthly
+                0x000014d6                writeOneUnSCROLL
+                0x00002aac                FreshDisplayBufferAjustYear
+                0x00001db6                Updata_time
+                0x00001c1a                i2cstart
+                0x0000122e                SaveRunParameter
+                0x000025ee                clearScreen
+                0x0000104c                ds1820_reset
+                0x000012d6                ReadRunParameter
+                0x00001d8c                PCF8563_init
+ .text          0x00003070        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodqi4.o)
+ .text          0x00003070        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
+ .text          0x00003070        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+ .text          0x00003070        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+ .text          0x00003070        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+ .text          0x00003070        0xe c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(memset.o)
+                0x00003070                memset
+ .text          0x0000307e        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_rb.1C1D1E.o)
+ .text          0x0000307e        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_wb.1C1D1E.o)
+                0x0000307e                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x000031d4       0x18 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodqi4.o)
-                0x000031d4                __udivmodqi4
- .text.libgcc   0x000031ec       0x28 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodhi4.o)
-                0x000031ec                __udivmodhi4
- .text.libgcc   0x00003214        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x00003214        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x00003214        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
-                0x00003214                . = ALIGN (0x2)
+ .text.libgcc   0x0000307e       0x18 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodqi4.o)
+                0x0000307e                __udivmodqi4
+ .text.libgcc   0x00003096       0x28 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
+                0x00003096                __udivmodhi4
+ .text.libgcc   0x000030be        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x000030be        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x000030be        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+ .text.eeprom   0x000030be       0x10 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_rb.1C1D1E.o)
+                0x000030be                __eeprom_read_byte_1C1D1E
+ .text.eeprom   0x000030ce       0x18 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_wb.1C1D1E.o)
+                0x000030ce                __eeprom_write_byte_1C1D1E
+                0x000030e6                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00003214        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_exit.o)
-                0x00003214                exit
-                0x00003214                _exit
+ .fini9         0x000030e6        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+                0x000030e6                exit
+                0x000030e6                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -337,23 +348,25 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00003214        0x4 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x000030e6        0x2 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00003218                _etext = .
+                0x000030e8                _etext = .
 
-.data           0x00800060       0x24 load address 0x00003218
+.data           0x00800060       0x24 load address 0x000030e8
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
- .data          0x00800060        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
+ .data          0x00800060        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
  .data          0x00800060       0x24 LED3264.o
                 0x0080007d                time
                 0x00800060                RunParameter
- .data          0x00800084        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodqi4.o)
- .data          0x00800084        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodhi4.o)
- .data          0x00800084        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_exit.o)
- .data          0x00800084        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_copy_data.o)
- .data          0x00800084        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
- .data          0x00800084        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5\libc.a(memset.o)
+ .data          0x00800084        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodqi4.o)
+ .data          0x00800084        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
+ .data          0x00800084        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+ .data          0x00800084        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+ .data          0x00800084        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+ .data          0x00800084        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(memset.o)
+ .data          0x00800084        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_rb.1C1D1E.o)
+ .data          0x00800084        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_wb.1C1D1E.o)
  *(.data*)
  *(.rodata)
  *(.rodata*)
@@ -362,53 +375,56 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
                 0x00800084                _edata = .
                 0x00800084                PROVIDE (__data_end, .)
 
-.bss            0x00800084      0x224
+.bss            0x00800084      0x225 load address 0x0000310c
                 0x00800084                PROVIDE (__bss_start, .)
  *(.bss)
- .bss           0x00800084        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
- .bss           0x00800084        0x2 LED3264.o
-                0x00800084                freshTimeCount
- .bss           0x00800086        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodqi4.o)
- .bss           0x00800086        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodhi4.o)
- .bss           0x00800086        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_exit.o)
- .bss           0x00800086        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_copy_data.o)
- .bss           0x00800086        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
- .bss           0x00800086        0x0 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5\libc.a(memset.o)
+ .bss           0x00800084        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+ .bss           0x00800084        0x3 LED3264.o
+                0x00800084                out_put
+                0x00800085                freshTimeCount
+ .bss           0x00800087        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodqi4.o)
+ .bss           0x00800087        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
+ .bss           0x00800087        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+ .bss           0x00800087        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+ .bss           0x00800087        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+ .bss           0x00800087        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(memset.o)
+ .bss           0x00800087        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_rb.1C1D1E.o)
+ .bss           0x00800087        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_wb.1C1D1E.o)
  *(.bss*)
  *(COMMON)
- COMMON         0x00800086      0x222 LED3264.o
-                0x00800086                display_buffer_temp
-                0x0080008e                moveSpeedTimerCount
-                0x00800090                init_f
-                0x00800091                display_buffer
-                0x00800281                AD_time_count
-                0x00800283                ReadDS18B20Count
-                0x00800285                halfSecondCount
-                0x00800287                PLUSE_Number
-                0x00800288                isSecondCountShow
-                0x00800289                display_cnt
-                0x0080028a                PLUSE_Status
-                0x0080028b                KEY_Time_count
-                0x0080028d                currentMoveLeft
-                0x0080028e                read_buff
-                0x00800296                SPEEK_TIME_Delay
-                0x00800298                syserr
-                0x00800299                inVoice
-                0x0080029a                FreshDisplayBufferCount
-                0x0080029c                PLUSE_Delay
-                0x0080029d                KEY_Time_count_speed_color
-                0x0080029f                SPEEK_TIME_Status
-                0x008002a0                write_buff
-                0x008002a8                PROVIDE (__bss_end, .)
-                0x00003218                __data_load_start = LOADADDR (.data)
-                0x0000323c                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800087      0x222 LED3264.o
+                0x00800087                display_buffer_temp
+                0x0080008f                moveSpeedTimerCount
+                0x00800091                init_f
+                0x00800092                display_buffer
+                0x00800282                AD_time_count
+                0x00800284                ReadDS18B20Count
+                0x00800286                halfSecondCount
+                0x00800288                PLUSE_Number
+                0x00800289                isSecondCountShow
+                0x0080028a                display_cnt
+                0x0080028b                PLUSE_Status
+                0x0080028c                KEY_Time_count
+                0x0080028e                currentMoveLeft
+                0x0080028f                read_buff
+                0x00800297                SPEEK_TIME_Delay
+                0x00800299                syserr
+                0x0080029a                inVoice
+                0x0080029b                FreshDisplayBufferCount
+                0x0080029d                PLUSE_Delay
+                0x0080029e                KEY_Time_count_speed_color
+                0x008002a0                SPEEK_TIME_Status
+                0x008002a1                write_buff
+                0x008002a9                PROVIDE (__bss_end, .)
+                0x000030e8                __data_load_start = LOADADDR (.data)
+                0x0000310c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008002a8        0x0
-                0x008002a8                PROVIDE (__noinit_start, .)
+.noinit         0x008002a9        0x0
+                0x008002a9                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x008002a8                PROVIDE (__noinit_end, .)
-                0x008002a8                _end = .
-                0x008002a8                PROVIDE (__heap_start, .)
+                0x008002a9                PROVIDE (__noinit_end, .)
+                0x008002a9                _end = .
+                0x008002a9                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -426,11 +442,13 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
 .signature
  *(.signature*)
 
-.stab
+.stab           0x00000000      0x378
  *(.stab)
+ .stab          0x00000000      0x378 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
 
-.stabstr
+.stabstr        0x00000000       0x5f
  *(.stabstr)
+ .stabstr       0x00000000       0x5f c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
 
 .stab.excl
  *(.stab.excl)
@@ -465,44 +483,41 @@ LOAD c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a
                 0x00000000       0x20 LED3264.o
 
 .debug_pubnames
-                0x00000000      0x707
+                0x00000000      0x724
  *(.debug_pubnames)
  .debug_pubnames
-                0x00000000      0x707 LED3264.o
+                0x00000000      0x724 LED3264.o
 
-.debug_info     0x00000000     0x1bda
+.debug_info     0x00000000     0x16ee
  *(.debug_info)
- .debug_info    0x00000000     0x1bda LED3264.o
+ .debug_info    0x00000000     0x16ee LED3264.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000      0x3c0
+.debug_abbrev   0x00000000      0x325
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x3c0 LED3264.o
+ .debug_abbrev  0x00000000      0x325 LED3264.o
 
-.debug_line     0x00000000     0x2894
+.debug_line     0x00000000     0x22d3
  *(.debug_line)
- .debug_line    0x00000000     0x2894 LED3264.o
+ .debug_line    0x00000000     0x22d3 LED3264.o
 
-.debug_frame    0x00000000      0x3c0
+.debug_frame    0x00000000      0x3d0
  *(.debug_frame)
- .debug_frame   0x00000000      0x3c0 LED3264.o
+ .debug_frame   0x00000000      0x3d0 LED3264.o
 
-.debug_str      0x00000000      0x73f
+.debug_str      0x00000000      0x770
  *(.debug_str)
- .debug_str     0x00000000      0x73f LED3264.o
-                                0x7a4 (size before relaxing)
+ .debug_str     0x00000000      0x770 LED3264.o
+                                0x7d6 (size before relaxing)
 
-.debug_loc      0x00000000      0xb36
+.debug_loc      0x00000000      0xc8c
  *(.debug_loc)
- .debug_loc     0x00000000      0xb36 LED3264.o
+ .debug_loc     0x00000000      0xc8c LED3264.o
 
 .debug_macinfo
  *(.debug_macinfo)
 OUTPUT(LED3264.elf elf32-avr)
 LOAD linker stubs
-
-.debug_ranges   0x00000000       0x30
- .debug_ranges  0x00000000       0x30 LED3264.o
 
 Cross Reference Table
 
@@ -529,6 +544,7 @@ FreshDisplayBufferNormal                          LED3264.o
 FreshDisplayBufferVoiceMode                       LED3264.o
 FreshDisplayComment                               LED3264.o
 GetDispalyLight                                   LED3264.o
+INFRARED_INI                                      LED3264.o
 KEY_Time_count                                    LED3264.o
 KEY_Time_count_speed_color                        LED3264.o
 Key_Init                                          LED3264.o
@@ -560,48 +576,52 @@ StartAD                                           LED3264.o
 Updata_time                                       LED3264.o
 Voice_Init                                        LED3264.o
 Write_time                                        LED3264.o
-__bad_interrupt                                   c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__bss_end                                         c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
-__bss_start                                       c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
-__data_end                                        c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_copy_data.o)
-__data_load_start                                 c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_copy_data.o)
-__data_start                                      c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_copy_data.o)
-__do_clear_bss                                    c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_clear_bss.o)
+__bad_interrupt                                   c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__bss_end                                         c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+__bss_start                                       c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+__data_end                                        c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+__data_load_start                                 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+__data_start                                      c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+__do_clear_bss                                    c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
                                                   LED3264.o
-__do_copy_data                                    c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_copy_data.o)
+__do_copy_data                                    c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
                                                   LED3264.o
-__heap_end                                        c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__init                                            c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__stack                                           c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__udivmodhi4                                      c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodhi4.o)
+__eeprom_read_byte_1C1D1E                         c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_rb.1C1D1E.o)
                                                   LED3264.o
-__udivmodqi4                                      c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_udivmodqi4.o)
+__eeprom_write_byte_1C1D1E                        c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_wb.1C1D1E.o)
                                                   LED3264.o
-__vector_1                                        c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_10                                       c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_11                                       c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_12                                       c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_13                                       c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_14                                       c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_15                                       c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_16                                       c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_17                                       c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_18                                       c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_19                                       c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_2                                        c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_20                                       c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_3                                        c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
+__heap_end                                        c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__init                                            c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__stack                                           c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__udivmodhi4                                      c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
+                                                  LED3264.o
+__udivmodqi4                                      c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodqi4.o)
+                                                  LED3264.o
+__vector_1                                        c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_10                                       c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_11                                       c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_12                                       c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_13                                       c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_14                                       c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_15                                       c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_16                                       c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_17                                       c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_18                                       c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_19                                       c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_2                                        c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_20                                       c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_3                                        c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
 __vector_4                                        LED3264.o
-                                                  c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_5                                        c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_6                                        c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_7                                        c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_8                                        c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_9                                        c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vector_default                                  c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-__vectors                                         c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
+                                                  c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_5                                        c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_6                                        c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_7                                        c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_8                                        c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_9                                        c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vector_default                                  c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+__vectors                                         c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
 _delay_100ms                                      LED3264.o
-_exit                                             c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_exit.o)
+_exit                                             c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
 clear                                             LED3264.o
 clearScreen                                       LED3264.o
 currentMoveLeft                                   LED3264.o
@@ -613,8 +633,8 @@ ds1820_read_byte                                  LED3264.o
 ds1820_reset                                      LED3264.o
 ds1820_start                                      LED3264.o
 ds1820_write_byte                                 LED3264.o
-exit                                              c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/avr5\libgcc.a(_exit.o)
-                                                  c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
+exit                                              c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+                                                  c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
 freshTimeCount                                    LED3264.o
 fullScreen                                        LED3264.o
 halfSecondCount                                   LED3264.o
@@ -627,10 +647,11 @@ init_devices                                      LED3264.o
 init_f                                            LED3264.o
 isSecondCountShow                                 LED3264.o
 main                                              LED3264.o
-                                                  c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5/crtm16.o
-memset                                            c:/winavr-20090313/bin/../lib/gcc/avr/4.3.2/../../../../avr/lib/avr5\libc.a(memset.o)
+                                                  c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
+memset                                            c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(memset.o)
                                                   LED3264.o
 moveSpeedTimerCount                               LED3264.o
+out_put                                           LED3264.o
 read_buff                                         LED3264.o
 s_10us                                            LED3264.o
 syserr                                            LED3264.o

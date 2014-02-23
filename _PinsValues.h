@@ -42,41 +42,47 @@
 #define LS138_D_H		LS138_D_PORT |= (1<<LS138_D_BIT)
 #define LS138_D_L		LS138_D_PORT &= ~(1<<LS138_D_BIT)
 
-#define HC595_D0_DDR		DDRD
-#define HC595_D0_PORT		PORTD
-#define HC595_D0_BIT		PD4
-#define HC595_D0_H		HC595_D0_PORT |= (1<<HC595_D0_BIT)
-#define HC595_D0_L		HC595_D0_PORT &= ~(1<<HC595_D0_BIT)
+#define HC595_RED1_DDR		DDRD
+#define HC595_RED1_PORT		PORTD
+#define HC595_RED1_BIT		PD4
+#define HC595_RED1_H		HC595_RED1_PORT |= (1<<HC595_RED1_BIT)
+#define HC595_RED1_L		HC595_RED1_PORT &= ~(1<<HC595_RED1_BIT)
 
-#define HC595_D1_DDR		DDRD
-#define HC595_D1_PORT		PORTD
-#define HC595_D1_BIT		PD5
-#define HC595_D1_H		HC595_D1_PORT |= (1<<HC595_D1_BIT)
-#define HC595_D1_L		HC595_D1_PORT &= ~(1<<HC595_D1_BIT)
+#define HC595_RED2_DDR		DDRD
+#define HC595_RED2_PORT		PORTD
+#define HC595_RED2_BIT		PD5
+#define HC595_RED2_H		HC595_RED2_PORT |= (1<<HC595_RED2_BIT)
+#define HC595_RED2_L		HC595_RED2_PORT &= ~(1<<HC595_RED2_BIT)
 
-#define HC595_D2_DDR		DDRA
-#define HC595_D2_PORT		PORTA
-#define HC595_D2_BIT		PA1
-#define HC595_D2_H		HC595_D2_PORT |= (1<<HC595_D2_BIT)
-#define HC595_D2_L		HC595_D2_PORT &= ~(1<<HC595_D2_BIT)
+#define HC595_GREEN1_DDR		DDRA
+#define HC595_GREEN1_PORT		PORTA
+#define HC595_GREEN1_BIT		PA1
+#define HC595_GREEN1_H		HC595_GREEN1_PORT |= (1<<HC595_GREEN1_BIT)
+#define HC595_GREEN1_L		HC595_GREEN1_PORT &= ~(1<<HC595_GREEN1_BIT)
 
-#define HC595_D3_DDR		DDRA
-#define HC595_D3_PORT		PORTA
-#define HC595_D3_BIT		PA2
-#define HC595_D3_H		HC595_D3_PORT |= (1<<HC595_D3_BIT)
-#define HC595_D3_L		HC595_D3_PORT &= ~(1<<HC595_D3_BIT)
+#define HC595_GREEN2_DDR		DDRA
+#define HC595_GREEN2_PORT		PORTA
+#define HC595_GREEN2_BIT		PA2
+#define HC595_GREEN2_H		HC595_GREEN2_PORT |= (1<<HC595_GREEN2_BIT)
+#define HC595_GREEN2_L		HC595_GREEN2_PORT &= ~(1<<HC595_GREEN2_BIT)
 
-#define HC595_D4_DDR		DDRA
-#define HC595_D4_PORT		PORTA
-#define HC595_D4_BIT		PA3
-#define HC595_D4_H		HC595_D4_PORT |= (1<<HC595_D4_BIT)
-#define HC595_D4_L		HC595_D4_PORT &= ~(1<<HC595_D4_BIT)
+#define HC595_BLUE1_DDR		DDRA
+#define HC595_BLUE1_PORT		PORTA
+#define HC595_BLUE1_BIT		PA3
+#define HC595_BLUE1_H		HC595_BLUE1_PORT |= (1<<HC595_BLUE1_BIT)
+#define HC595_BLUE1_L		HC595_BLUE1_PORT &= ~(1<<HC595_BLUE1_BIT)
 
-#define HC595_D5_DDR		DDRA
-#define HC595_D5_PORT		PORTA
-#define HC595_D5_BIT		PA4
-#define HC595_D5_H		HC595_D5_PORT |= (1<<HC595_D5_BIT)
-#define HC595_D5_L		HC595_D5_PORT &= ~(1<<HC595_D5_BIT)
+#define HC595_BLUE2_DDR		DDRA
+#define HC595_BLUE2_PORT		PORTA
+#define HC595_BLUE2_BIT		PA4
+#define HC595_BLUE2_H		HC595_BLUE2_PORT |= (1<<HC595_BLUE2_BIT)
+#define HC595_BLUE2_L		HC595_BLUE2_PORT &= ~(1<<HC595_BLUE2_BIT)
+
+#define INFR_DDR			DDRA
+#define INFR_PORT			PORTA
+#define INFR_BIT			PA7
+#define INFR_H				INFR_PORT |= (1<<INFR_BIT)
+#define INFR_L				INFR_PORT &= ~(1<<INFR_BIT)
 
 #define HC595_LAT_DDR		DDRD
 #define HC595_LAT_PORT		PORTD
@@ -159,7 +165,9 @@
 #define Display_BigNumber_Font  RunParameter[27]
 #define Voice_Mode  RunParameter[28]
 
-#define SET_DISPLAY_LIGHT OCR0= (display_light-1)*25+1
+//#define SET_DISPLAY_LIGHT OCR0= (display_light-1)*25+1
+
+#define SET_DISPLAY_LIGHT OCR0= (display_light-1)*25
 
 #define W_ADD_COM 0xa2
 #define R_ADD_COM 0xa3
@@ -199,7 +207,7 @@ uint8 RunParameter[29] = {	2,	//0 年千位
 							0,	//23 校对时间 十位
 							0,	//24 校队时间 个位
 							0,	//25 是否已经校时状态位 0：未校时 1：已校时
-							0,	//26 显示模式 0：单红 1：单绿 2：单黄 3：红底黄字 4：绿底黄字
+							0,	//26 显示模式 0：蓝 1：绿 2：红 3：青： 4：黄 5：粉 6：白
 							0,  //27 大数字字体 0 1 2
 							0	//28 语音报时模式 0:正常 1:勿扰 2:关闭 
 						};

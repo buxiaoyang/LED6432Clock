@@ -26,12 +26,12 @@ void LED_SCREEN_INI()
 	LS138_B_DDR |= 1<<LS138_B_BIT;
 	LS138_C_DDR |= 1<<LS138_C_BIT;
 	LS138_D_DDR |= 1<<LS138_D_BIT;
-	HC595_D0_DDR |= 1<<HC595_D0_BIT;
-	HC595_D1_DDR |= 1<<HC595_D1_BIT;
-	HC595_D2_DDR |= 1<<HC595_D2_BIT;
-	HC595_D3_DDR |= 1<<HC595_D3_BIT;
-	HC595_D4_DDR |= 1<<HC595_D4_BIT;
-	HC595_D5_DDR |= 1<<HC595_D5_BIT;
+	HC595_RED1_DDR |= 1<<HC595_RED1_BIT;
+	HC595_RED2_DDR |= 1<<HC595_RED2_BIT;
+	HC595_GREEN1_DDR |= 1<<HC595_GREEN1_BIT;
+	HC595_GREEN2_DDR |= 1<<HC595_GREEN2_BIT;
+	HC595_BLUE1_DDR |= 1<<HC595_BLUE1_BIT;
+	HC595_BLUE2_DDR |= 1<<HC595_BLUE2_BIT;
 	HC595_LAT_DDR |= 1<<HC595_LAT_BIT;
 	HC595_SCK_DDR |= 1<<HC595_SCK_BIT;
 
@@ -426,24 +426,24 @@ void display()
 	}
 	if(Display_color == 0)
 	{
-	/* µ¥ºì	*/
+	/*  */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
 			{
-				HC595_D0_L;
-				HC595_D1_L;
-				HC595_D2_L;
-				HC595_D3_L;
-				HC595_D4_L;
-				HC595_D5_L;
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
 				if(*ptr0 & 1<<j)
 				{
-					HC595_D0_H;
+					HC595_RED1_H;
 				}
 				if(*ptr1 & 1<<j)
 				{
-					HC595_D1_H;
+					HC595_RED2_H;
 				}
 				HC595_SCK_L;
 				HC595_SCK_H;
@@ -455,24 +455,24 @@ void display()
 	}
 	else if(Display_color == 1)
 	{
-	/*µ¥ÂÌ	*/
+	/*	*/
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
 			{
-				HC595_D0_L;
-				HC595_D1_L;
-				HC595_D2_L;
-				HC595_D3_L;
-				HC595_D4_L;
-				HC595_D5_L;
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
 				if(*ptr0 & 1<<j)
 				{
-					HC595_D2_H;
+					HC595_GREEN1_H;
 				}
 				if(*ptr1 & 1<<j)
 				{
-					HC595_D3_H;
+					HC595_GREEN2_H;
 				}
 				HC595_SCK_L;
 				HC595_SCK_H;
@@ -484,24 +484,26 @@ void display()
 	}
 	else if(Display_color == 2)
 	{
-	/*µ¥»Æ*/
+	/*	*/
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
 			{
-				HC595_D0_L;
-				HC595_D1_L;
-				HC595_D2_L;
-				HC595_D3_L;
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
 				if(*ptr0 & 1<<j)
 				{
-					HC595_D0_H;
-					HC595_D2_H;
+					HC595_RED1_H;
+					HC595_GREEN1_H;
 				}
 				if(*ptr1 & 1<<j)
 				{
-					HC595_D1_H;
-					HC595_D3_H;
+					HC595_RED2_H;
+					HC595_GREEN2_H;
 				}
 				HC595_SCK_L;
 				HC595_SCK_H;
@@ -509,28 +511,28 @@ void display()
 			ptr0++;
 			ptr1++;
 		}
-			
+		
 	}
 	else if(Display_color == 3)
 	{
-	/*µ¥À¶*/
+	/*	*/
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
 			{
-				HC595_D0_L;
-				HC595_D1_L;
-				HC595_D2_L;
-				HC595_D3_L;
-				HC595_D4_L;
-				HC595_D5_L;
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
 				if(*ptr0 & 1<<j)
 				{
-					HC595_D4_H;
+					HC595_BLUE1_H;
 				}
 				if(*ptr1 & 1<<j)
 				{
-					HC595_D5_H;
+					HC595_BLUE2_H;
 				}
 				HC595_SCK_L;
 				HC595_SCK_H;
@@ -538,25 +540,30 @@ void display()
 			ptr0++;
 			ptr1++;
 		}
+		
 	}
 	else if(Display_color == 4)
 	{
-	/* ÂÌµ×»Æ×Ö*/
+	/*	*/
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
 			{
-				HC595_D0_L;
-				HC595_D1_L;
-				HC595_D2_H;
-				HC595_D3_H;
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
 				if(*ptr0 & 1<<j)
 				{
-					HC595_D0_H;
+					HC595_GREEN1_H;
+					HC595_BLUE1_H;
 				}
 				if(*ptr1 & 1<<j)
 				{
-					HC595_D1_H;
+					HC595_GREEN2_H;
+					HC595_BLUE2_H;
 				}
 				HC595_SCK_L;
 				HC595_SCK_H;
@@ -564,7 +571,71 @@ void display()
 			ptr0++;
 			ptr1++;
 		}
-	
+		
+	}
+	else if(Display_color == 5)
+	{
+	/*	*/
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_RED1_H;
+					HC595_BLUE1_H;
+				}
+				if(*ptr1 & 1<<j)
+				{
+					HC595_RED2_H;
+					HC595_BLUE2_H;
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
+	}
+	else if(Display_color == 6)
+	{
+	/*	*/
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_RED1_H;
+					HC595_GREEN1_H;
+					HC595_BLUE1_H;
+				}
+				if(*ptr1 & 1<<j)
+				{
+					HC595_RED2_H;
+					HC595_GREEN2_H;
+					HC595_BLUE2_H;
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
 	}
 	//LS138_E_T_H;
 	HC595_LAT_H;

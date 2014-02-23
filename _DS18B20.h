@@ -12,17 +12,36 @@
 
 uint16 ReadDS18B20Count;
 //中断标志
-unsigned char init_f;     
+unsigned char init_f; 
+
+unsigned char out_put = 0;    
 
 //延时函数
 void s_10us(unsigned int _10us)
 {
-	unsigned int aa;
+	unsigned char aa;
 	for(;_10us>=1;_10us--)
 	{
-		for(aa=0;aa<=66;aa++)
-		{;}
+		for(aa = 0;aa< 9; aa ++)
+		{
+			asm("nop");
+		}
 	}
+
+	//test code
+	/*
+	if(out_put)
+	{
+		INFR_H;
+		out_put = 0;
+	}
+	else
+	{
+		INFR_L;
+		out_put = 1;
+	}
+	*/
+	//test code
 }	
 
 void _delay_100ms(unsigned int _100ms)
