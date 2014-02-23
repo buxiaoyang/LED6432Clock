@@ -72,6 +72,10 @@ void init_devices()
 int main()
 {
 	uint8 currentlyHourVoice;//当前小时数，用于语音报时
+	uint8 needFreshDisplayBuffer = 1; //used in fresh disply buffer
+	uint8 secondPointFreshFlag = 0; //used for check whether to fresh the second dot
+	
+	unsigned char out_put = 0;  //Used for test output
 	init_devices();
 	ds1820_start();   
 	_delay_100ms(6);   
@@ -104,7 +108,35 @@ int main()
 		//675 us 0.000675s
 		if( Mode == 0)
 		{
+			//test code begin
+			if(out_put)
+			{
+				INFR_H;
+				out_put = 0;
+			}
+			else
+			{
+				INFR_L;
+				out_put = 1;
+			}
+			//test code end
 			Updata_time();
+			FreshDisplayBufferSecond(); //update second
+			if(SecondTen == 0 && SecondOne == 0 && needFreshDisplayBuffer)
+			{
+				AjustTimerMonthly();
+				FreshDisplayBufferNormal();
+				needFreshDisplayBuffer = 0;
+			}
+			if(SecondTen == 5 && SecondOne == 9)
+			{
+				needFreshDisplayBuffer = 1;
+			}
+			if(secondPointFreshFlag != SecondOne)
+			{
+				writeCloclColon(SecondOne % 2);
+				secondPointFreshFlag = SecondOne;
+			}
 			//语音报时开始
 			if(Voice_Mode == 0)//正常模式
 			{
@@ -131,13 +163,7 @@ int main()
 			
 			}
 			//语音报时结束
-			FreshDisplayBufferCount ++;
-			if(FreshDisplayBufferCount > 10000)
-			{
-				AjustTimerMonthly();
-				FreshDisplayBufferNormal();
-				FreshDisplayBufferCount = 0;
-			}	
+
 		}
 		display();	
 		Scan_Key();

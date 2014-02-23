@@ -59,12 +59,12 @@ SIGNAL(SIG_OVERFLOW2)
 		if(!display_light_Mode)
 		{
 			AD_time_count ++;
-			if(AD_time_count == 600)
+			if(AD_time_count == 12000)
 			{
 				StartAD();    
 			}
 		
-			if(AD_time_count > 900)
+			if(AD_time_count > 12300)
 			{
 				GetDispalyLight(); 
 				AD_time_count = 0;

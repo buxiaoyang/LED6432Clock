@@ -11,13 +11,13 @@
 #define _DISPLAY_H_
 
 volatile uint8 display_cnt; /*用于定时显示数码管的位数*/
+
 uint8 display_buffer[496]; 	/*显示缓冲区*/
+uint8 display_buffer_second[20]; //second buffer
 uint8 display_buffer_temp[8];
-uint16 	halfSecondCount; /*半秒定时计数器*/
 uint8 	isSecondCountShow;
 uint8 	currentMoveLeft;
 uint16  moveSpeedTimerCount;
-uint16 FreshDisplayBufferCount; /*刷新显示缓存时间计数器*/
 
 void LED_SCREEN_INI()
 {
@@ -36,11 +36,9 @@ void LED_SCREEN_INI()
 	HC595_SCK_DDR |= 1<<HC595_SCK_BIT;
 
 	display_cnt = 0;
-	halfSecondCount = 0;
 	isSecondCountShow = 0;
 	currentMoveLeft = 0;
 	moveSpeedTimerCount = 0;
-	FreshDisplayBufferCount = 0;
 }
 
 void clearScreen()
@@ -362,6 +360,51 @@ void FreshDisplayBufferNormal()
 	writeOneSCROLL(3,25,13);	
 }
 
+void FreshDisplayBufferSecond() //Second update
+{	
+	uint8 temp;
+	uint8 i;
+	if(Display_BigNumber_Font == 0)
+	{
+		for(i=0;i<10;i++)
+		{
+			temp = pgm_read_byte(&SCROLL_STYLE1[SecondTen][i]);
+			display_buffer_second[i] = temp;
+		}
+		for(i=0;i<10;i++)
+		{
+			temp = pgm_read_byte(&SCROLL_STYLE1[SecondOne][i]);
+			display_buffer_second[i+10] = temp;
+		}
+	}	
+	else if(Display_BigNumber_Font == 1)
+	{
+		for(i=0;i<10;i++)
+		{
+			temp = pgm_read_byte(&SCROLL_STYLE2[SecondTen][i]);
+			display_buffer_second[i] = temp;
+		}
+		for(i=0;i<10;i++)
+		{
+			temp = pgm_read_byte(&SCROLL_STYLE2[SecondOne][i]);
+			display_buffer_second[i+10] = temp;
+		}
+	}
+	else
+	{
+		for(i=0;i<10;i++)
+		{
+			temp = pgm_read_byte(&SCROLL_STYLE3[SecondTen][i]);
+			display_buffer_second[i] = temp;
+		}
+		for(i=0;i<10;i++)
+		{
+			temp = pgm_read_byte(&SCROLL_STYLE3[SecondOne][i]);
+			display_buffer_second[i+10] = temp;
+		}
+	}	
+}
+
 void display()
 {
 	uint8 i;
@@ -380,6 +423,7 @@ void display()
 		}
 	}
 	HC595_LAT_L;
+	/*
 	if(Mode == 0)
 	{
 		halfSecondCount ++;
@@ -398,6 +442,7 @@ void display()
 			}
 		}
 	}
+	*/
 	if(display_cnt > 5)
 	{
 		if(Mode == 0) //正常显示模式 日期温度滚动
@@ -407,10 +452,13 @@ void display()
 			temp2 = temp2>>5;
 			uint16 temp3 = 176+(display_cnt-6)*24+temp1;
 			ptr0 = &display_buffer[0+display_cnt*8];
-			for(k=0; k<8; k++)
+			for(k=0; k<6; k++)
 			{
 				display_buffer_temp[k] = (display_buffer[temp3+k]<<temp2) | (display_buffer[temp3+k+1]>>(8-temp2));
 			}
+			display_buffer_temp[5] &= 0xF8;
+			display_buffer_temp[6] = display_buffer_second[display_cnt-6];
+			display_buffer_temp[7] = display_buffer_second[display_cnt+4];
 			ptr1 = display_buffer_temp;
 		}
 		else //设置模式 不滚动
