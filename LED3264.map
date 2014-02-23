@@ -156,7 +156,7 @@ LOAD c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x31ec
+.text           0x00000000     0x3a88
  *(.vectors)
  .vectors       0x00000000       0x54 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
                 0x00000000                __vectors
@@ -241,95 +241,95 @@ LOAD c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a
                 0x00001018                __vector_16
                 0x00001018                __vector_18
                 0x00001018                __vector_20
- .text          0x0000101c     0x2158 LED3264.o
-                0x00002b48                FreshDisplayBufferAjustHour
+ .text          0x0000101c     0x29f4 LED3264.o
+                0x000033e4                FreshDisplayBufferAjustHour
                 0x00001714                FreshDisplayBufferSecond
                 0x00001112                ds1820_start
-                0x00002b38                FreshDisplayBufferAjustMinute
-                0x00002a9e                FreshDisplayBufferAjustWeek
-                0x0000268c                timer2_init
+                0x000033d4                FreshDisplayBufferAjustMinute
+                0x0000333a                FreshDisplayBufferAjustWeek
+                0x00002f28                timer2_init
                 0x00001082                ds1820_read_byte
-                0x00001d0a                i2crd
-                0x00002084                SPEEK_Time
+                0x000025a6                i2crd
+                0x00002920                SPEEK_Time
                 0x00001384                LED_SCREEN_INI
                 0x000014fe                writeOneSCROLL
-                0x00001f38                Write_time
-                0x00002528                Key_Init
-                0x00002ae2                FreshDisplayComment
+                0x000027d4                Write_time
+                0x00002dc4                Key_Init
+                0x0000337e                FreshDisplayComment
                 0x0000101c                s_10us
-                0x00001cd6                twi_init
-                0x00001dce                PCF8536_rd
-                0x00001d2e                PCF8536_wt
+                0x00002572                twi_init
+                0x0000266a                PCF8536_rd
+                0x000025ca                PCF8536_wt
                 0x000010d0                ds1820_write_byte
                 0x00001804                display
-                0x00002790                FreshDisplayBufferNormal
-                0x00002a5a                FreshDisplayBufferAjustSpeed
-                0x0000260c                StartAD
-                0x000026a8                fullScreen
-                0x000029e6                FreshDisplayBufferVoiceMode
-                0x000026ca                init_devices
-                0x00001d20                clear
-                0x00002b88                Scan_Key
-                0x00001d72                PCF8536_wt_p
-                0x0000293c                FreshDisplayBufferAjustLightMode
-                0x00002b58                FreshDisplayBufferAjustDay
-                0x00002994                FreshDisplayBufferAjustLight
+                0x0000302c                FreshDisplayBufferNormal
+                0x000032f6                FreshDisplayBufferAjustSpeed
+                0x00002ea8                StartAD
+                0x00002f44                fullScreen
+                0x00003282                FreshDisplayBufferVoiceMode
+                0x00002f66                init_devices
+                0x000025bc                clear
+                0x00003424                Scan_Key
+                0x0000260e                PCF8536_wt_p
+                0x000031d8                FreshDisplayBufferAjustLightMode
+                0x000033f4                FreshDisplayBufferAjustDay
+                0x00003230                FreshDisplayBufferAjustLight
                 0x0000147c                writeOneChinese
-                0x00001cf2                i2cwt
-                0x000028fa                FreshDisplayBufferChangeFont
-                0x00002b68                FreshDisplayBufferAjustMonth
+                0x0000258e                i2cwt
+                0x00003196                FreshDisplayBufferChangeFont
+                0x00003404                FreshDisplayBufferAjustMonth
                 0x00001124                ReadTemputer
-                0x0000270e                Show_welcome
-                0x0000207a                Voice_Init
-                0x00002f12                main
-                0x00001d1a                i2cstop
-                0x00003078                __vector_4
-                0x00002618                GetDispalyLight
-                0x00002666                timer0_init
+                0x00002faa                Show_welcome
+                0x00002916                Voice_Init
+                0x000037ae                main
+                0x000025b6                i2cstop
+                0x00003914                __vector_4
+                0x00002eb4                GetDispalyLight
+                0x00002f02                timer0_init
                 0x000015c0                wirteOneBigNumber
-                0x00002894                FreshDisplayBufferAjustProofTime
-                0x0000253a                Key_Operation
-                0x0000247e                PLUSE_Out
+                0x00003130                FreshDisplayBufferAjustProofTime
+                0x00002dd6                Key_Operation
+                0x00002d1a                PLUSE_Out
                 0x00001030                _delay_100ms
-                0x000026a4                INFRARED_INI
+                0x00002f40                INFRARED_INI
                 0x000013b4                writeCloclColon
-                0x00001fd6                AjustTimerMonthly
+                0x00002872                AjustTimerMonthly
                 0x000014c6                writeOneUnSCROLL
-                0x00002b78                FreshDisplayBufferAjustYear
-                0x00001e82                Updata_time
-                0x00001ce6                i2cstart
+                0x00003414                FreshDisplayBufferAjustYear
+                0x0000271e                Updata_time
+                0x00002582                i2cstart
                 0x0000122e                SaveRunParameter
-                0x000026ba                clearScreen
+                0x00002f56                clearScreen
                 0x0000104c                ds1820_reset
                 0x000012d6                ReadRunParameter
-                0x00001e58                PCF8563_init
- .text          0x00003174        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodqi4.o)
- .text          0x00003174        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
- .text          0x00003174        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
- .text          0x00003174        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
- .text          0x00003174        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
- .text          0x00003174        0xe c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(memset.o)
-                0x00003174                memset
- .text          0x00003182        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_rb.1C1D1E.o)
- .text          0x00003182        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_wb.1C1D1E.o)
-                0x00003182                . = ALIGN (0x2)
+                0x000026f4                PCF8563_init
+ .text          0x00003a10        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodqi4.o)
+ .text          0x00003a10        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
+ .text          0x00003a10        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+ .text          0x00003a10        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+ .text          0x00003a10        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+ .text          0x00003a10        0xe c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(memset.o)
+                0x00003a10                memset
+ .text          0x00003a1e        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_rb.1C1D1E.o)
+ .text          0x00003a1e        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_wb.1C1D1E.o)
+                0x00003a1e                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00003182       0x18 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodqi4.o)
-                0x00003182                __udivmodqi4
- .text.libgcc   0x0000319a       0x28 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
-                0x0000319a                __udivmodhi4
- .text.libgcc   0x000031c2        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x000031c2        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x000031c2        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
- .text.eeprom   0x000031c2       0x10 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_rb.1C1D1E.o)
-                0x000031c2                __eeprom_read_byte_1C1D1E
- .text.eeprom   0x000031d2       0x18 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_wb.1C1D1E.o)
-                0x000031d2                __eeprom_write_byte_1C1D1E
-                0x000031ea                . = ALIGN (0x2)
+ .text.libgcc   0x00003a1e       0x18 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodqi4.o)
+                0x00003a1e                __udivmodqi4
+ .text.libgcc   0x00003a36       0x28 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_udivmodhi4.o)
+                0x00003a36                __udivmodhi4
+ .text.libgcc   0x00003a5e        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x00003a5e        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x00003a5e        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_clear_bss.o)
+ .text.eeprom   0x00003a5e       0x10 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_rb.1C1D1E.o)
+                0x00003a5e                __eeprom_read_byte_1C1D1E
+ .text.eeprom   0x00003a6e       0x18 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5\libc.a(ee_wb.1C1D1E.o)
+                0x00003a6e                __eeprom_write_byte_1C1D1E
+                0x00003a86                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000031ea        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
-                0x000031ea                exit
-                0x000031ea                _exit
+ .fini9         0x00003a86        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+                0x00003a86                exit
+                0x00003a86                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -348,11 +348,11 @@ LOAD c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000031ea        0x2 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x00003a86        0x2 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000031ec                _etext = .
+                0x00003a88                _etext = .
 
-.data           0x00800060       0x24 load address 0x000031ec
+.data           0x00800060       0x24 load address 0x00003a88
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
@@ -375,7 +375,7 @@ LOAD c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a
                 0x00800084                _edata = .
                 0x00800084                PROVIDE (__data_end, .)
 
-.bss            0x00800084      0x234 load address 0x00003210
+.bss            0x00800084      0x234 load address 0x00003aac
                 0x00800084                PROVIDE (__bss_start, .)
  *(.bss)
  .bss           0x00800084        0x0 c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/../../../../avr/lib/avr5/crtm16.o
@@ -414,8 +414,8 @@ LOAD c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a
                 0x008002af                SPEEK_TIME_Status
                 0x008002b0                write_buff
                 0x008002b8                PROVIDE (__bss_end, .)
-                0x000031ec                __data_load_start = LOADADDR (.data)
-                0x00003210                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00003a88                __data_load_start = LOADADDR (.data)
+                0x00003aac                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x008002b8        0x0
                 0x008002b8                PROVIDE (__noinit_start, .)
@@ -495,9 +495,9 @@ LOAD c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x325 LED3264.o
 
-.debug_line     0x00000000     0x23ab
+.debug_line     0x00000000     0x2d03
  *(.debug_line)
- .debug_line    0x00000000     0x23ab LED3264.o
+ .debug_line    0x00000000     0x2d03 LED3264.o
 
 .debug_frame    0x00000000      0x3e0
  *(.debug_frame)
@@ -508,9 +508,9 @@ LOAD c:/winavr-20071221/bin/../lib/gcc/avr/4.2.2/avr5\libgcc.a
  .debug_str     0x00000000      0x7a3 LED3264.o
                                 0x809 (size before relaxing)
 
-.debug_loc      0x00000000      0xd17
+.debug_loc      0x00000000      0xd2d
  *(.debug_loc)
- .debug_loc     0x00000000      0xd17 LED3264.o
+ .debug_loc     0x00000000      0xd2d LED3264.o
 
 .debug_macinfo
  *(.debug_macinfo)

@@ -456,7 +456,7 @@ void display()
 			{
 				display_buffer_temp[k] = (display_buffer[temp3+k]<<temp2) | (display_buffer[temp3+k+1]>>(8-temp2));
 			}
-			display_buffer_temp[5] &= 0xF8;
+			display_buffer_temp[5] &= 0xFE;
 			display_buffer_temp[6] = display_buffer_second[display_cnt-6];
 			display_buffer_temp[7] = display_buffer_second[display_cnt+4];
 			ptr1 = display_buffer_temp;
@@ -676,6 +676,599 @@ void display()
 					HC595_RED2_H;
 					HC595_GREEN2_H;
 					HC595_BLUE2_H;
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
+	}
+	else if(Display_color == 7)
+	{
+	/* ºì£¬ÂÌ£¬»Æ */
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_RED1_H;
+				}
+				if(display_cnt > 5 && i < 6)
+				{
+
+					if(*ptr1 & 1<<j)
+					{
+						HC595_GREEN2_H;
+					}
+				}
+				else if(display_cnt > 5 && i >= 6)
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_RED2_H;
+						HC595_GREEN2_H;
+					}	
+				}
+				else
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_RED2_H;
+					}	
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
+	}
+	else if(Display_color == 8)
+	{
+	/*ºì£¬ÂÌ£¬À¶ */
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_RED1_H;
+				}
+				if(display_cnt > 5 && i < 6)
+				{
+
+					if(*ptr1 & 1<<j)
+					{
+						HC595_GREEN2_H;
+					}
+				}
+				else if(display_cnt > 5 && i >= 6)
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+					}	
+				}
+				else
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_RED2_H;
+					}	
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
+	}
+	else if(Display_color == 9)
+	{
+	/* ÂÌ£¬À¶£¬×Ï */
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_GREEN1_H;
+				}
+				if(display_cnt > 5 && i < 6)
+				{
+
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+					}
+				}
+				else if(display_cnt > 5 && i >= 6)
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+						HC595_RED2_H;
+					}	
+				}
+				else
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_GREEN2_H;
+					}	
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
+	}
+	else if(Display_color == 10)
+	{
+	/* ÂÌ£¬À¶£¬»Æ */
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_GREEN1_H;
+				}
+				if(display_cnt > 5 && i < 6)
+				{
+
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+					}
+				}
+				else if(display_cnt > 5 && i >= 6)
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_RED2_H;
+						HC595_GREEN2_H;
+					}	
+				}
+				else
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_GREEN2_H;
+					}	
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
+	}
+	else if(Display_color == 11)
+	{
+	/* À¶£¬×Ï£¬»Æ */
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_BLUE1_H;
+				}
+				if(display_cnt > 5 && i < 6)
+				{
+
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+						HC595_RED2_H;
+					}
+				}
+				else if(display_cnt > 5 && i >= 6)
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_RED2_H;
+						HC595_GREEN2_H;
+					}	
+				}
+				else
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+					}	
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
+	}
+	else if(Display_color == 12)
+	{
+	/* À¶£¬×Ï£¬Çà */
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_BLUE1_H;
+				}
+				if(display_cnt > 5 && i < 6)
+				{
+
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+						HC595_RED2_H;
+					}
+				}
+				else if(display_cnt > 5 && i >= 6)
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+						HC595_GREEN2_H;
+					}	
+				}
+				else
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+					}	
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
+	}
+	else if(Display_color == 13)
+	{
+	/* ×Ï£¬»Æ£¬Çà */
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_BLUE1_H;
+					HC595_RED1_H;
+				}
+				if(display_cnt > 5 && i < 6)
+				{
+
+					if(*ptr1 & 1<<j)
+					{
+						HC595_RED2_H;
+						HC595_GREEN2_H;
+					}
+				}
+				else if(display_cnt > 5 && i >= 6)
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+						HC595_GREEN2_H;
+					}	
+				}
+				else
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+						HC595_RED2_H;
+					}	
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
+	}
+	else if(Display_color == 14)
+	{
+	/* ×Ï£¬À¶£¬°× */
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_BLUE1_H;
+					HC595_RED1_H;
+				}
+				if(display_cnt > 5 && i < 6)
+				{
+
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+					}
+				}
+				else if(display_cnt > 5 && i >= 6)
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+						HC595_RED2_H;
+						HC595_GREEN2_H;
+					}	
+				}
+				else
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+						HC595_RED2_H;
+					}	
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
+	}
+	else if(Display_color == 15)
+	{
+	/* »Æ£¬Çà£¬°× */
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_RED1_H;
+					HC595_GREEN1_H;
+				}
+				if(display_cnt > 5 && i < 6)
+				{
+
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+						HC595_GREEN2_H;
+					}
+				}
+				else if(display_cnt > 5 && i >= 6)
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+						HC595_RED2_H;
+						HC595_GREEN2_H;
+					}	
+				}
+				else
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_RED2_H;
+						HC595_GREEN2_H;
+					}	
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
+	}
+	else if(Display_color == 16)
+	{
+	/* »Æ£¬ºì£¬ÂÌ */
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_RED1_H;
+					HC595_GREEN1_H;
+				}
+				if(display_cnt > 5 && i < 6)
+				{
+
+					if(*ptr1 & 1<<j)
+					{
+						HC595_RED2_H;
+					}
+				}
+				else if(display_cnt > 5 && i >= 6)
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_GREEN2_H;
+					}	
+				}
+				else
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_RED2_H;
+						HC595_GREEN2_H;
+					}	
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
+	}
+	else if(Display_color == 17)
+	{
+	/* Çà£¬°×£¬×Ï */
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_BLUE1_H;
+					HC595_GREEN1_H;
+				}
+				if(display_cnt > 5 && i < 6)
+				{
+
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+						HC595_RED2_H;
+						HC595_GREEN2_H;
+					}
+				}
+				else if(display_cnt > 5 && i >= 6)
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+						HC595_RED2_H;
+					}	
+				}
+				else
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+						HC595_GREEN2_H;
+					}	
+				}
+				HC595_SCK_L;
+				HC595_SCK_H;
+			}
+			ptr0++;
+			ptr1++;
+		}
+		
+	}
+	else if(Display_color == 18)
+	{
+	/* Çà£¬À¶£¬ÂÌ */
+		for(i=0;i<8;i++)
+		{
+			for(j=7;j>=0;j--)
+			{
+				HC595_RED1_L;
+				HC595_RED2_L;
+				HC595_GREEN1_L;
+				HC595_GREEN2_L;
+				HC595_BLUE1_L;
+				HC595_BLUE2_L;
+				if(*ptr0 & 1<<j)
+				{
+					HC595_BLUE1_H;
+					HC595_GREEN1_H;
+				}
+				if(display_cnt > 5 && i < 6)
+				{
+
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+					}
+				}
+				else if(display_cnt > 5 && i >= 6)
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_GREEN2_H;
+					}	
+				}
+				else
+				{
+					if(*ptr1 & 1<<j)
+					{
+						HC595_BLUE2_H;
+						HC595_GREEN2_H;
+					}	
 				}
 				HC595_SCK_L;
 				HC595_SCK_H;

@@ -97,7 +97,7 @@ void Scan_Key()
 		{
 			SPEEK_TIME_Status = 1;
 			Display_color ++;
-			if(Display_color > 6)
+			if(Display_color > 18)
 			{
 				Display_color = 0;
 			}
