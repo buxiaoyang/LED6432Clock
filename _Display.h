@@ -14,7 +14,6 @@ uint16 FreshDisplayBufferCount; /*刷新显示缓存时间计数器*/
 void LED_SCREEN_INI()
 {
 	LS138_E_DDR |= 1<<LS138_E_BIT;
-	//LS138_E_T_DDR |= 1<<LS138_E_T_BIT;
 	LS138_A_DDR |= 1<<LS138_A_BIT;
 	LS138_B_DDR |= 1<<LS138_B_BIT;
 	LS138_C_DDR |= 1<<LS138_C_BIT;
@@ -23,15 +22,7 @@ void LED_SCREEN_INI()
 	HC595_D1_DDR |= 1<<HC595_D1_BIT;
 	HC595_LAT_DDR |= 1<<HC595_LAT_BIT;
 	HC595_SCK_DDR |= 1<<HC595_SCK_BIT;
-	//LS138_E_T_L;
-	LS138_A_L;
-	LS138_B_L;
-	LS138_C_L;
-	LS138_D_L;
-	HC595_D0_L;
-	HC595_D1_L;
-	HC595_LAT_L;
-	HC595_SCK_L;
+
 	display_cnt = 0;
 	halfSecondCount = 0;
 	isSecondCountShow = 0;
@@ -86,7 +77,7 @@ void writeCloclColon(uint8 isSecondCountShow)
 		display_buffer[123] &= 0xFE;
 	}
 }
-
+/*
 void writeOneChinese(uint8 x, uint8 y,uint8 index)
 {
 	uint8 temp;
@@ -100,7 +91,7 @@ void writeOneChinese(uint8 x, uint8 y,uint8 index)
 	}
 	
 }
-
+*/
 void writeOneUnSCROLL(uint8 x, uint8 y,uint8 index)
 {
 	uint8 temp;
@@ -128,163 +119,157 @@ void wirteOneBigNumber(uint8 x, uint8 y,uint8 index)
 {
 	uint8 temp,temp1;
 	uint8 i;
-	if(y) //左
+	for(i=0;i<21;i++)
 	{
-		for(i=0;i<21;i++)
-		{
-			temp = pgm_read_byte(&BIG_NUMBER_L[index][i*2]);
-			display_buffer[i*8+x] = temp;
-			temp = pgm_read_byte(&BIG_NUMBER_L[index][i*2+1]);
-			display_buffer[i*8+x+1] = temp;
-		}
+		temp = pgm_read_byte(&BIG_NUMBER_L[index][i*2]);
+		display_buffer[i*8+x] = temp >> y;
+		temp1 = pgm_read_byte(&BIG_NUMBER_L[index][i*2+1]);
+		display_buffer[i*8+x+1] = (temp << (8-y))|(temp1>>y);
 	}
-	else  //右
-	{
-		for(i=0;i<21;i++)
-		{
-			temp = pgm_read_byte(&BIG_NUMBER_L[index][i*2]);
-			display_buffer[i*8+x] = temp >> 3;
-			temp1 = pgm_read_byte(&BIG_NUMBER_L[index][i*2+1]);
-			display_buffer[i*8+x+1] = (temp << 5)|(temp1>>3);
-		}
-	}
+}
+
+void FreshDisplayComment(uint8 *tenValue, uint8 *oneValue, uint8 matrixIndex)
+{
+	clearScreen();
+	writeOneUnSCROLL(0,0,28);
+	writeOneUnSCROLL(1,0,29);
+	writeOneUnSCROLL(2,0,30);
+	wirteOneBigNumber(3,0,*tenValue); 
+	wirteOneBigNumber(5,0,*oneValue);
+	writeOneUnSCROLL(7,11,matrixIndex);
 }
 
 void FreshDisplayBufferAjustYear()
 {
-	writeOneChinese(0, 0, 10);
-	writeOneChinese(2, 0, 11);
-	writeOneChinese(4, 0, 12);
-	writeOneChinese(6, 0, 13);
-	writeOneChinese(0, 16, YearTen );
-	writeOneChinese(2, 16, YearOne );
-	writeOneChinese(4, 16, 16);
-	writeOneChinese(6, 16, 31);
+	FreshDisplayComment(&YearTen, &YearOne, 10);
+	/*
+	clearScreen();
+	writeOneUnSCROLL(0,0,28);
+	writeOneUnSCROLL(1,0,29);
+	writeOneUnSCROLL(2,0,30);
+	wirteOneBigNumber(3,0,YearTen ); 
+	wirteOneBigNumber(5,0,YearOne );
+	writeOneUnSCROLL(7,11,10);
+	*/
 }
 
 void FreshDisplayBufferAjustMonth()
 {
-	writeOneChinese(0, 0, 10);
-	writeOneChinese(2, 0, 11);
-	writeOneChinese(4, 0, 12);
-	writeOneChinese(6, 0, 13);
-	writeOneChinese(0, 16, MonthTen);
-	writeOneChinese(2, 16, MonthOne);
-	writeOneChinese(4, 16, 17);
-	writeOneChinese(6, 16, 31);
+	FreshDisplayComment(&MonthTen, &MonthOne, 11);
+	/*
+	clearScreen();
+	writeOneUnSCROLL(0,0,28);
+	writeOneUnSCROLL(1,0,29);
+	writeOneUnSCROLL(2,0,30);
+	wirteOneBigNumber(3,0,MonthTen ); 
+	wirteOneBigNumber(5,0,MonthOne );
+	writeOneUnSCROLL(7,11,11);
+	*/
 }
 
 void FreshDisplayBufferAjustDay()
 {
-	writeOneChinese(0, 0, 10);
-	writeOneChinese(2, 0, 11);
-	writeOneChinese(4, 0, 12);
-	writeOneChinese(6, 0, 13);
-	writeOneChinese(0, 16, DayTen);
-	writeOneChinese(2, 16, DayOne);
-	writeOneChinese(4, 16, 12);
-	writeOneChinese(6, 16, 31);
+	FreshDisplayComment(&DayTen, &DayOne, 20);
+	/*
+	clearScreen();
+	writeOneUnSCROLL(0,0,28);
+	writeOneUnSCROLL(1,0,29);
+	writeOneUnSCROLL(2,0,30);
+	wirteOneBigNumber(3,0,DayTen ); 
+	wirteOneBigNumber(5,0,DayOne );
+	writeOneUnSCROLL(7,11,20);
+	*/
 }
 
 void FreshDisplayBufferAjustHour()
 {
-	writeOneChinese(0, 0, 10);
-	writeOneChinese(2, 0, 11);
-	writeOneChinese(4, 0, 14);
-	writeOneChinese(6, 0, 15);
-	writeOneChinese(0, 16, HourTen);
-	writeOneChinese(2, 16, HourOne);
-	writeOneChinese(4, 16, 14);
-	writeOneChinese(6, 16, 31);
+	FreshDisplayComment(&HourTen, &HourOne, 23);
+	/*
+	clearScreen();
+	writeOneUnSCROLL(0,0,28);
+	writeOneUnSCROLL(1,0,29);
+	writeOneUnSCROLL(2,0,30);
+	wirteOneBigNumber(3,0,HourTen ); 
+	wirteOneBigNumber(5,0,HourOne );
+	writeOneUnSCROLL(7,11,23);
+	*/
 }
 
 void FreshDisplayBufferAjustMinute()
 {
-	writeOneChinese(0, 0, 10);
-	writeOneChinese(2, 0, 11);
-	writeOneChinese(4, 0, 14);
-	writeOneChinese(6, 0, 15);
-	writeOneChinese(0, 16, MinuteTen );
-	writeOneChinese(2, 16, MinuteOne );
-	writeOneChinese(4, 16, 19);
-	writeOneChinese(6, 16, 31);
+	FreshDisplayComment(&MinuteTen, &MinuteOne, 24);
+	/*
+	clearScreen();
+	writeOneUnSCROLL(0,0,28);
+	writeOneUnSCROLL(1,0,29);
+	writeOneUnSCROLL(2,0,30);
+	wirteOneBigNumber(3,0,MinuteTen ); 
+	wirteOneBigNumber(5,0,MinuteOne );
+	writeOneUnSCROLL(7,11,24);
+	*/
 }
 
 void FreshDisplayBufferAjustWeek()
 {
-	writeOneChinese(0, 0, 10);
-	writeOneChinese(2, 0, 11);
-	writeOneChinese(4, 0, 32);
-	writeOneChinese(6, 0, 13);
-	writeOneChinese(0, 16, 33);
-	if(Week == 7)
-	{
-		writeOneChinese(2, 16, 12);
-	}
-	else
-	{
-		writeOneChinese(2, 16, Week + 33);
-	}
-	writeOneChinese(4, 16, 31);
-	writeOneChinese(6, 16, 31);
+	clearScreen();
+	writeOneUnSCROLL(0,0,28);
+	writeOneUnSCROLL(1,0,29);
+	writeOneUnSCROLL(2,0,30);
+	writeOneUnSCROLL(3,11,12); 
+	wirteOneBigNumber(5,0,Week );
 }
 
 
 void FreshDisplayBufferAjustLightMode() //亮度模式
 {
-	writeOneChinese(0, 0, 20);
-	writeOneChinese(2, 0, 21);
-	writeOneChinese(4, 0, 22);
-	writeOneChinese(6, 0, 23);
-	if(display_light_Mode)
+	clearScreen();
+	writeOneUnSCROLL(0,0,28);
+	writeOneUnSCROLL(1,0,29);
+	writeOneUnSCROLL(2,0,30);
+	if(display_light_Mode) //手动
 	{
-		writeOneChinese(0, 16, 26);
+		wirteOneBigNumber(3,0,display_light_Mode); 
+		writeOneUnSCROLL(5,0,32);
 	}
 	else
 	{
-		writeOneChinese(0, 16, 24);		
+		wirteOneBigNumber(3,0,display_light_Mode); 
+		writeOneUnSCROLL(5,0,31);	
 	}
-	writeOneChinese(2, 16, 25);
-	writeOneChinese(4, 16, 31);
-	writeOneChinese(6, 16, 31);
+	writeOneUnSCROLL(7,0,33);	
+	writeOneUnSCROLL(5,13,25);	
+	writeOneUnSCROLL(7,13,13);	
 }
 
 void FreshDisplayBufferAjustProofTime() //校对时间模式
 {
-	writeOneChinese(0, 0, 27);
-	writeOneChinese(2, 0, 17);
-	writeOneChinese(4, 0, 28);
-	writeOneChinese(6, 0, 14);
-	if(AjustTimeMode)
+	clearScreen();
+	writeOneUnSCROLL(0,0,28);
+	writeOneUnSCROLL(1,0,29);
+	writeOneUnSCROLL(2,0,30);
+	writeOneUnSCROLL(0,11,26);
+	writeOneUnSCROLL(1,11,11);
+	if(AjustTimeMode) // 加
 	{
-		writeOneChinese(0, 16, 29);		
+		writeOneUnSCROLL(2,11,27);	
 	}
 	else
 	{
-		writeOneChinese(0, 16, 30);		
+		writeOneUnSCROLL(2,11,14);	
 	}
-	writeOneChinese(2, 16, AjustTimeTen);
-	writeOneChinese(4, 16, AjustTimeOne);
-	writeOneChinese(6, 16, 19);
+	wirteOneBigNumber(3,0,AjustTimeTen); 
+	wirteOneBigNumber(5,0,AjustTimeOne);
+	writeOneUnSCROLL(7,11,24);
 }
 
 void FreshDisplayBufferNormal()
 {
+	clearScreen();
 	///// 10年 11月 12周 13度 14一 15二 16三 17四 18五 19六 20日 21点 22空格
-	wirteOneBigNumber(0,1,HourTen ); 	//8 时十位
-	wirteOneBigNumber(2,1,HourOne );	//9 时个位
-	wirteOneBigNumber(4,0,MinuteTen );	//10 分十位
-	wirteOneBigNumber(6,0,MinuteOne );	//11 分个位
-	
-	writeOneSCROLL(0,22,22);
-	writeOneSCROLL(1,22,22);
-	writeOneSCROLL(2,22,22);
-	writeOneSCROLL(3,22,22);
-	writeOneSCROLL(4,22,22);
-	writeOneSCROLL(5,22,22);
-	writeOneSCROLL(6,22,22);
-	writeOneSCROLL(7,22,22);
-
+	wirteOneBigNumber(0,0,HourTen ); 	//8 时十位
+	wirteOneBigNumber(2,0,HourOne );	//9 时个位
+	wirteOneBigNumber(4,3,MinuteTen );	//10 分十位
+	wirteOneBigNumber(6,3,MinuteOne );	//11 分个位
 	writeOneSCROLL(0,23,YearThousand );		//0 年千位
 	writeOneSCROLL(1,23,YearHundred );		//1 年百位
 	writeOneSCROLL(2,23,YearTen );		//2 年十位
@@ -293,27 +278,17 @@ void FreshDisplayBufferNormal()
 	writeOneSCROLL(5,23,MonthTen );		//4 月十位
 	writeOneSCROLL(6,23,MonthOne );		//5 月个位
 	writeOneSCROLL(7,23,11);	
-
 	///// 10年 11月 12周 13度 14一 15二 16三 17四 18五 19六 20日 21点 22空格
-
 	writeOneSCROLL(0,24,DayTen );		//6 日十位
 	writeOneSCROLL(1,24,DayOne );		//7 日个位
 	writeOneSCROLL(2,24,20);
-	writeOneSCROLL(3,24,22);
 	writeOneSCROLL(4,24,12);
 	writeOneSCROLL(5,24,Week +13); 		//14 星期
-	writeOneSCROLL(6,24,22); 
 	writeOneSCROLL(7,24,TemperatureTen );		//15 温度十位
-
 	writeOneSCROLL(0,25,TemperatureOne );		//16 温度个位
 	writeOneSCROLL(1,25,21);	
 	writeOneSCROLL(2,25,TemperatureDecimal );		//17 温度小数	
 	writeOneSCROLL(3,25,13);	
-	writeOneSCROLL(4,25,22);
-	writeOneSCROLL(5,25,22);
-	writeOneSCROLL(6,25,22);
-	writeOneSCROLL(7,25,22); 
-	
 }
 
 

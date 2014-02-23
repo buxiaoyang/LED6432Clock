@@ -12,6 +12,44 @@ void Key_Init()
 	KEY_MODE_DDR  &= ~(1<<KEY_MODE_BIT);
 }
 
+void Key_Operation(uint8 maxNum, uint8 minNum, uint8 *tenValue, uint8 *oneValue, void (*FunP)())
+{
+	if(KEY_UP_L) 
+	{
+		_delay_ms(10);
+		if(KEY_UP_L)
+		{
+			uint8 value = *tenValue*10 + *oneValue;
+			value ++;
+			if(value > maxNum)
+			{
+				value = minNum;
+			}
+			*tenValue = value/10;
+			*oneValue = value%10;
+			(*FunP)();
+		}
+		while(KEY_UP_L);	
+	}
+	if(KEY_DOWN_L) 
+	{
+		_delay_ms(10);
+		if(KEY_DOWN_L)
+		{
+			uint8 value = *tenValue*10 + *oneValue;
+			value --;
+			if((value > maxNum) | (value < minNum))
+			{
+				value = maxNum;
+			}
+			*tenValue = value/10;
+			*oneValue = value%10;
+			(*FunP)();			
+		}
+		while(KEY_DOWN_L);	
+	}
+}
+
 void Scan_Key()
 {
 	if(Mode == 0) //正常运行模式
@@ -44,259 +82,35 @@ void Scan_Key()
 			while(KEY_DOWN_L);	
 		}
 	}
-	/*
 	else if(Mode == 1) //调节年
 	{
-		if(KEY_UP_L) 
-		{
-			_delay_ms(10);
-			if(KEY_UP_L)
-			{
-				uint8 value = YearTen*10 + YearOne;
-				value ++;
-				if(value > 99)
-				{
-					value = 0;
-				}
-				YearTen = value/10;
-				YearOne = value%10;
-				FreshDisplayBufferAjustYear();
-			}
-			while(KEY_UP_L);	
-		}
-		if(KEY_DOWN_L) 
-		{
-			_delay_ms(10);
-			if(KEY_DOWN_L)
-			{
-				uint8 value = YearTen*10 + YearOne;
-				value --;
-				if(value > 99)
-				{
-					value = 99;
-				}
-				YearTen = value/10;
-				YearOne = value%10;	
-				FreshDisplayBufferAjustYear();			
-			}
-			while(KEY_DOWN_L);	
-		}
+		Key_Operation(99, 0, &YearTen, &YearOne, &FreshDisplayBufferAjustYear);
 	}
 	else if(Mode == 2) //调节月
 	{
-		if(KEY_UP_L) 
-		{
-			_delay_ms(10);
-			if(KEY_UP_L)
-			{
-				uint8 value = MonthTen*10 + MonthOne;
-				value ++;
-				if(value > 12)
-				{
-					value = 1;
-				}
-				MonthTen = value/10;
-				MonthOne = value%10;
-				FreshDisplayBufferAjustMonth();
-			}
-			while(KEY_UP_L);	
-		}
-		if(KEY_DOWN_L) 
-		{
-			_delay_ms(10);
-			if(KEY_DOWN_L)
-			{
-				uint8 value = MonthTen*10 + MonthOne;
-				value --;
-				if(value > 12 || value < 1)
-				{
-					value = 12;
-				}
-				MonthTen = value/10;
-				MonthOne = value%10;
-				FreshDisplayBufferAjustMonth();		
-			}
-			while(KEY_DOWN_L);	
-		}
+		Key_Operation(12, 1, &MonthTen, &MonthOne, &FreshDisplayBufferAjustMonth);
 	}
 	else if(Mode == 3) //调节日
 	{
-		if(KEY_UP_L) 
-		{
-			_delay_ms(10);
-			if(KEY_UP_L)
-			{
-				uint8 value = DayTen*10 + DayOne;
-				value ++;
-				if(value > 31)
-				{
-					value = 1;
-				}
-				DayTen = value/10;
-				DayOne = value%10;
-				FreshDisplayBufferAjustDay();
-			}
-			while(KEY_UP_L);	
-		}
-		if(KEY_DOWN_L) 
-		{
-			_delay_ms(10);
-			if(KEY_DOWN_L)
-			{
-				uint8 value = DayTen*10 + DayOne;
-				value --;
-				if(value > 31 || value < 1)
-				{
-					value = 31;
-				}
-				DayTen = value/10;
-				DayOne = value%10;
-				FreshDisplayBufferAjustDay();
-			}
-			while(KEY_DOWN_L);	
-		}
+		Key_Operation(31, 1, &DayTen, &DayOne, &FreshDisplayBufferAjustDay);
 	}
 	else if(Mode == 4) //调节时
 	{
-		if(KEY_UP_L) 
-		{
-			_delay_ms(10);
-			if(KEY_UP_L)
-			{
-				uint8 value = HourTen*10 + HourOne;
-				value ++;
-				if(value > 23)
-				{
-					value = 0;
-				}
-				HourTen = value/10;
-				HourOne = value%10;
-				FreshDisplayBufferAjustHour();
-			}
-			while(KEY_UP_L);	
-		}
-		if(KEY_DOWN_L) 
-		{
-			_delay_ms(10);
-			if(KEY_DOWN_L)
-			{
-				uint8 value = HourTen*10 + HourOne;
-				value --;
-				if(value > 23)
-				{
-					value = 23;
-				}
-				HourTen = value/10;
-				HourOne = value%10;
-				FreshDisplayBufferAjustHour();
-			}
-			while(KEY_DOWN_L);	
-		}
+		Key_Operation(23, 0, &HourTen, &HourOne, &FreshDisplayBufferAjustHour);
 	}
 	else if(Mode == 5) //调节分
 	{
-		if(KEY_UP_L) 
-		{
-			_delay_ms(10);
-			if(KEY_UP_L)
-			{
-				uint8 value = MinuteTen*10 + MinuteOne;
-				value ++;
-				if(value > 59)
-				{
-					value = 0;
-				}
-				MinuteTen = value/10;
-				MinuteOne = value%10;
-				FreshDisplayBufferAjustMinute();
-			}
-			while(KEY_UP_L);	
-		}
-		if(KEY_DOWN_L) 
-		{
-			_delay_ms(10);
-			if(KEY_DOWN_L)
-			{
-				uint8 value = MinuteTen*10 + MinuteOne;
-				value --;
-				if(value > 59)
-				{
-					value = 59;
-				}
-				MinuteTen = value/10;
-				MinuteOne = value%10;
-				FreshDisplayBufferAjustMinute();
-			}
-			while(KEY_DOWN_L);	
-		}
+		Key_Operation(59, 0, &MinuteTen, &MinuteOne, &FreshDisplayBufferAjustMinute);
 	}
 	else if(Mode == 6) //调节星期
 	{
-		if(KEY_UP_L) 
-		{
-			_delay_ms(10);
-			if(KEY_UP_L)
-			{
-				Week ++;
-				if(Week > 7)
-				{
-					Week = 1;
-				}
-				FreshDisplayBufferAjustWeek();
-			}
-			while(KEY_UP_L);	
-		}
-		if(KEY_DOWN_L) 
-		{
-			_delay_ms(10);
-			if(KEY_DOWN_L)
-			{
-				Week --;
-				if(Week > 7 || Week < 1)
-				{
-					Week = 7;
-				}
-				FreshDisplayBufferAjustWeek();
-			}
-			while(KEY_DOWN_L);	
-		}
+		uint8 temp = 0;
+		Key_Operation(7, 1, &temp, &Week, &FreshDisplayBufferAjustWeek);
 	}
 	else if(Mode == 7) //调节亮度模式
 	{
-		if(KEY_UP_L) 
-		{
-			_delay_ms(10);
-			if(KEY_UP_L)
-			{
-				if(display_light_Mode)
-				{
-					display_light_Mode = 0;
-				}
-				else
-				{
-					display_light_Mode = 1;
-				}
-				FreshDisplayBufferAjustLightMode();
-			}
-			while(KEY_UP_L);	
-		}
-		if(KEY_DOWN_L) 
-		{
-			_delay_ms(10);
-			if(KEY_DOWN_L)
-			{
-				if(display_light_Mode)
-				{
-					display_light_Mode = 0;
-				}
-				else
-				{
-					display_light_Mode = 1;
-				}
-				FreshDisplayBufferAjustLightMode();
-			}
-			while(KEY_DOWN_L);	
-		}
+		uint8 temp = 0;
+		Key_Operation(1, 0, &temp, &display_light_Mode, &FreshDisplayBufferAjustLightMode);
 	}
 
 	else if(Mode == 8) //调节校对时间
@@ -336,7 +150,7 @@ void Scan_Key()
 			while(KEY_DOWN_L);	
 		}
 	}
-	*/
+	//////////////////////////////////////////////////////////
 	if(KEY_MODE_L) //模式调节
 	{
 		_delay_ms(10);
@@ -350,7 +164,7 @@ void Scan_Key()
 			switch(Mode){
 				case 0:	//正常运行
 					//保存时间到时钟芯片
-					
+					Write_time();
 					//保存运行参数到eepROM
 
 					clearScreen(); //清屏

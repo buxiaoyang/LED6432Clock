@@ -27,6 +27,7 @@
 #include "_Key.h"
 #include "_Timers.h"
 #include "_Infrared.h"
+#include "_Dimming.h"
 
 
 void init_devices()

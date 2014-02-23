@@ -42,7 +42,7 @@ SIGNAL(SIG_OVERFLOW2)
 		}
 	
 		freshTimeCount ++;
-		if(freshTimeCount > 10000)
+		if(freshTimeCount > 16000)
 		{
 			Updata_time();
 			freshTimeCount = 0;
