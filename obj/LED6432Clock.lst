@@ -21,11 +21,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   8 .debug_frame  000003e0  00000000  00000000  00008d74  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000768  00000000  00000000  00009154  2**0
+  9 .debug_str    0000076c  00000000  00000000  00009154  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000b07  00000000  00000000  000098bc  2**0
+ 10 .debug_loc    00000b07  00000000  00000000  000098c0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000030  00000000  00000000  0000a3c3  2**0
+ 11 .debug_ranges 00000030  00000000  00000000  0000a3c7  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -6947,21 +6947,21 @@ void clearScreen()
 
 void init_devices()
 {
-	cli(); //¹Ø±ÕËùÓĞÖĞ¶Ï
+	cli(); //å…³é—­æ‰€æœ‰ä¸­æ–­
     2ec8:	f8 94       	cli
 	MCUCR  = 0x00;
     2eca:	15 be       	out	0x35, r1	; 53
-	//MCUCSR = 0x80;//½ûÖ¹JTAG
-	GICR   = 0x00;//¹Ø±ÕÍâ²¿ÖĞ¶Ï
+	//MCUCSR = 0x80;//ç¦æ­¢JTAG
+	GICR   = 0x00;//å…³é—­å¤–éƒ¨ä¸­æ–­
     2ecc:	1b be       	out	0x3b, r1	; 59
-	LED_SCREEN_INI(); //³õÊ¼»¯LEDµãÕó
+	LED_SCREEN_INI(); //åˆå§‹åŒ–LEDç‚¹é˜µ
     2ece:	0e 94 0c 09 	call	0x1218	; 0x1218 <LED_SCREEN_INI>
 	Key_Init();
     2ed2:	0e 94 19 16 	call	0x2c32	; 0x2c32 <Key_Init>
 	Voice_Init();
     2ed6:	0e 94 c2 13 	call	0x2784	; 0x2784 <Voice_Init>
 	//USART_Init();
-	timer0_init(); //³õÊ¼»¯¶¨Ê±Æ÷
+	timer0_init(); //åˆå§‹åŒ–å®šæ—¶å™¨
     2eda:	0e 94 b1 16 	call	0x2d62	; 0x2d62 <timer0_init>
 	timer2_init();
     2ede:	0e 94 c4 16 	call	0x2d88	; 0x2d88 <timer2_init>
@@ -7003,7 +7003,7 @@ void clearScreen()
     2f14:	30 40       	sbci	r19, 0x00	; 0
     2f16:	e1 f7       	brne	.-8      	; 0x2f10 <init_devices+0x48>
 	clearScreen();	
-	sei(); //Ê¹ÄÜÖĞ¶Ï
+	sei(); //ä½¿èƒ½ä¸­æ–­
     2f18:	78 94       	sei
 }
     2f1a:	08 95       	ret
@@ -8636,7 +8636,7 @@ int main()
     38de:	ff 92       	push	r15
     38e0:	0f 93       	push	r16
     38e2:	1f 93       	push	r17
-	uint8 currentlyHourVoice;//µ±Ç°Ğ¡Ê±Êı£¬ÓÃÓÚÓïÒô±¨Ê±
+	uint8 currentlyHourVoice;//å½“å‰å°æ—¶æ•°ï¼Œç”¨äºè¯­éŸ³æŠ¥æ—¶
 	uint8 needFreshDisplayBuffer = 1; //used in fresh disply buffer
 	uint8 secondPointFreshFlag = 0; //used for check whether to fresh the second dot
 	
@@ -8651,7 +8651,7 @@ int main()
     38f0:	0e 94 33 08 	call	0x1066	; 0x1066 <_delay_100ms>
 	ReadTemputer();
     38f4:	0e 94 ac 08 	call	0x1158	; 0x1158 <ReadTemputer>
-	if(KEY_MODE_L) //ÅĞ¶ÏÊÇ·ñ¼ÓÔØ³õÊ¼»¯²ÎÊı
+	if(KEY_MODE_L) //åˆ¤æ–­æ˜¯å¦åŠ è½½åˆå§‹åŒ–å‚æ•°
     38f8:	80 99       	sbic	0x10, 0	; 16
     38fa:	1c c0       	rjmp	.+56     	; 0x3934 <main+0x5a>
     38fc:	80 e2       	ldi	r24, 0x20	; 32
@@ -8705,14 +8705,14 @@ int main()
     394e:	10 e0       	ldi	r17, 0x00	; 0
 				}
 			}
-			else if(Voice_Mode == 1) //ÎğÈÅÄ£Ê½
+			else if(Voice_Mode == 1) //å‹¿æ‰°æ¨¡å¼
 			{
 				currentlyHourVoice = HourTen*10 + HourOne;
 				if(currentlyHourVoice > 6 && currentlyHourVoice <= 23)
     3950:	fa e0       	ldi	r31, 0x0A	; 10
     3952:	df 2e       	mov	r13, r31
-			//ÓïÒô±¨Ê±¿ªÊ¼
-			if(Voice_Mode == 0)//Õı³£Ä£Ê½
+			//è¯­éŸ³æŠ¥æ—¶å¼€å§‹
+			if(Voice_Mode == 0)//æ­£å¸¸æ¨¡å¼
 			{
 				if(MinuteTen == 0 && MinuteOne == 0 && SecondTen == 0 && SecondOne < 10 && inVoice == 0)
 				{
@@ -8792,8 +8792,8 @@ int main()
 				secondPointFreshFlag = SecondOne;
     39b6:	f0 90 6d 00 	lds	r15, 0x006D
 			}
-			//ÓïÒô±¨Ê±¿ªÊ¼
-			if(Voice_Mode == 0)//Õı³£Ä£Ê½
+			//è¯­éŸ³æŠ¥æ—¶å¼€å§‹
+			if(Voice_Mode == 0)//æ­£å¸¸æ¨¡å¼
     39ba:	30 91 7c 00 	lds	r19, 0x007C
     39be:	33 23       	and	r19, r19
     39c0:	c9 f4       	brne	.+50     	; 0x39f4 <main+0x11a>
@@ -8822,7 +8822,7 @@ int main()
     39f2:	25 c0       	rjmp	.+74     	; 0x3a3e <main+0x164>
 				}
 			}
-			else if(Voice_Mode == 1) //ÎğÈÅÄ£Ê½
+			else if(Voice_Mode == 1) //å‹¿æ‰°æ¨¡å¼
     39f4:	31 30       	cpi	r19, 0x01	; 1
     39f6:	19 f5       	brne	.+70     	; 0x3a3e <main+0x164>
 			{
@@ -8861,7 +8861,7 @@ int main()
     3a3a:	30 93 af 02 	sts	0x02AF, r19
 			
 			}
-			//ÓïÒô±¨Ê±½áÊø
+			//è¯­éŸ³æŠ¥æ—¶ç»“æŸ
 
 		}
 		display();	
