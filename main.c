@@ -99,7 +99,7 @@ int main()
 		}
 	}
 	ReadRunParameter();
-	Show_welcome();
+	//Show_welcome();
 	Updata_time();
 	FreshDisplayBufferNormal();
 	SPEEK_TIME_Status = 1;

@@ -1,10 +1,10 @@
 /***************************************************************************/
-// ³ÌĞò£ºLED3264µç×ÓÈÕÀú
-// Ä£¿é£º°´¼üÉ¨Ãè
-// ÎÄ¼ş£º_Key.h
-// ×÷Õß£º²·Ïş•D
-// °æ±¾£º1.9.7
-// ÈÕÆÚ£º2012Äê2ÔÂ10ÈÕ
+// ç¨‹åºï¼šLED3264ç”µå­æ—¥å†
+// æ¨¡å—ï¼šæŒ‰é”®æ‰«æ
+// æ–‡ä»¶ï¼š_Key.h
+// ä½œè€…ï¼šåœæ™“æ—¸
+// ç‰ˆæœ¬ï¼š1.9.7
+// æ—¥æœŸï¼š2012å¹´2æœˆ10æ—¥
 /***************************************************************************/
 
 #ifndef _KEY_H_
@@ -32,7 +32,7 @@ void Key_Operation(uint8 maxNum, uint8 minNum, uint8 *tenValue, uint8 *oneValue,
 		_delay_ms(10);
 		if(KEY_UP_L)
 		{
-			SPEEK_TIME_Status = 100; //°´¼üÒô
+			SPEEK_TIME_Status = 100; //æŒ‰é”®éŸ³
 			KEY_Time_count = 0;
 			uint8 value = *tenValue*10 + *oneValue;
 			value ++;
@@ -51,7 +51,7 @@ void Key_Operation(uint8 maxNum, uint8 minNum, uint8 *tenValue, uint8 *oneValue,
 		_delay_ms(10);
 		if(KEY_DOWN_L)
 		{
-			SPEEK_TIME_Status = 100; //°´¼üÒô
+			SPEEK_TIME_Status = 100; //æŒ‰é”®éŸ³
 			KEY_Time_count = 0;
 			uint8 value = *tenValue*10 + *oneValue;
 			value --;
@@ -72,12 +72,12 @@ void Scan_Key()
 	if(Mode != 0 && Mode != 27 && Mode != 26 && KEY_Time_count > 21000)
 	{
 		Mode = 0;
-		//±£´æÊ±¼äµ½Ê±ÖÓĞ¾Æ¬
+		//ä¿å­˜æ—¶é—´åˆ°æ—¶é’ŸèŠ¯ç‰‡
 		Write_time();
-		//±£´æÔËĞĞ²ÎÊıµ½eepROM
+		//ä¿å­˜è¿è¡Œå‚æ•°åˆ°eepROM
 		SaveRunParameter();
-		clearScreen(); //ÇåÆÁ
-		FreshDisplayBufferNormal(); //¼ÓÔØÕı³£×ßÊ±Ä£Ê½
+		clearScreen(); //æ¸…å±
+		FreshDisplayBufferNormal(); //åŠ è½½æ­£å¸¸èµ°æ—¶æ¨¡å¼
 	}
 	
 	if(Mode == 27 || Mode == 26)
@@ -86,18 +86,18 @@ void Scan_Key()
 		{
 			Mode = 0;
 			SaveRunParameter();
-			FreshDisplayBufferNormal(); //¼ÓÔØÕı³£×ßÊ±Ä£Ê½
+			FreshDisplayBufferNormal(); //åŠ è½½æ­£å¸¸èµ°æ—¶æ¨¡å¼
 		}
 	}
 
-	if(KEY_DISPLAY_COLOR_L) //ÏÔÊ¾ÑÕÉ«µ÷½Ú
+	if(KEY_DISPLAY_COLOR_L) //æ˜¾ç¤ºé¢œè‰²è°ƒèŠ‚
 	{
 		_delay_ms(10);
 		if(KEY_DISPLAY_COLOR_L)
 		{
 			SPEEK_TIME_Status = 1;
 			Display_color ++;
-			if(Display_color > 18)
+			if(Display_color > 7)
 			{
 				Display_color = 0;
 			}
@@ -106,25 +106,25 @@ void Scan_Key()
 		while(KEY_DISPLAY_COLOR_L);	
 	}
 
-	if(Mode == 0 || Mode== 27 || Mode == 26) //Õı³£ÔËĞĞÄ£Ê½ µ÷½ÚËÙ¶ÈºÍÁÁ¶ÈÄ£Ê½
+	if(Mode == 0 || Mode== 27 || Mode == 26) //æ­£å¸¸è¿è¡Œæ¨¡å¼ è°ƒèŠ‚é€Ÿåº¦å’Œäº®åº¦æ¨¡å¼
 	{
 
-		if(KEY_UP_L) //ÁÁ¶Èµ÷½Ú
+		if(KEY_UP_L) //äº®åº¦è°ƒèŠ‚
 		{
 			_delay_ms(10);
 			if(KEY_UP_L)
 			{
-				SPEEK_TIME_Status = 100; //°´¼üÒô
-				if(display_light_Mode) //ÊÖ¶¯µ÷½ÚÁÁ¶ÈÄ£Ê½
+				SPEEK_TIME_Status = 100; //æŒ‰é”®éŸ³
+				if(display_light_Mode) //æ‰‹åŠ¨è°ƒèŠ‚äº®åº¦æ¨¡å¼
 				{
 					display_light ++;
 					if(display_light > 8)
 					{
 						display_light = 1;
 					}
-					SET_DISPLAY_LIGHT;//OCR0ÖÃ³õÖµ,Õ¼¿Õ±È50%£¬µ÷ÕûOCR0µÄÖµÓÃÀ´µ÷ÕûÕ¼¿Õ±È
+					SET_DISPLAY_LIGHT;//OCR0ç½®åˆå€¼,å ç©ºæ¯”50%ï¼Œè°ƒæ•´OCR0çš„å€¼ç”¨æ¥è°ƒæ•´å ç©ºæ¯”
 				}
-				else //×Ô¶¯µ÷½ÚÁÁ¶ÈÄ£Ê½
+				else //è‡ªåŠ¨è°ƒèŠ‚äº®åº¦æ¨¡å¼
 				{
 				
 				}
@@ -135,12 +135,12 @@ void Scan_Key()
 			while(KEY_UP_L);	
 		}
 	
-		if(KEY_DOWN_L) //ËÙ¶Èµ÷½Ú
+		if(KEY_DOWN_L) //é€Ÿåº¦è°ƒèŠ‚
 		{
 			_delay_ms(10);
 			if(KEY_DOWN_L)
 			{
-				SPEEK_TIME_Status = 100; //°´¼üÒô
+				SPEEK_TIME_Status = 100; //æŒ‰é”®éŸ³
 				moveSpeed ++;
 				if(moveSpeed > 8)
 				{
@@ -153,42 +153,42 @@ void Scan_Key()
 			while(KEY_DOWN_L);	
 		}
 	}
-	else if(Mode == 1) //µ÷½ÚÄê
+	else if(Mode == 1) //è°ƒèŠ‚å¹´
 	{
 		Key_Operation(99, 0, &YearTen, &YearOne, &FreshDisplayBufferAjustYear);
 	}
-	else if(Mode == 2) //µ÷½ÚÔÂ
+	else if(Mode == 2) //è°ƒèŠ‚æœˆ
 	{
 		Key_Operation(12, 1, &MonthTen, &MonthOne, &FreshDisplayBufferAjustMonth);
 	}
-	else if(Mode == 3) //µ÷½ÚÈÕ
+	else if(Mode == 3) //è°ƒèŠ‚æ—¥
 	{
 		Key_Operation(31, 1, &DayTen, &DayOne, &FreshDisplayBufferAjustDay);
 	}
-	else if(Mode == 4) //µ÷½ÚÊ±
+	else if(Mode == 4) //è°ƒèŠ‚æ—¶
 	{
 		Key_Operation(23, 0, &HourTen, &HourOne, &FreshDisplayBufferAjustHour);
 	}
-	else if(Mode == 5) //µ÷½Ú·Ö
+	else if(Mode == 5) //è°ƒèŠ‚åˆ†
 	{
 		Key_Operation(59, 0, &MinuteTen, &MinuteOne, &FreshDisplayBufferAjustMinute);
 	}
-	else if(Mode == 6) //µ÷½ÚĞÇÆÚ
+	else if(Mode == 6) //è°ƒèŠ‚æ˜ŸæœŸ
 	{
 		uint8 temp = 0;
 		Key_Operation(7, 1, &temp, &Week, &FreshDisplayBufferAjustWeek);
 	}
-	else if(Mode == 7) //µ÷½ÚÁÁ¶ÈÄ£Ê½
+	else if(Mode == 7) //è°ƒèŠ‚äº®åº¦æ¨¡å¼
 	{
 		uint8 temp = 0;
 		Key_Operation(1, 0, &temp, &display_light_Mode, &FreshDisplayBufferAjustLightMode);
 	}
-	else if(Mode == 8) //ÉèÖÃ×ÖÌå
+	else if(Mode == 8) //è®¾ç½®å­—ä½“
 	{
 		uint8 temp = 0;
 		Key_Operation(2, 0, &temp, &Display_BigNumber_Font, &FreshDisplayBufferChangeFont);
 	}
-	else if(Mode == 9) //µ÷½ÚĞ£¶ÔÊ±¼ä
+	else if(Mode == 9) //è°ƒèŠ‚æ ¡å¯¹æ—¶é—´
 	{
 		if(KEY_UP_L) 
 		{
@@ -196,7 +196,7 @@ void Scan_Key()
 			if(KEY_UP_L)
 			{
 				KEY_Time_count = 0;
-				SPEEK_TIME_Status = 100; //°´¼üÒô
+				SPEEK_TIME_Status = 100; //æŒ‰é”®éŸ³
 				uint8 value = AjustTimeTen*10 + AjustTimeOne;
 				value ++;
 				if(value > 20)
@@ -215,7 +215,7 @@ void Scan_Key()
 			if(KEY_DOWN_L)
 			{
 				KEY_Time_count = 0;
-				SPEEK_TIME_Status = 100; //°´¼üÒô
+				SPEEK_TIME_Status = 100; //æŒ‰é”®éŸ³
 				if(AjustTimeMode)
 				{
 					AjustTimeMode = 0;
@@ -229,18 +229,18 @@ void Scan_Key()
 			while(KEY_DOWN_L);	
 		}
 	}
-	else if(Mode == 10) //±¨Ê±
+	else if(Mode == 10) //æŠ¥æ—¶
 	{
 		uint8 temp = 0;
 		Key_Operation(2, 0, &temp, &Voice_Mode, &FreshDisplayBufferVoiceMode);
 	}
 	//////////////////////////////////////////////////////////
-	if(KEY_MODE_L) //Ä£Ê½µ÷½Ú
+	if(KEY_MODE_L) //æ¨¡å¼è°ƒèŠ‚
 	{
 		_delay_ms(10);
 		if(KEY_MODE_L)
 		{
-			SPEEK_TIME_Status = 100; //°´¼üÒô
+			SPEEK_TIME_Status = 100; //æŒ‰é”®éŸ³
 			KEY_Time_count = 0;
 			Mode ++;
 			if(Mode > 10)
@@ -248,42 +248,42 @@ void Scan_Key()
 				Mode = 0;
 			}
 			switch(Mode){
-				case 0:	//Õı³£ÔËĞĞ
-					//±£´æÊ±¼äµ½Ê±ÖÓĞ¾Æ¬
+				case 0:	//æ­£å¸¸è¿è¡Œ
+					//ä¿å­˜æ—¶é—´åˆ°æ—¶é’ŸèŠ¯ç‰‡
 					Write_time();
-					//±£´æÔËĞĞ²ÎÊıµ½eepROM
+					//ä¿å­˜è¿è¡Œå‚æ•°åˆ°eepROM
 					SaveRunParameter();
-					clearScreen(); //ÇåÆÁ
-					FreshDisplayBufferNormal(); //¼ÓÔØÕı³£×ßÊ±Ä£Ê½
+					clearScreen(); //æ¸…å±
+					FreshDisplayBufferNormal(); //åŠ è½½æ­£å¸¸èµ°æ—¶æ¨¡å¼
 					break; 
-				case 1:	//µ÷½ÚÄê
+				case 1:	//è°ƒèŠ‚å¹´
 					FreshDisplayBufferAjustYear();
 					break; 
-				case 2:	//µ÷½ÚÔÂ
+				case 2:	//è°ƒèŠ‚æœˆ
 					FreshDisplayBufferAjustMonth();
 					break; 
-				case 3:	//µ÷½ÚÈÕ
+				case 3:	//è°ƒèŠ‚æ—¥
 					FreshDisplayBufferAjustDay();
 					break; 
-				case 4:	//µ÷½ÚÊ±
+				case 4:	//è°ƒèŠ‚æ—¶
 					FreshDisplayBufferAjustHour();
 					break; 
-				case 5:	//µ÷½Ú·Ö
+				case 5:	//è°ƒèŠ‚åˆ†
 					FreshDisplayBufferAjustMinute();
 					break;
-				case 6:	//µ÷½ÚĞÇÆÚ
+				case 6:	//è°ƒèŠ‚æ˜ŸæœŸ
 					FreshDisplayBufferAjustWeek();
 					break;  
-				case 7:	//µ÷½ÚÁÁ¶ÈÄ£Ê½
+				case 7:	//è°ƒèŠ‚äº®åº¦æ¨¡å¼
 					FreshDisplayBufferAjustLightMode();
 					break;
-				case 8:	//ÉèÖÃ×ÖÌå
+				case 8:	//è®¾ç½®å­—ä½“
 					FreshDisplayBufferChangeFont();
 					break;
-				case 9:	//µ÷½ÚĞ£¶ÓÊ±¼ä
+				case 9:	//è°ƒèŠ‚æ ¡é˜Ÿæ—¶é—´
 					FreshDisplayBufferAjustProofTime();
 					break; 
-				case 10://µ÷½ÚÓïÒô±¨Ê±
+				case 10://è°ƒèŠ‚è¯­éŸ³æŠ¥æ—¶
 					FreshDisplayBufferVoiceMode();
 					break;
 				default:
