@@ -1,20 +1,20 @@
 /***************************************************************************/
-// ³ÌĞò£ºLED3264µç×ÓÈÕÀú
-// Ä£¿é£ºDS18B20ÎÂ¶È´«¸ĞÆ÷Çı¶¯Ä£¿é
-// ÎÄ¼ş£º_DS18B20.h
-// ×÷Õß£º²·Ïş•D
-// °æ±¾£º1.9.7
-// ÈÕÆÚ£º2012Äê2ÔÂ10ÈÕ
+// ç¨‹åºï¼šLED3264ç”µå­æ—¥å†
+// æ¨¡å—ï¼šDS18B20æ¸©åº¦ä¼ æ„Ÿå™¨é©±åŠ¨æ¨¡å—
+// æ–‡ä»¶ï¼š_DS18B20.h
+// ä½œè€…ï¼šåœæ™“æ—¸
+// ç‰ˆæœ¬ï¼š1.9.7
+// æ—¥æœŸï¼š2012å¹´2æœˆ10æ—¥
 /***************************************************************************/
 
 #ifndef	_DS18B20_H_
 #define	_DS18B20_H_
 
 uint16 ReadDS18B20Count;
-//ÖĞ¶Ï±êÖ¾
+//ä¸­æ–­æ ‡å¿—
 unsigned char init_f; 
 
-//ÑÓÊ±º¯Êı
+//å»¶æ—¶å‡½æ•°
 void s_10us(unsigned int _10us)
 {
 	unsigned char aa;
@@ -36,36 +36,36 @@ void _delay_100ms(unsigned int _100ms)
 	}
 }
 
-//DS18B20¸´Î»
+//DS18B20å¤ä½
 void ds1820_reset(void) 
 {
 	unsigned char i;
-	//ÖĞ¶Ï±£»¤
+	//ä¸­æ–­ä¿æŠ¤
 	init_f = SREG;    
-	//¹ØÖĞ¶Ï
+	//å…³ä¸­æ–­
 	cli();      
 	DQ_OUT;
 	DQ_LO;
-	s_10us(60);    //ÑÓÊ±600us
+	s_10us(60);    //å»¶æ—¶600us
 	DQ_HI;
 	DQ_INPUT;
-	s_10us(5);     //ÑÓÊ±50us
+	s_10us(5);     //å»¶æ—¶50us
 	i = DQ_R;
-	s_10us(50);    //ÑÓÊ±500us
-	if (init_f & 0x80)  //»Ö¸´ÖĞ¶Ï×´Ì¬
+	s_10us(50);    //å»¶æ—¶500us
+	if (init_f & 0x80)  //æ¢å¤ä¸­æ–­çŠ¶æ€
 	{   
 		sei();        
 	}
 }
 
-//DS18B20×Ö½Ú¶ÁÈ¡
+//DS18B20å­—èŠ‚è¯»å–
 unsigned char ds1820_read_byte(void) 
 {
 	unsigned char i;
 	unsigned char value = 0;
-	//ÖĞ¶Ï±£»¤
+	//ä¸­æ–­ä¿æŠ¤
 	init_f = SREG;
-	//¹ØÖĞ¶Ï    
+	//å…³ä¸­æ–­    
 	cli();      
 	for (i = 8; i != 0; i--) 
 	{
@@ -80,58 +80,58 @@ unsigned char ds1820_read_byte(void)
 		{
 			value|=0x80;
 		}
-		s_10us(3);   //ÑÓÊ±30us
+		s_10us(3);   //å»¶æ—¶30us
 	}
-	if (init_f & 0x80) //»Ö¸´ÖĞ¶Ï×´Ì¬
+	if (init_f & 0x80) //æ¢å¤ä¸­æ–­çŠ¶æ€
 	{   
 		sei();
 	}
 	return(value);
 }
 
-//DS18B20×Ö½ÚĞ´Èë
+//DS18B20å­—èŠ‚å†™å…¥
 void ds1820_write_byte(unsigned char value) 
 {
 	unsigned char i;
-	//ÖĞ¶Ï±£»¤
+	//ä¸­æ–­ä¿æŠ¤
 	init_f = SREG;   
-	//¹ØÖĞ¶Ï 
+	//å…³ä¸­æ–­ 
 	cli();      
 	for (i = 8; i != 0; i--) 
 	{
 		DQ_OUT;
 		DQ_LO;
-		s_10us(1); //ÑÓÊ±10us
+		s_10us(1); //å»¶æ—¶10us
 		if (value & 0x01) 
 		{
 			DQ_HI;
 		}
-		s_10us(4);   //ÑÓÊ±40us
+		s_10us(4);   //å»¶æ—¶40us
 		DQ_HI;     
 		value >>= 1;
 	}
-	if (init_f & 0x80)//»Ö¸´ÖĞ¶Ï×´Ì¬
+	if (init_f & 0x80)//æ¢å¤ä¸­æ–­çŠ¶æ€
 	{   
 		sei();
 	}
 }
 
-//Æô¶¯ds1820×ª»»
+//å¯åŠ¨ds1820è½¬æ¢
 void ds1820_start(void) 
 {
 	ds1820_reset();
-	ds1820_write_byte(0xCC); //ÎğÂÔROM
-	ds1820_write_byte(0x44); //Æô¶¯×ª»»
+	ds1820_write_byte(0xCC); //å‹¿ç•¥ROM
+	ds1820_write_byte(0x44); //å¯åŠ¨è½¬æ¢
 }
 
-//¶ÁÎÂ¶È
+//è¯»æ¸©åº¦
 void ReadTemputer(void)
  {
 	unsigned int i,tem3,tem2,tem1;
 	unsigned char buf[2], NegativeTem;
 	ds1820_reset();
-	ds1820_write_byte(0xCC); //ÎğÂÔROM
-	ds1820_write_byte(0xBE); //¶ÁÎÂ¶È
+	ds1820_write_byte(0xCC); //å‹¿ç•¥ROM
+	ds1820_write_byte(0xBE); //è¯»æ¸©åº¦
 	for (i = 0; i < 2; i++) {
 		buf[i] = ds1820_read_byte();
 	}
@@ -141,7 +141,7 @@ void ReadTemputer(void)
 	i = buf[1];
 	i <<= 8;
 	i |= buf[0];
-	if((i & 0xF000) == 0xF000) //¸ºÎÂ¶È
+	if((i & 0xF000) == 0xF000) //è´Ÿæ¸©åº¦
 	{
 		NegativeTem = 1;
 		i = ~i;
@@ -153,21 +153,21 @@ void ReadTemputer(void)
 	}
 	tem1 = i & 0x000f;
 	tem1 = (tem1*625)/1000;
-	i = (i * 10) / 16;        //ÊıÖµ´¦Àí  
-	//µÚ3Î»Ã»ÓĞÏÔÊ¾
+	i = (i * 10) / 16;        //æ•°å€¼å¤„ç†  
+	//ç¬¬3ä½æ²¡æœ‰æ˜¾ç¤º
 	i = i % 1000;  
-	//ÏÔÊ¾µÚ2Î»
+	//æ˜¾ç¤ºç¬¬2ä½
 	tem3= i / 100;
 	if(NegativeTem == 1)
 	{
-		TemperatureTen = 14; // - ·ûºÅ
+		TemperatureTen = 14; // - ç¬¦å·
 	}
 	else
 	{
 		TemperatureTen = tem3;
 	}
 	i = i % 100;  
-	//ÏÔÊ¾µÚ1Î»
+	//æ˜¾ç¤ºç¬¬1ä½
 	tem2= i / 10;
 	TemperatureOne = tem2;
 	TemperatureDecimal = tem1;

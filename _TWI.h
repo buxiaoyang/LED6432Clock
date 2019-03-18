@@ -1,16 +1,16 @@
 /***************************************************************************/
-// ³ÌÐò£ºLED3264µç×ÓÈÕÀú
-// Ä£¿é£ºI2C Çý¶¯
-// ÎÄ¼þ£º_TWI.h
-// ×÷Õß£º²·Ïþ•D
-// °æ±¾£º1.9.7
-// ÈÕÆÚ£º2012Äê2ÔÂ10ÈÕ
+// ç¨‹åºï¼šLED3264ç”µå­æ—¥åŽ†
+// æ¨¡å—ï¼šI2C é©±åŠ¨
+// æ–‡ä»¶ï¼š_TWI.h
+// ä½œè€…ï¼šåœæ™“æ—¸
+// ç‰ˆæœ¬ï¼š1.9.7
+// æ—¥æœŸï¼š2012å¹´2æœˆ10æ—¥
 /***************************************************************************/
 
 #ifndef _TWI_H_
 #define _TWI_H_
 
-//¹¦ÄÜÃèÊö: i2cÍ¨ÐÅ³õÊ¼»¯
+//åŠŸèƒ½æè¿°: i2cé€šä¿¡åˆå§‹åŒ–
 void twi_init(void)
 {
  TWCR= 0x00; //disable twi
@@ -20,14 +20,14 @@ void twi_init(void)
  TWCR= (1<<TWEN); //enable twi
 }
 
-//i2cÍ¨ÐÅ¿ªÊ¼
+//i2cé€šä¿¡å¼€å§‹
 void i2cstart(void)
 { 
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN); 
    	while (!(TWCR & (1<<TWINT)));
 }
 
-//i2cÐ´Êý¾Ý,·µ»ØTWI×´Ì¬
+//i2cå†™æ•°æ®,è¿”å›žTWIçŠ¶æ€
 unsigned char i2cwt(unsigned char data)
 { 
 	TWDR = data;
@@ -37,7 +37,7 @@ unsigned char i2cwt(unsigned char data)
    	return(TWSR&0b11111000);
 }
 
-//i2c¶ÁÊý¾Ý
+//i2cè¯»æ•°æ®
 unsigned char i2crd(void)
 {
    	TWCR= (1<<TWINT) | (1<<TWEA) | (1<<TWEN);
@@ -45,7 +45,7 @@ unsigned char i2crd(void)
    	return(TWDR);
 }
 
-//¹¦ÄÜÃèÊö: i2cÍ£Ö¹
+//åŠŸèƒ½æè¿°: i2cåœæ­¢
 void i2cstop(void)
 { 
    TWCR = (1<<TWINT) | (1<<TWSTO) | (1<<TWEN);

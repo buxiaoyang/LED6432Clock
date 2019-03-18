@@ -1,31 +1,31 @@
 /***************************************************************************/
-// ³ÌÐò£ºLED3264µç×ÓÈÕÀú
-// Ä£¿é£ºÖ÷º¯Êý	
-// ÎÄ¼þ£ºLED3264.c
-// ×÷Õß£º²·Ïþ•D
-// °æ±¾£º1.9.7
-// ÈÕÆÚ£º2012Äê2ÔÂ10ÈÕ
-// ¹¦ÄÜ£ºÊ±·ÖÊý×Ö¾²Ì¬ÏÔÊ¾£¬ÄêÔÂÈÕÖÜÎÂ¶È¹ö¶¯ÏÔÊ¾¡£¿ÉÑ¡ÁÁ¶ÈÄ£Ê½£¬Ê±¼ä²¹³¥¡£
-// Ð¾Æ¬£ºAtmega16
-// ÈÝË¿£ºµÍÎ»0xA4 10100100 ¸ßÎ»0xD1 11010001
-// ±àÒë£ºAVR GCC
-// Òý½Å¶¨Òå£º	PD0£º°´¼üMODE 
-//				PD1: °´¼üÏÔÊ¾Ä£Ê½
-//				PD2£ºÏÔÊ¾ÆÁ¿ØÖÆLAT
-//				PD3£ºÏÔÊ¾ÆÁ¿ØÖÆSCK
-//				PD4£ºÏÔÊ¾ÆÁÐÅºÅR1
-//				PD5£ºÏÔÊ¾ÆÁÐÅºÅR2
-// 				PD7£ºÎÂ¶È´«¸ÐÆ÷DS18B20
-//				PC6£º°´¼üUP
-//				PC7£º°´¼üDOWN
-//				PB0£ºÏÔÊ¾ÆÁ¿ØÖÆA
-//				PB1£ºÏÔÊ¾ÆÁ¿ØÖÆB
-//				PB2£ºÏÔÊ¾ÆÁ¿ØÖÆC
-//				PB3£ºÏÔÊ¾ÆÁ¿ØÖÆEN
-//				PB4£ºÏÔÊ¾ÆÁ¿ØÖÆD
-//				PA1£ºÏÔÊ¾ÆÁÊý¾ÝG1
-//				PA2£ºÏÔÊ¾ÆÁÊý¾ÝG2
-//				PA0: ¹âÃôµç×è
+// ç¨‹åºï¼šLED3264ç”µå­æ—¥åŽ†
+// æ¨¡å—ï¼šä¸»å‡½æ•°	
+// æ–‡ä»¶ï¼šLED3264.c
+// ä½œè€…ï¼šåœæ™“æ—¸
+// ç‰ˆæœ¬ï¼š1.9.7
+// æ—¥æœŸï¼š2012å¹´2æœˆ10æ—¥
+// åŠŸèƒ½ï¼šæ—¶åˆ†æ•°å­—é™æ€æ˜¾ç¤ºï¼Œå¹´æœˆæ—¥å‘¨æ¸©åº¦æ»šåŠ¨æ˜¾ç¤ºã€‚å¯é€‰äº®åº¦æ¨¡å¼ï¼Œæ—¶é—´è¡¥å¿ã€‚
+// èŠ¯ç‰‡ï¼šAtmega16
+// å®¹ä¸ï¼šä½Žä½0xA4 10100100 é«˜ä½0xD1 11010001
+// ç¼–è¯‘ï¼šAVR GCC
+// å¼•è„šå®šä¹‰ï¼š	PD0ï¼šæŒ‰é”®MODE 
+//				PD1: æŒ‰é”®æ˜¾ç¤ºæ¨¡å¼
+//				PD2ï¼šæ˜¾ç¤ºå±æŽ§åˆ¶LAT
+//				PD3ï¼šæ˜¾ç¤ºå±æŽ§åˆ¶SCK
+//				PD4ï¼šæ˜¾ç¤ºå±ä¿¡å·R1
+//				PD5ï¼šæ˜¾ç¤ºå±ä¿¡å·R2
+// 				PD7ï¼šæ¸©åº¦ä¼ æ„Ÿå™¨DS18B20
+//				PC6ï¼šæŒ‰é”®UP
+//				PC7ï¼šæŒ‰é”®DOWN
+//				PB0ï¼šæ˜¾ç¤ºå±æŽ§åˆ¶A
+//				PB1ï¼šæ˜¾ç¤ºå±æŽ§åˆ¶B
+//				PB2ï¼šæ˜¾ç¤ºå±æŽ§åˆ¶C
+//				PB3ï¼šæ˜¾ç¤ºå±æŽ§åˆ¶EN
+//				PB4ï¼šæ˜¾ç¤ºå±æŽ§åˆ¶D
+//				PA1ï¼šæ˜¾ç¤ºå±æ•°æ®G1
+//				PA2ï¼šæ˜¾ç¤ºå±æ•°æ®G2
+//				PA0: å…‰æ•ç”µé˜»
 /***************************************************************************/
 
 #include <avr/io.h>
@@ -49,15 +49,15 @@
 
 void init_devices()
 {
-	cli(); //¹Ø±ÕËùÓÐÖÐ¶Ï
+	cli(); //å…³é—­æ‰€æœ‰ä¸­æ–­
 	MCUCR  = 0x00;
-	//MCUCSR = 0x80;//½ûÖ¹JTAG
-	GICR   = 0x00;//¹Ø±ÕÍâ²¿ÖÐ¶Ï
-	LED_SCREEN_INI(); //³õÊ¼»¯LEDµãÕó
+	//MCUCSR = 0x80;//ç¦æ­¢JTAG
+	GICR   = 0x00;//å…³é—­å¤–éƒ¨ä¸­æ–­
+	LED_SCREEN_INI(); //åˆå§‹åŒ–LEDç‚¹é˜µ
 	Key_Init();
 	Voice_Init();
 	//USART_Init();
-	timer0_init(); //³õÊ¼»¯¶¨Ê±Æ÷
+	timer0_init(); //åˆå§‹åŒ–å®šæ—¶å™¨
 	timer2_init();
 	PCF8563_init();
 	INFRARED_INI();
@@ -66,12 +66,12 @@ void init_devices()
 	KEY_Time_count = 0;
 	ds1820_reset();  
 	clearScreen();	
-	sei(); //Ê¹ÄÜÖÐ¶Ï
+	sei(); //ä½¿èƒ½ä¸­æ–­
 }
 
 int main()
 {
-	uint8 currentlyHourVoice;//µ±Ç°Ð¡Ê±Êý£¬ÓÃÓÚÓïÒô±¨Ê±
+	uint8 currentlyHourVoice;//å½“å‰å°æ—¶æ•°ï¼Œç”¨äºŽè¯­éŸ³æŠ¥æ—¶
 	uint8 needFreshDisplayBuffer = 1; //used in fresh disply buffer
 	uint8 secondPointFreshFlag = 0; //used for check whether to fresh the second dot
 	
@@ -80,7 +80,7 @@ int main()
 	ds1820_start();   
 	_delay_100ms(6);   
 	ReadTemputer();
-	if(KEY_MODE_L) //ÅÐ¶ÏÊÇ·ñ¼ÓÔØ³õÊ¼»¯²ÎÊý
+	if(KEY_MODE_L) //åˆ¤æ–­æ˜¯å¦åŠ è½½åˆå§‹åŒ–å‚æ•°
 	{
 		_delay_ms(10);
 		if(KEY_MODE_L)
@@ -137,8 +137,8 @@ int main()
 				writeCloclColon(SecondOne % 2);
 				secondPointFreshFlag = SecondOne;
 			}
-			//ÓïÒô±¨Ê±¿ªÊ¼
-			if(Voice_Mode == 0)//Õý³£Ä£Ê½
+			//è¯­éŸ³æŠ¥æ—¶å¼€å§‹
+			if(Voice_Mode == 0)//æ­£å¸¸æ¨¡å¼
 			{
 				if(MinuteTen == 0 && MinuteOne == 0 && SecondTen == 0 && SecondOne < 10 && inVoice == 0)
 				{
@@ -146,7 +146,7 @@ int main()
 					SPEEK_TIME_Status = 1;
 				}
 			}
-			else if(Voice_Mode == 1) //ÎðÈÅÄ£Ê½
+			else if(Voice_Mode == 1) //å‹¿æ‰°æ¨¡å¼
 			{
 				currentlyHourVoice = HourTen*10 + HourOne;
 				if(currentlyHourVoice > 6 && currentlyHourVoice <= 23)
@@ -158,11 +158,11 @@ int main()
 					}
 				}
 			}
-			else //¹Ø±ÕÄ£Ê½
+			else //å…³é—­æ¨¡å¼
 			{
 			
 			}
-			//ÓïÒô±¨Ê±½áÊø
+			//è¯­éŸ³æŠ¥æ—¶ç»“æŸ
 
 		}
 		display();	

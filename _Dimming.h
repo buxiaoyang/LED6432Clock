@@ -1,10 +1,10 @@
 /***************************************************************************/
-// ³ÌÐò£ºLED3264µç×ÓÈÕÀú
-// Ä£¿é£º¹âÃôµç×èµ÷½ÚÁÁ¶ÈÄ£¿é	
-// ÎÄ¼þ£º_Dimming.h
-// ×÷Õß£º²·Ïþ•D
-// °æ±¾£º1.9.7
-// ÈÕÆÚ£º2012Äê2ÔÂ10ÈÕ
+// ç¨‹åºï¼šLED3264ç”µå­æ—¥åŽ†
+// æ¨¡å—ï¼šå…‰æ•ç”µé˜»è°ƒèŠ‚äº®åº¦æ¨¡å—	
+// æ–‡ä»¶ï¼š_Dimming.h
+// ä½œè€…ï¼šåœæ™“æ—¸
+// ç‰ˆæœ¬ï¼š1.9.7
+// æ—¥æœŸï¼š2012å¹´2æœˆ10æ—¥
 /***************************************************************************/
 
 #ifndef _DIMMING_H_
@@ -16,7 +16,7 @@ void StartAD()
 {
 	ADCSRA=0x00;
 	ADMUX=0x40;
-	ADCSRA=(1<<ADEN)|(1<<ADSC)|(1<<ADIF)|0x07;   //128·ÖÆµ£¬Á¬Ðø×ª»»
+	ADCSRA=(1<<ADEN)|(1<<ADSC)|(1<<ADIF)|0x07;   //128åˆ†é¢‘ï¼Œè¿žç»­è½¬æ¢
 }
 
 void GetDispalyLight()
@@ -26,8 +26,8 @@ void GetDispalyLight()
 	adc_l0=ADCL;
 	adc_h0=ADCH;
 	adc_data0=adc_h0<<8|adc_l0;                  
-	adc_data0=adc_data0>>1;               //·ÅÆúÒ»Î»µÄ¾«¶È
-	adc_data0-=35;                        //ÐÞÕý
+	adc_data0=adc_data0>>1;               //æ”¾å¼ƒä¸€ä½çš„ç²¾åº¦
+	adc_data0-=35;                        //ä¿®æ­£
 	ten_1=(adc_data0)/60;
 	display_light = 8 - ten_1;
 	if(display_light > 8)

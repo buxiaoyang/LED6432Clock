@@ -1,10 +1,10 @@
 /***************************************************************************/
-// ³ÌĞò£ºLED3264µç×ÓÈÕÀú
-// Ä£¿é£ºPCF8563Ê±ÖÓĞ¾Æ¬Çı¶¯
-// ÎÄ¼ş£º_PCF8563.h
-// ×÷Õß£º²·Ïş•D
-// °æ±¾£º1.9.7
-// ÈÕÆÚ£º2012Äê2ÔÂ10ÈÕ
+// ç¨‹åºï¼šLED3264ç”µå­æ—¥å†
+// æ¨¡å—ï¼šPCF8563æ—¶é’ŸèŠ¯ç‰‡é©±åŠ¨
+// æ–‡ä»¶ï¼š_PCF8563.h
+// ä½œè€…ï¼šåœæ™“æ—¸
+// ç‰ˆæœ¬ï¼š1.9.7
+// æ—¥æœŸï¼š2012å¹´2æœˆ10æ—¥
 /***************************************************************************/
 
 #ifndef _PCF8563_H_
@@ -14,18 +14,18 @@ unsigned char syserr;
 
 unsigned char write_buff[8],read_buff[8];
 unsigned char time[7]={
-		 	  		   0x40/*Ãë*/,
-					   0x59/*·Ö*/,
-					   0x23/*Ê±*/,
-					   0x29/*Ìì*/,
-					   0x05/*ĞÇÆÚ*/,
-					   0x02/*ÔÂ/ÊÀ¼Í*/,
-					   0x08/*Äê*/
+		 	  		   0x40/*ç§’*/,
+					   0x59/*åˆ†*/,
+					   0x23/*æ—¶*/,
+					   0x29/*å¤©*/,
+					   0x05/*æ˜ŸæœŸ*/,
+					   0x02/*æœˆ/ä¸–çºª*/,
+					   0x08/*å¹´*/
 };
 
 uint16 freshTimeCount = 0;
 
-//Çå³ıÖ¸¶¨ÇøÓòÖ¸¶¨³¤¶ÈµÄÊı¾İ
+//æ¸…é™¤æŒ‡å®šåŒºåŸŸæŒ‡å®šé•¿åº¦çš„æ•°æ®
 void clear(unsigned char *p,unsigned char num)
 {
  for(;num>0;num--)
@@ -35,7 +35,7 @@ void clear(unsigned char *p,unsigned char num)
 	}
 }
 
-//¹¦ÄÜÃèÊö: ÏòPCF8563Ö¸¶¨µØÖ·Ğ´ÈëÒ»ÌõÊı¾İ
+//åŠŸèƒ½æè¿°: å‘PCF8563æŒ‡å®šåœ°å€å†™å…¥ä¸€æ¡æ•°æ®
 void PCF8536_wt(unsigned int add,unsigned char data)
 {
  unsigned char t;
@@ -51,7 +51,7 @@ void PCF8536_wt(unsigned int add,unsigned char data)
  i2cstop();
 }
 
-//¹¦ÄÜÃèÊö: ÏòPCF8563µØÖ·Á¬ĞøµÄ¼Ä´æÆ÷Ğ´ÈëÏµÁĞÊı¾İ
+//åŠŸèƒ½æè¿°: å‘PCF8563åœ°å€è¿ç»­çš„å¯„å­˜å™¨å†™å…¥ç³»åˆ—æ•°æ®
 void PCF8536_wt_p(unsigned int add,unsigned char *p,unsigned char num)
 {
  unsigned char t;
@@ -72,7 +72,7 @@ void PCF8536_wt_p(unsigned int add,unsigned char *p,unsigned char num)
  i2cstop();
 }
 
-//¶ÁPCF8563
+//è¯»PCF8563
 void PCF8536_rd(unsigned int add,unsigned char *p,unsigned char num)
 {
  unsigned char t;
@@ -99,21 +99,21 @@ void PCF8536_rd(unsigned int add,unsigned char *p,unsigned char num)
 	} 
 }
 
-//¹¦ÄÜÃèÊö: PCF8563³õÊ¼»¯
+//åŠŸèƒ½æè¿°: PCF8563åˆå§‹åŒ–
 void PCF8563_init(void)
 {
  clear(write_buff,8);
  clear(read_buff,8);
  
- PCF8536_wt(0x00,0x20);//Ğ´¼Ä´æÆ÷1£¬Í£Ö¹¼ÆÊ±
- //PCF8536_wt_p(0x02,time,7);//Éè¶¨Ê±¼ä
- PCF8536_wt(0x00,0x00);//Ğ´¼Ä´æÆ÷1£¬¿ªÊ¼¼ÆÊ±
+ PCF8536_wt(0x00,0x20);//å†™å¯„å­˜å™¨1ï¼Œåœæ­¢è®¡æ—¶
+ //PCF8536_wt_p(0x02,time,7);//è®¾å®šæ—¶é—´
+ PCF8536_wt(0x00,0x00);//å†™å¯„å­˜å™¨1ï¼Œå¼€å§‹è®¡æ—¶
 }
 
-//Ë¢ĞÂÊ±¼ä¼Ä´æÆ÷¼°Ïà¹ØÊı×éÄÚÈİ
+//åˆ·æ–°æ—¶é—´å¯„å­˜å™¨åŠç›¸å…³æ•°ç»„å†…å®¹
 void Updata_time(void)
 {
-	PCF8536_rd(0x02,time,7);//¶ÁÈ¡Ê±¼ä
+	PCF8536_rd(0x02,time,7);//è¯»å–æ—¶é—´
 
 	time[0]=time[0]&0x7F;
 	time[1]=time[1]&0x7F;
@@ -122,21 +122,21 @@ void Updata_time(void)
 	time[4]=time[4]&0x07;
 	time[5]=time[5]&0x1F;
 	//time_tmp[]="00:00:00",data_tmp[]="2008.01.01",*week_tmp;
-	//´¦ÀíÊ±¼ä
+	//å¤„ç†æ—¶é—´
 	SecondOne = time[0]&0x0F;
 	SecondTen = time[0]>>4;
 	MinuteOne = time[1]&0x0F;
 	MinuteTen = time[1]>>4;
 	HourOne	= time[2]&0x0F;
 	HourTen	= time[2]>>4;
-	//´¦ÀíÈÕÆÚ
+	//å¤„ç†æ—¥æœŸ
 	DayOne = time[3]&0x0F;
 	DayTen = time[3]>>4;
 	MonthOne = time[5]&0x0F;
 	MonthTen = time[5]>>4;
 	YearOne = time[6]&0x0F;
 	YearTen = time[6]>>4;
-	//´¦ÀíĞÇÆÚ
+	//å¤„ç†æ˜ŸæœŸ
 	Week = (time[4]&0x0F)+1;
 }
 
@@ -155,13 +155,13 @@ void Write_time(void)
 
 void AjustTimerMonthly()
 {
-	if(DayTen == 0 && DayOne == 1) // Ã¿¸öÔÂµÄÒ»ºÅ 
+	if(DayTen == 0 && DayOne == 1) // æ¯ä¸ªæœˆçš„ä¸€å· 
 	{
-		if(HourTen == 0 && HourOne == 3) //Èıµã
+		if(HourTen == 0 && HourOne == 3) //ä¸‰ç‚¹
 		{
-			if(MinuteTen  == 3 && MinuteOne  == 0) //30·Ö
+			if(MinuteTen  == 3 && MinuteOne  == 0) //30åˆ†
 			{
-				if(AjustTimeMode && !AjustTimeIsAjusted) //¼ÓÊ±¼ä
+				if(AjustTimeMode && !AjustTimeIsAjusted) //åŠ æ—¶é—´
 				{
 					uint8 temp = MinuteTen*10 + MinuteOne;
 					temp = temp + AjustTimeTen*10 + AjustTimeOne;
@@ -170,7 +170,7 @@ void AjustTimerMonthly()
 					Write_time();
 					AjustTimeIsAjusted = 1;
 				}
-				else if(!AjustTimeMode && !AjustTimeIsAjusted) //¼õÊ±¼ä
+				else if(!AjustTimeMode && !AjustTimeIsAjusted) //å‡æ—¶é—´
 				{
 					uint8 temp = MinuteTen*10 + MinuteOne;
 					temp = temp - AjustTimeTen*10 - AjustTimeOne;

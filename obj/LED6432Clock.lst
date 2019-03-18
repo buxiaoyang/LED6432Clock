@@ -21,11 +21,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   8 .debug_frame  000003e0  00000000  00000000  00008d74  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000768  00000000  00000000  00009154  2**0
+  9 .debug_str    00000752  00000000  00000000  00009154  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000b07  00000000  00000000  000098bc  2**0
+ 10 .debug_loc    00000b07  00000000  00000000  000098a6  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000030  00000000  00000000  0000a3c3  2**0
+ 11 .debug_ranges 00000030  00000000  00000000  0000a3ad  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -394,10 +394,10 @@ Disassembly of section .text:
     104e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00001052 <s_10us>:
-//ÖĞ¶Ï±êÖ¾
+//ä¸­æ–­æ ‡å¿—
 unsigned char init_f; 
 
-//ÑÓÊ±º¯Êı
+//å»¶æ—¶å‡½æ•°
 void s_10us(unsigned int _10us)
 {
     1052:	06 c0       	rjmp	.+12     	; 0x1060 <s_10us+0xe>
@@ -419,7 +419,7 @@ void s_10us(unsigned int _10us)
     105a:	29 30       	cpi	r18, 0x09	; 9
     105c:	e1 f7       	brne	.-8      	; 0x1056 <s_10us+0x4>
 
-//ÑÓÊ±º¯Êı
+//å»¶æ—¶å‡½æ•°
 void s_10us(unsigned int _10us)
 {
 	unsigned char aa;
@@ -467,22 +467,22 @@ void _delay_100ms(unsigned int _100ms)
     1080:	08 95       	ret
 
 00001082 <ds1820_reset>:
-//DS18B20¸´Î»
+//DS18B20å¤ä½
 void ds1820_reset(void) 
 {
 	unsigned char i;
-	//ÖĞ¶Ï±£»¤
+	//ä¸­æ–­ä¿æŠ¤
 	init_f = SREG;    
     1082:	8f b7       	in	r24, 0x3f	; 63
     1084:	80 93 90 00 	sts	0x0090, r24
-	//¹ØÖĞ¶Ï
+	//å…³ä¸­æ–­
 	cli();      
     1088:	f8 94       	cli
 	DQ_OUT;
     108a:	8f 9a       	sbi	0x11, 7	; 17
 	DQ_LO;
     108c:	97 98       	cbi	0x12, 7	; 18
-	s_10us(60);    //ÑÓÊ±600us
+	s_10us(60);    //å»¶æ—¶600us
     108e:	8c e3       	ldi	r24, 0x3C	; 60
     1090:	90 e0       	ldi	r25, 0x00	; 0
     1092:	0e 94 29 08 	call	0x1052	; 0x1052 <s_10us>
@@ -490,17 +490,17 @@ void ds1820_reset(void)
     1096:	97 9a       	sbi	0x12, 7	; 18
 	DQ_INPUT;
     1098:	8f 98       	cbi	0x11, 7	; 17
-	s_10us(5);     //ÑÓÊ±50us
+	s_10us(5);     //å»¶æ—¶50us
     109a:	85 e0       	ldi	r24, 0x05	; 5
     109c:	90 e0       	ldi	r25, 0x00	; 0
     109e:	0e 94 29 08 	call	0x1052	; 0x1052 <s_10us>
 	i = DQ_R;
     10a2:	80 b3       	in	r24, 0x10	; 16
-	s_10us(50);    //ÑÓÊ±500us
+	s_10us(50);    //å»¶æ—¶500us
     10a4:	82 e3       	ldi	r24, 0x32	; 50
     10a6:	90 e0       	ldi	r25, 0x00	; 0
     10a8:	0e 94 29 08 	call	0x1052	; 0x1052 <s_10us>
-	if (init_f & 0x80)  //»Ö¸´ÖĞ¶Ï×´Ì¬
+	if (init_f & 0x80)  //æ¢å¤ä¸­æ–­çŠ¶æ€
     10ac:	80 91 90 00 	lds	r24, 0x0090
     10b0:	87 ff       	sbrs	r24, 7
     10b2:	01 c0       	rjmp	.+2      	; 0x10b6 <ds1820_reset+0x34>
@@ -513,18 +513,18 @@ void ds1820_reset(void)
 	}
 }
 
-//DS18B20×Ö½Ú¶ÁÈ¡
+//DS18B20å­—èŠ‚è¯»å–
 unsigned char ds1820_read_byte(void) 
 {
     10b8:	0f 93       	push	r16
     10ba:	1f 93       	push	r17
 	unsigned char i;
 	unsigned char value = 0;
-	//ÖĞ¶Ï±£»¤
+	//ä¸­æ–­ä¿æŠ¤
 	init_f = SREG;
     10bc:	8f b7       	in	r24, 0x3f	; 63
     10be:	80 93 90 00 	sts	0x0090, r24
-	//¹ØÖĞ¶Ï    
+	//å…³ä¸­æ–­    
 	cli();      
     10c2:	f8 94       	cli
     10c4:	08 e0       	ldi	r16, 0x08	; 8
@@ -555,14 +555,14 @@ unsigned char ds1820_read_byte(void)
 			value|=0x80;
     10e4:	10 68       	ori	r17, 0x80	; 128
 		}
-		s_10us(3);   //ÑÓÊ±30us
+		s_10us(3);   //å»¶æ—¶30us
     10e6:	83 e0       	ldi	r24, 0x03	; 3
     10e8:	90 e0       	ldi	r25, 0x00	; 0
     10ea:	0e 94 29 08 	call	0x1052	; 0x1052 <s_10us>
 	unsigned char value = 0;
-	//ÖĞ¶Ï±£»¤
+	//ä¸­æ–­ä¿æŠ¤
 	init_f = SREG;
-	//¹ØÖĞ¶Ï    
+	//å…³ä¸­æ–­    
 	cli();      
 	for (i = 8; i != 0; i--) 
     10ee:	01 50       	subi	r16, 0x01	; 1
@@ -570,9 +570,9 @@ unsigned char ds1820_read_byte(void)
 		{
 			value|=0x80;
 		}
-		s_10us(3);   //ÑÓÊ±30us
+		s_10us(3);   //å»¶æ—¶30us
 	}
-	if (init_f & 0x80) //»Ö¸´ÖĞ¶Ï×´Ì¬
+	if (init_f & 0x80) //æ¢å¤ä¸­æ–­çŠ¶æ€
     10f2:	80 91 90 00 	lds	r24, 0x0090
     10f6:	87 ff       	sbrs	r24, 7
     10f8:	01 c0       	rjmp	.+2      	; 0x10fc <ds1820_read_byte+0x44>
@@ -589,18 +589,18 @@ unsigned char ds1820_read_byte(void)
 
 00001104 <ds1820_write_byte>:
 
-//DS18B20×Ö½ÚĞ´Èë
+//DS18B20å­—èŠ‚å†™å…¥
 void ds1820_write_byte(unsigned char value) 
 {
     1104:	0f 93       	push	r16
     1106:	1f 93       	push	r17
     1108:	08 2f       	mov	r16, r24
 	unsigned char i;
-	//ÖĞ¶Ï±£»¤
+	//ä¸­æ–­ä¿æŠ¤
 	init_f = SREG;   
     110a:	8f b7       	in	r24, 0x3f	; 63
     110c:	80 93 90 00 	sts	0x0090, r24
-	//¹ØÖĞ¶Ï 
+	//å…³ä¸­æ–­ 
 	cli();      
     1110:	f8 94       	cli
     1112:	18 e0       	ldi	r17, 0x08	; 8
@@ -610,7 +610,7 @@ void ds1820_write_byte(unsigned char value)
     1114:	8f 9a       	sbi	0x11, 7	; 17
 		DQ_LO;
     1116:	97 98       	cbi	0x12, 7	; 18
-		s_10us(1); //ÑÓÊ±10us
+		s_10us(1); //å»¶æ—¶10us
     1118:	81 e0       	ldi	r24, 0x01	; 1
     111a:	90 e0       	ldi	r25, 0x00	; 0
     111c:	0e 94 29 08 	call	0x1052	; 0x1052 <s_10us>
@@ -620,16 +620,16 @@ void ds1820_write_byte(unsigned char value)
 			DQ_HI;
     1122:	97 9a       	sbi	0x12, 7	; 18
 		}
-		s_10us(4);   //ÑÓÊ±40us
+		s_10us(4);   //å»¶æ—¶40us
     1124:	84 e0       	ldi	r24, 0x04	; 4
     1126:	90 e0       	ldi	r25, 0x00	; 0
     1128:	0e 94 29 08 	call	0x1052	; 0x1052 <s_10us>
 		DQ_HI;     
     112c:	97 9a       	sbi	0x12, 7	; 18
 	unsigned char i;
-	//ÖĞ¶Ï±£»¤
+	//ä¸­æ–­ä¿æŠ¤
 	init_f = SREG;   
-	//¹ØÖĞ¶Ï 
+	//å…³ä¸­æ–­ 
 	cli();      
 	for (i = 8; i != 0; i--) 
     112e:	11 50       	subi	r17, 0x01	; 1
@@ -637,13 +637,13 @@ void ds1820_write_byte(unsigned char value)
 		{
 			DQ_HI;
 		}
-		s_10us(4);   //ÑÓÊ±40us
+		s_10us(4);   //å»¶æ—¶40us
 		DQ_HI;     
 		value >>= 1;
     1132:	06 95       	lsr	r16
     1134:	ef cf       	rjmp	.-34     	; 0x1114 <ds1820_write_byte+0x10>
 	}
-	if (init_f & 0x80)//»Ö¸´ÖĞ¶Ï×´Ì¬
+	if (init_f & 0x80)//æ¢å¤ä¸­æ–­çŠ¶æ€
     1136:	80 91 90 00 	lds	r24, 0x0090
     113a:	87 ff       	sbrs	r24, 7
     113c:	01 c0       	rjmp	.+2      	; 0x1140 <ds1820_write_byte+0x3c>
@@ -658,15 +658,15 @@ void ds1820_write_byte(unsigned char value)
 
 00001146 <ds1820_start>:
 
-//Æô¶¯ds1820×ª»»
+//å¯åŠ¨ds1820è½¬æ¢
 void ds1820_start(void) 
 {
 	ds1820_reset();
     1146:	0e 94 41 08 	call	0x1082	; 0x1082 <ds1820_reset>
-	ds1820_write_byte(0xCC); //ÎğÂÔROM
+	ds1820_write_byte(0xCC); //å‹¿ç•¥ROM
     114a:	8c ec       	ldi	r24, 0xCC	; 204
     114c:	0e 94 82 08 	call	0x1104	; 0x1104 <ds1820_write_byte>
-	ds1820_write_byte(0x44); //Æô¶¯×ª»»
+	ds1820_write_byte(0x44); //å¯åŠ¨è½¬æ¢
     1150:	84 e4       	ldi	r24, 0x44	; 68
     1152:	0e 94 82 08 	call	0x1104	; 0x1104 <ds1820_write_byte>
 }
@@ -674,7 +674,7 @@ void ds1820_start(void)
 
 00001158 <ReadTemputer>:
 
-//¶ÁÎÂ¶È
+//è¯»æ¸©åº¦
 void ReadTemputer(void)
  {
     1158:	1f 93       	push	r17
@@ -682,10 +682,10 @@ void ReadTemputer(void)
 	unsigned char buf[2], NegativeTem;
 	ds1820_reset();
     115a:	0e 94 41 08 	call	0x1082	; 0x1082 <ds1820_reset>
-	ds1820_write_byte(0xCC); //ÎğÂÔROM
+	ds1820_write_byte(0xCC); //å‹¿ç•¥ROM
     115e:	8c ec       	ldi	r24, 0xCC	; 204
     1160:	0e 94 82 08 	call	0x1104	; 0x1104 <ds1820_write_byte>
-	ds1820_write_byte(0xBE); //¶ÁÎÂ¶È
+	ds1820_write_byte(0xBE); //è¯»æ¸©åº¦
     1164:	8e eb       	ldi	r24, 0xBE	; 190
     1166:	0e 94 82 08 	call	0x1104	; 0x1104 <ds1820_write_byte>
 	for (i = 0; i < 2; i++) {
@@ -706,7 +706,7 @@ void ReadTemputer(void)
     117a:	f0 e0       	ldi	r31, 0x00	; 0
     117c:	e2 2b       	or	r30, r18
     117e:	f3 2b       	or	r31, r19
-	if((i & 0xF000) == 0xF000) //¸ºÎÂ¶È
+	if((i & 0xF000) == 0xF000) //è´Ÿæ¸©åº¦
     1180:	cf 01       	movw	r24, r30
     1182:	80 70       	andi	r24, 0x00	; 0
     1184:	90 7f       	andi	r25, 0xF0	; 240
@@ -728,7 +728,7 @@ void ReadTemputer(void)
 	}
 	tem1 = i & 0x000f;
 	tem1 = (tem1*625)/1000;
-	i = (i * 10) / 16;        //ÊıÖµ´¦Àí  
+	i = (i * 10) / 16;        //æ•°å€¼å¤„ç†  
     1198:	cf 01       	movw	r24, r30
     119a:	88 0f       	add	r24, r24
     119c:	99 1f       	adc	r25, r25
@@ -740,7 +740,7 @@ void ReadTemputer(void)
     11a8:	e1 f7       	brne	.-8      	; 0x11a2 <ReadTemputer+0x4a>
     11aa:	82 0f       	add	r24, r18
     11ac:	93 1f       	adc	r25, r19
-	//µÚ3Î»Ã»ÓĞÏÔÊ¾
+	//ç¬¬3ä½æ²¡æœ‰æ˜¾ç¤º
 	i = i % 1000;  
     11ae:	24 e0       	ldi	r18, 0x04	; 4
     11b0:	96 95       	lsr	r25
@@ -751,13 +751,13 @@ void ReadTemputer(void)
     11ba:	73 e0       	ldi	r23, 0x03	; 3
     11bc:	0e 94 30 1d 	call	0x3a60	; 0x3a60 <__udivmodhi4>
     11c0:	9c 01       	movw	r18, r24
-	//ÏÔÊ¾µÚ2Î»
+	//æ˜¾ç¤ºç¬¬2ä½
 	tem3= i / 100;
 	if(NegativeTem == 1)
     11c2:	41 30       	cpi	r20, 0x01	; 1
     11c4:	21 f4       	brne	.+8      	; 0x11ce <ReadTemputer+0x76>
 	{
-		TemperatureTen = 14; // - ·ûºÅ
+		TemperatureTen = 14; // - ç¬¦å·
     11c6:	8e e0       	ldi	r24, 0x0E	; 14
     11c8:	80 93 6f 00 	sts	0x006F, r24
     11cc:	06 c0       	rjmp	.+12     	; 0x11da <ReadTemputer+0x82>
@@ -771,7 +771,7 @@ void ReadTemputer(void)
     11d6:	60 93 6f 00 	sts	0x006F, r22
 	}
 	i = i % 100;  
-	//ÏÔÊ¾µÚ1Î»
+	//æ˜¾ç¤ºç¬¬1ä½
 	tem2= i / 10;
 	TemperatureOne = tem2;
     11da:	c9 01       	movw	r24, r18
@@ -792,7 +792,7 @@ void ReadTemputer(void)
     11f2:	f0 70       	andi	r31, 0x00	; 0
 	}
 	i = i % 100;  
-	//ÏÔÊ¾µÚ1Î»
+	//æ˜¾ç¤ºç¬¬1ä½
 	tem2= i / 10;
 	TemperatureOne = tem2;
 	TemperatureDecimal = tem1;
@@ -1525,7 +1525,7 @@ void FreshDisplayBufferSecond() //Second update
     15f6:	80 91 7b 00 	lds	r24, 0x007B
     15fa:	88 23       	and	r24, r24
     15fc:	09 f5       	brne	.+66     	; 0x1640 <FreshDisplayBufferSecond+0x4a>
-	writeOneSCROLL(2,25,TemperatureDecimal );		//17 ÎÂ¶ÈĞ¡Êı	
+	writeOneSCROLL(2,25,TemperatureDecimal );		//17 æ¸©åº¦å°æ•°	
 	writeOneSCROLL(3,25,13);	
 }
 
@@ -1596,7 +1596,7 @@ void FreshDisplayBufferSecond() //Second update
 	else if(Display_BigNumber_Font == 1)
     1640:	81 30       	cpi	r24, 0x01	; 1
     1642:	09 f5       	brne	.+66     	; 0x1686 <FreshDisplayBufferSecond+0x90>
-	writeOneSCROLL(2,25,TemperatureDecimal );		//17 ÎÂ¶ÈĞ¡Êı	
+	writeOneSCROLL(2,25,TemperatureDecimal );		//17 æ¸©åº¦å°æ•°	
 	writeOneSCROLL(3,25,13);	
 }
 
@@ -1659,7 +1659,7 @@ void FreshDisplayBufferSecond() //Second update
     1680:	b8 07       	cpc	r27, r24
     1682:	c9 f7       	brne	.-14     	; 0x1676 <FreshDisplayBufferSecond+0x80>
     1684:	08 95       	ret
-	writeOneSCROLL(2,25,TemperatureDecimal );		//17 ÎÂ¶ÈĞ¡Êı	
+	writeOneSCROLL(2,25,TemperatureDecimal );		//17 æ¸©åº¦å°æ•°	
 	writeOneSCROLL(3,25,13);	
 }
 
@@ -1793,7 +1793,7 @@ void display()
     172a:	08 f4       	brcc	.+2      	; 0x172e <display+0x66>
     172c:	56 c0       	rjmp	.+172    	; 0x17da <display+0x112>
 	{
-		if(Mode == 0) //Õı³£ÏÔÊ¾Ä£Ê½ ÈÕÆÚÎÂ¶È¹ö¶¯
+		if(Mode == 0) //æ­£å¸¸æ˜¾ç¤ºæ¨¡å¼ æ—¥æœŸæ¸©åº¦æ»šåŠ¨
     172e:	80 91 75 00 	lds	r24, 0x0075
     1732:	88 23       	and	r24, r24
     1734:	09 f0       	breq	.+2      	; 0x1738 <display+0x70>
@@ -1822,7 +1822,7 @@ void display()
     175c:	a6 e8       	ldi	r26, 0x86	; 134
     175e:	b0 e0       	ldi	r27, 0x00	; 0
 	{
-		if(Mode == 0) //Õı³£ÏÔÊ¾Ä£Ê½ ÈÕÆÚÎÂ¶È¹ö¶¯
+		if(Mode == 0) //æ­£å¸¸æ˜¾ç¤ºæ¨¡å¼ æ—¥æœŸæ¸©åº¦æ»šåŠ¨
 		{
 			uint8 temp1 = currentMoveLeft>>3;
 			uint8 temp2 = currentMoveLeft<<5;
@@ -2727,7 +2727,7 @@ void display()
     1afc:	52 c0       	rjmp	.+164    	; 0x1ba2 <display+0x4da>
     1afe:	50 e0       	ldi	r21, 0x00	; 0
     1b00:	4a c0       	rjmp	.+148    	; 0x1b96 <display+0x4ce>
-	/* ºì£¬ÂÌ£¬»Æ */
+	/* çº¢ï¼Œç»¿ï¼Œé»„ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -2830,7 +2830,7 @@ void display()
     1b7e:	30 40       	sbci	r19, 0x00	; 0
 	else if(Display_color == 7)
 	{
-	/* ºì£¬ÂÌ£¬»Æ */
+	/* çº¢ï¼Œç»¿ï¼Œé»„ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -2843,7 +2843,7 @@ void display()
 	}
 	else if(Display_color == 7)
 	{
-	/* ºì£¬ÂÌ£¬»Æ */
+	/* çº¢ï¼Œç»¿ï¼Œé»„ */
 		for(i=0;i<8;i++)
     1b8a:	5f 5f       	subi	r21, 0xFF	; 255
     1b8c:	58 30       	cpi	r21, 0x08	; 8
@@ -2881,7 +2881,7 @@ void display()
     1ba6:	52 c0       	rjmp	.+164    	; 0x1c4c <display+0x584>
     1ba8:	50 e0       	ldi	r21, 0x00	; 0
     1baa:	4a c0       	rjmp	.+148    	; 0x1c40 <display+0x578>
-	/*ºì£¬ÂÌ£¬À¶ */
+	/*çº¢ï¼Œç»¿ï¼Œè“ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -2983,7 +2983,7 @@ void display()
     1c28:	30 40       	sbci	r19, 0x00	; 0
 	else if(Display_color == 8)
 	{
-	/*ºì£¬ÂÌ£¬À¶ */
+	/*çº¢ï¼Œç»¿ï¼Œè“ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -2996,7 +2996,7 @@ void display()
 	}
 	else if(Display_color == 8)
 	{
-	/*ºì£¬ÂÌ£¬À¶ */
+	/*çº¢ï¼Œç»¿ï¼Œè“ */
 		for(i=0;i<8;i++)
     1c34:	5f 5f       	subi	r21, 0xFF	; 255
     1c36:	58 30       	cpi	r21, 0x08	; 8
@@ -3034,7 +3034,7 @@ void display()
     1c50:	53 c0       	rjmp	.+166    	; 0x1cf8 <display+0x630>
     1c52:	50 e0       	ldi	r21, 0x00	; 0
     1c54:	4b c0       	rjmp	.+150    	; 0x1cec <display+0x624>
-	/* ÂÌ£¬À¶£¬×Ï */
+	/* ç»¿ï¼Œè“ï¼Œç´« */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -3138,7 +3138,7 @@ void display()
     1cd4:	30 40       	sbci	r19, 0x00	; 0
 	else if(Display_color == 9)
 	{
-	/* ÂÌ£¬À¶£¬×Ï */
+	/* ç»¿ï¼Œè“ï¼Œç´« */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -3151,7 +3151,7 @@ void display()
 	}
 	else if(Display_color == 9)
 	{
-	/* ÂÌ£¬À¶£¬×Ï */
+	/* ç»¿ï¼Œè“ï¼Œç´« */
 		for(i=0;i<8;i++)
     1ce0:	5f 5f       	subi	r21, 0xFF	; 255
     1ce2:	58 30       	cpi	r21, 0x08	; 8
@@ -3189,7 +3189,7 @@ void display()
     1cfc:	52 c0       	rjmp	.+164    	; 0x1da2 <display+0x6da>
     1cfe:	50 e0       	ldi	r21, 0x00	; 0
     1d00:	4a c0       	rjmp	.+148    	; 0x1d96 <display+0x6ce>
-	/* ÂÌ£¬À¶£¬»Æ */
+	/* ç»¿ï¼Œè“ï¼Œé»„ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -3292,7 +3292,7 @@ void display()
     1d7e:	30 40       	sbci	r19, 0x00	; 0
 	else if(Display_color == 10)
 	{
-	/* ÂÌ£¬À¶£¬»Æ */
+	/* ç»¿ï¼Œè“ï¼Œé»„ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -3305,7 +3305,7 @@ void display()
 	}
 	else if(Display_color == 10)
 	{
-	/* ÂÌ£¬À¶£¬»Æ */
+	/* ç»¿ï¼Œè“ï¼Œé»„ */
 		for(i=0;i<8;i++)
     1d8a:	5f 5f       	subi	r21, 0xFF	; 255
     1d8c:	58 30       	cpi	r21, 0x08	; 8
@@ -3343,7 +3343,7 @@ void display()
     1da6:	54 c0       	rjmp	.+168    	; 0x1e50 <display+0x788>
     1da8:	30 e0       	ldi	r19, 0x00	; 0
     1daa:	4c c0       	rjmp	.+152    	; 0x1e44 <display+0x77c>
-	/* À¶£¬×Ï£¬»Æ */
+	/* è“ï¼Œç´«ï¼Œé»„ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -3449,7 +3449,7 @@ void display()
     1e2c:	50 40       	sbci	r21, 0x00	; 0
 	else if(Display_color == 11)
 	{
-	/* À¶£¬×Ï£¬»Æ */
+	/* è“ï¼Œç´«ï¼Œé»„ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -3462,7 +3462,7 @@ void display()
 	}
 	else if(Display_color == 11)
 	{
-	/* À¶£¬×Ï£¬»Æ */
+	/* è“ï¼Œç´«ï¼Œé»„ */
 		for(i=0;i<8;i++)
     1e38:	3f 5f       	subi	r19, 0xFF	; 255
     1e3a:	38 30       	cpi	r19, 0x08	; 8
@@ -3500,7 +3500,7 @@ void display()
     1e54:	54 c0       	rjmp	.+168    	; 0x1efe <display+0x836>
     1e56:	30 e0       	ldi	r19, 0x00	; 0
     1e58:	4c c0       	rjmp	.+152    	; 0x1ef2 <display+0x82a>
-	/* À¶£¬×Ï£¬Çà */
+	/* è“ï¼Œç´«ï¼Œé’ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -3606,7 +3606,7 @@ void display()
     1eda:	50 40       	sbci	r21, 0x00	; 0
 	else if(Display_color == 12)
 	{
-	/* À¶£¬×Ï£¬Çà */
+	/* è“ï¼Œç´«ï¼Œé’ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -3619,7 +3619,7 @@ void display()
 	}
 	else if(Display_color == 12)
 	{
-	/* À¶£¬×Ï£¬Çà */
+	/* è“ï¼Œç´«ï¼Œé’ */
 		for(i=0;i<8;i++)
     1ee6:	3f 5f       	subi	r19, 0xFF	; 255
     1ee8:	38 30       	cpi	r19, 0x08	; 8
@@ -3657,7 +3657,7 @@ void display()
     1f02:	57 c0       	rjmp	.+174    	; 0x1fb2 <display+0x8ea>
     1f04:	30 e0       	ldi	r19, 0x00	; 0
     1f06:	4f c0       	rjmp	.+158    	; 0x1fa6 <display+0x8de>
-	/* ×Ï£¬»Æ£¬Çà */
+	/* ç´«ï¼Œé»„ï¼Œé’ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -3768,7 +3768,7 @@ void display()
     1f8e:	50 40       	sbci	r21, 0x00	; 0
 	else if(Display_color == 13)
 	{
-	/* ×Ï£¬»Æ£¬Çà */
+	/* ç´«ï¼Œé»„ï¼Œé’ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -3781,7 +3781,7 @@ void display()
 	}
 	else if(Display_color == 13)
 	{
-	/* ×Ï£¬»Æ£¬Çà */
+	/* ç´«ï¼Œé»„ï¼Œé’ */
 		for(i=0;i<8;i++)
     1f9a:	3f 5f       	subi	r19, 0xFF	; 255
     1f9c:	38 30       	cpi	r19, 0x08	; 8
@@ -3819,7 +3819,7 @@ void display()
     1fb6:	58 c0       	rjmp	.+176    	; 0x2068 <display+0x9a0>
     1fb8:	30 e0       	ldi	r19, 0x00	; 0
     1fba:	50 c0       	rjmp	.+160    	; 0x205c <display+0x994>
-	/* ×Ï£¬À¶£¬°× */
+	/* ç´«ï¼Œè“ï¼Œç™½ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -3931,7 +3931,7 @@ void display()
     2044:	50 40       	sbci	r21, 0x00	; 0
 	else if(Display_color == 14)
 	{
-	/* ×Ï£¬À¶£¬°× */
+	/* ç´«ï¼Œè“ï¼Œç™½ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -3944,7 +3944,7 @@ void display()
 	}
 	else if(Display_color == 14)
 	{
-	/* ×Ï£¬À¶£¬°× */
+	/* ç´«ï¼Œè“ï¼Œç™½ */
 		for(i=0;i<8;i++)
     2050:	3f 5f       	subi	r19, 0xFF	; 255
     2052:	38 30       	cpi	r19, 0x08	; 8
@@ -3982,7 +3982,7 @@ void display()
     206c:	56 c0       	rjmp	.+172    	; 0x211a <display+0xa52>
     206e:	30 e0       	ldi	r19, 0x00	; 0
     2070:	4e c0       	rjmp	.+156    	; 0x210e <display+0xa46>
-	/* »Æ£¬Çà£¬°× */
+	/* é»„ï¼Œé’ï¼Œç™½ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -4092,7 +4092,7 @@ void display()
     20f6:	50 40       	sbci	r21, 0x00	; 0
 	else if(Display_color == 15)
 	{
-	/* »Æ£¬Çà£¬°× */
+	/* é»„ï¼Œé’ï¼Œç™½ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -4105,7 +4105,7 @@ void display()
 	}
 	else if(Display_color == 15)
 	{
-	/* »Æ£¬Çà£¬°× */
+	/* é»„ï¼Œé’ï¼Œç™½ */
 		for(i=0;i<8;i++)
     2102:	3f 5f       	subi	r19, 0xFF	; 255
     2104:	38 30       	cpi	r19, 0x08	; 8
@@ -4143,7 +4143,7 @@ void display()
     211e:	55 c0       	rjmp	.+170    	; 0x21ca <display+0xb02>
     2120:	50 e0       	ldi	r21, 0x00	; 0
     2122:	4d c0       	rjmp	.+154    	; 0x21be <display+0xaf6>
-	/* »Æ£¬ºì£¬ÂÌ */
+	/* é»„ï¼Œçº¢ï¼Œç»¿ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -4249,7 +4249,7 @@ void display()
     21a6:	30 40       	sbci	r19, 0x00	; 0
 	else if(Display_color == 16)
 	{
-	/* »Æ£¬ºì£¬ÂÌ */
+	/* é»„ï¼Œçº¢ï¼Œç»¿ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -4262,7 +4262,7 @@ void display()
 	}
 	else if(Display_color == 16)
 	{
-	/* »Æ£¬ºì£¬ÂÌ */
+	/* é»„ï¼Œçº¢ï¼Œç»¿ */
 		for(i=0;i<8;i++)
     21b2:	5f 5f       	subi	r21, 0xFF	; 255
     21b4:	58 30       	cpi	r21, 0x08	; 8
@@ -4300,7 +4300,7 @@ void display()
     21ce:	58 c0       	rjmp	.+176    	; 0x2280 <display+0xbb8>
     21d0:	30 e0       	ldi	r19, 0x00	; 0
     21d2:	50 c0       	rjmp	.+160    	; 0x2274 <display+0xbac>
-	/* Çà£¬°×£¬×Ï */
+	/* é’ï¼Œç™½ï¼Œç´« */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -4413,7 +4413,7 @@ void display()
     225c:	50 40       	sbci	r21, 0x00	; 0
 	else if(Display_color == 17)
 	{
-	/* Çà£¬°×£¬×Ï */
+	/* é’ï¼Œç™½ï¼Œç´« */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -4426,7 +4426,7 @@ void display()
 	}
 	else if(Display_color == 17)
 	{
-	/* Çà£¬°×£¬×Ï */
+	/* é’ï¼Œç™½ï¼Œç´« */
 		for(i=0;i<8;i++)
     2268:	3f 5f       	subi	r19, 0xFF	; 255
     226a:	38 30       	cpi	r19, 0x08	; 8
@@ -4464,7 +4464,7 @@ void display()
     2284:	54 c0       	rjmp	.+168    	; 0x232e <display+0xc66>
     2286:	50 e0       	ldi	r21, 0x00	; 0
     2288:	4c c0       	rjmp	.+152    	; 0x2322 <display+0xc5a>
-	/* Çà£¬À¶£¬ÂÌ */
+	/* é’ï¼Œè“ï¼Œç»¿ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -4570,7 +4570,7 @@ void display()
     230c:	30 40       	sbci	r19, 0x00	; 0
 	else if(Display_color == 18)
 	{
-	/* Çà£¬À¶£¬ÂÌ */
+	/* é’ï¼Œè“ï¼Œç»¿ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -4583,7 +4583,7 @@ void display()
 	}
 	else if(Display_color == 18)
 	{
-	/* Çà£¬À¶£¬ÂÌ */
+	/* é’ï¼Œè“ï¼Œç»¿ */
 		for(i=0;i<8;i++)
     2318:	5f 5f       	subi	r21, 0xFF	; 255
     231a:	58 30       	cpi	r21, 0x08	; 8
@@ -4746,7 +4746,7 @@ void display()
 000023c4 <twi_init>:
 #define _TWI_H_
 
-//¹¦ÄÜÃèÊö: i2cÍ¨ĞÅ³õÊ¼»¯
+//åŠŸèƒ½æè¿°: i2cé€šä¿¡åˆå§‹åŒ–
 void twi_init(void)
 {
  TWCR= 0x00; //disable twi
@@ -4766,7 +4766,7 @@ void twi_init(void)
 
 000023d4 <i2cstart>:
 
-//i2cÍ¨ĞÅ¿ªÊ¼
+//i2cé€šä¿¡å¼€å§‹
 void i2cstart(void)
 { 
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN); 
@@ -4781,7 +4781,7 @@ void i2cstart(void)
 
 000023e0 <i2cwt>:
 
-//i2cĞ´Êı¾İ,·µ»ØTWI×´Ì¬
+//i2cå†™æ•°æ®,è¿”å›TWIçŠ¶æ€
 unsigned char i2cwt(unsigned char data)
 { 
 	TWDR = data;
@@ -4803,7 +4803,7 @@ unsigned char i2cwt(unsigned char data)
 
 000023f4 <i2crd>:
 
-//i2c¶ÁÊı¾İ
+//i2cè¯»æ•°æ®
 unsigned char i2crd(void)
 {
    	TWCR= (1<<TWINT) | (1<<TWEA) | (1<<TWEN);
@@ -4820,7 +4820,7 @@ unsigned char i2crd(void)
 
 00002402 <i2cstop>:
 
-//¹¦ÄÜÃèÊö: i2cÍ£Ö¹
+//åŠŸèƒ½æè¿°: i2cåœæ­¢
 void i2cstop(void)
 { 
    TWCR = (1<<TWINT) | (1<<TWSTO) | (1<<TWEN);
@@ -4833,7 +4833,7 @@ void i2cstop(void)
 
 uint16 freshTimeCount = 0;
 
-//Çå³ıÖ¸¶¨ÇøÓòÖ¸¶¨³¤¶ÈµÄÊı¾İ
+//æ¸…é™¤æŒ‡å®šåŒºåŸŸæŒ‡å®šé•¿åº¦çš„æ•°æ®
 void clear(unsigned char *p,unsigned char num)
 {
     2408:	fc 01       	movw	r30, r24
@@ -4844,7 +4844,7 @@ void clear(unsigned char *p,unsigned char num)
     240c:	11 92       	st	Z+, r1
 uint16 freshTimeCount = 0;
 
-//Çå³ıÖ¸¶¨ÇøÓòÖ¸¶¨³¤¶ÈµÄÊı¾İ
+//æ¸…é™¤æŒ‡å®šåŒºåŸŸæŒ‡å®šé•¿åº¦çš„æ•°æ®
 void clear(unsigned char *p,unsigned char num)
 {
  for(;num>0;num--)
@@ -4860,13 +4860,13 @@ void clear(unsigned char *p,unsigned char num)
 
 00002416 <PCF8536_wt>:
 
-//¹¦ÄÜÃèÊö: ÏòPCF8563Ö¸¶¨µØÖ·Ğ´ÈëÒ»ÌõÊı¾İ
+//åŠŸèƒ½æè¿°: å‘PCF8563æŒ‡å®šåœ°å€å†™å…¥ä¸€æ¡æ•°æ®
 void PCF8536_wt(unsigned int add,unsigned char data)
 {
     2416:	28 2f       	mov	r18, r24
 }
 
-//i2cÍ¨ĞÅ¿ªÊ¼
+//i2cé€šä¿¡å¼€å§‹
 void i2cstart(void)
 { 
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN); 
@@ -4885,7 +4885,7 @@ void i2cstart(void)
     2424:	9e 55       	subi	r25, 0x5E	; 94
 }
 
-//i2cĞ´Êı¾İ,·µ»ØTWI×´Ì¬
+//i2cå†™æ•°æ®,è¿”å›TWIçŠ¶æ€
 unsigned char i2cwt(unsigned char data)
 { 
 	TWDR = data;
@@ -4906,7 +4906,7 @@ unsigned char i2cwt(unsigned char data)
     243a:	89 f4       	brne	.+34     	; 0x245e <PCF8536_wt+0x48>
 }
 
-//i2cĞ´Êı¾İ,·µ»ØTWI×´Ì¬
+//i2cå†™æ•°æ®,è¿”å›TWIçŠ¶æ€
 unsigned char i2cwt(unsigned char data)
 { 
 	TWDR = data;
@@ -4924,7 +4924,7 @@ unsigned char i2cwt(unsigned char data)
     244a:	81 b1       	in	r24, 0x01	; 1
 }
 
-//i2cĞ´Êı¾İ,·µ»ØTWI×´Ì¬
+//i2cå†™æ•°æ®,è¿”å›TWIçŠ¶æ€
 unsigned char i2cwt(unsigned char data)
 { 
 	TWDR = data;
@@ -4950,7 +4950,7 @@ unsigned char i2cwt(unsigned char data)
     2460:	80 93 aa 02 	sts	0x02AA, r24
 }
 
-//¹¦ÄÜÃèÊö: i2cÍ£Ö¹
+//åŠŸèƒ½æè¿°: i2cåœæ­¢
 void i2cstop(void)
 { 
    TWCR = (1<<TWINT) | (1<<TWSTO) | (1<<TWEN);
@@ -4962,14 +4962,14 @@ void i2cstop(void)
 
 0000246a <PCF8536_wt_p>:
 
-//¹¦ÄÜÃèÊö: ÏòPCF8563µØÖ·Á¬ĞøµÄ¼Ä´æÆ÷Ğ´ÈëÏµÁĞÊı¾İ
+//åŠŸèƒ½æè¿°: å‘PCF8563åœ°å€è¿ç»­çš„å¯„å­˜å™¨å†™å…¥ç³»åˆ—æ•°æ®
 void PCF8536_wt_p(unsigned int add,unsigned char *p,unsigned char num)
 {
     246a:	28 2f       	mov	r18, r24
     246c:	fb 01       	movw	r30, r22
 }
 
-//i2cÍ¨ĞÅ¿ªÊ¼
+//i2cé€šä¿¡å¼€å§‹
 void i2cstart(void)
 { 
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN); 
@@ -4988,7 +4988,7 @@ void i2cstart(void)
     247a:	9e 55       	subi	r25, 0x5E	; 94
 }
 
-//i2cĞ´Êı¾İ,·µ»ØTWI×´Ì¬
+//i2cå†™æ•°æ®,è¿”å›TWIçŠ¶æ€
 unsigned char i2cwt(unsigned char data)
 { 
 	TWDR = data;
@@ -5009,7 +5009,7 @@ unsigned char i2cwt(unsigned char data)
     2490:	c1 f4       	brne	.+48     	; 0x24c2 <PCF8536_wt_p+0x58>
 }
 
-//i2cĞ´Êı¾İ,·µ»ØTWI×´Ì¬
+//i2cå†™æ•°æ®,è¿”å›TWIçŠ¶æ€
 unsigned char i2cwt(unsigned char data)
 { 
 	TWDR = data;
@@ -5026,7 +5026,7 @@ unsigned char i2cwt(unsigned char data)
    	return(TWSR&0b11111000);
     24a0:	81 b1       	in	r24, 0x01	; 1
 
-//i2cĞ´Êı¾İ,·µ»ØTWI×´Ì¬
+//i2cå†™æ•°æ®,è¿”å›TWIçŠ¶æ€
 unsigned char i2cwt(unsigned char data)
 { 
 	TWDR = data;
@@ -5041,7 +5041,7 @@ unsigned char i2cwt(unsigned char data)
     24a6:	80 81       	ld	r24, Z
 }
 
-//i2cĞ´Êı¾İ,·µ»ØTWI×´Ì¬
+//i2cå†™æ•°æ®,è¿”å›TWIçŠ¶æ€
 unsigned char i2cwt(unsigned char data)
 { 
 	TWDR = data;
@@ -5080,7 +5080,7 @@ unsigned char i2cwt(unsigned char data)
     24c4:	80 93 aa 02 	sts	0x02AA, r24
 }
 
-//¹¦ÄÜÃèÊö: i2cÍ£Ö¹
+//åŠŸèƒ½æè¿°: i2cåœæ­¢
 void i2cstop(void)
 { 
    TWCR = (1<<TWINT) | (1<<TWSTO) | (1<<TWEN);
@@ -5092,7 +5092,7 @@ void i2cstop(void)
 
 000024ce <PCF8536_rd>:
 
-//¶ÁPCF8563
+//è¯»PCF8563
 void PCF8536_rd(unsigned int add,unsigned char *p,unsigned char num)
 {
     24ce:	28 2f       	mov	r18, r24
@@ -5103,7 +5103,7 @@ void PCF8536_rd(unsigned int add,unsigned char *p,unsigned char num)
     24d2:	99 0f       	add	r25, r25
 }
 
-//i2cÍ¨ĞÅ¿ªÊ¼
+//i2cé€šä¿¡å¼€å§‹
 void i2cstart(void)
 { 
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN); 
@@ -5118,7 +5118,7 @@ void i2cstart(void)
     24de:	9e 55       	subi	r25, 0x5E	; 94
 }
 
-//i2cĞ´Êı¾İ,·µ»ØTWI×´Ì¬
+//i2cå†™æ•°æ®,è¿”å›TWIçŠ¶æ€
 unsigned char i2cwt(unsigned char data)
 { 
 	TWDR = data;
@@ -5140,7 +5140,7 @@ unsigned char i2cwt(unsigned char data)
     24f6:	49 f4       	brne	.+18     	; 0x250a <PCF8536_rd+0x3c>
 }
 
-//i2cĞ´Êı¾İ,·µ»ØTWI×´Ì¬
+//i2cå†™æ•°æ®,è¿”å›TWIçŠ¶æ€
 unsigned char i2cwt(unsigned char data)
 { 
 	TWDR = data;
@@ -5165,7 +5165,7 @@ unsigned char i2cwt(unsigned char data)
     250c:	80 93 aa 02 	sts	0x02AA, r24
 }
 
-//i2cÍ¨ĞÅ¿ªÊ¼
+//i2cé€šä¿¡å¼€å§‹
 void i2cstart(void)
 { 
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN); 
@@ -5181,7 +5181,7 @@ void i2cstart(void)
     251a:	9d 55       	subi	r25, 0x5D	; 93
 }
 
-//i2cĞ´Êı¾İ,·µ»ØTWI×´Ì¬
+//i2cå†™æ•°æ®,è¿”å›TWIçŠ¶æ€
 unsigned char i2cwt(unsigned char data)
 { 
 	TWDR = data;
@@ -5202,7 +5202,7 @@ unsigned char i2cwt(unsigned char data)
     2530:	49 f4       	brne	.+18     	; 0x2544 <PCF8536_rd+0x76>
 }
 
-//i2cĞ´Êı¾İ,·µ»ØTWI×´Ì¬
+//i2cå†™æ•°æ®,è¿”å›TWIçŠ¶æ€
 unsigned char i2cwt(unsigned char data)
 { 
 	TWDR = data;
@@ -5228,7 +5228,7 @@ unsigned char i2cwt(unsigned char data)
     254a:	08 c0       	rjmp	.+16     	; 0x255c <PCF8536_rd+0x8e>
 }
 
-//i2c¶ÁÊı¾İ
+//i2cè¯»æ•°æ®
 unsigned char i2crd(void)
 {
    	TWCR= (1<<TWINT) | (1<<TWEA) | (1<<TWEN);
@@ -5254,7 +5254,7 @@ unsigned char i2crd(void)
     255a:	01 c0       	rjmp	.+2      	; 0x255e <PCF8536_rd+0x90>
 }
 
-//i2c¶ÁÊı¾İ
+//i2cè¯»æ•°æ®
 unsigned char i2crd(void)
 {
    	TWCR= (1<<TWINT) | (1<<TWEA) | (1<<TWEN);
@@ -5270,12 +5270,12 @@ unsigned char i2crd(void)
 
 00002564 <PCF8563_init>:
 
-//¹¦ÄÜÃèÊö: PCF8563³õÊ¼»¯
+//åŠŸèƒ½æè¿°: PCF8563åˆå§‹åŒ–
 void PCF8563_init(void)
 {
     2564:	e0 eb       	ldi	r30, 0xB0	; 176
     2566:	f2 e0       	ldi	r31, 0x02	; 2
-//Çå³ıÖ¸¶¨ÇøÓòÖ¸¶¨³¤¶ÈµÄÊı¾İ
+//æ¸…é™¤æŒ‡å®šåŒºåŸŸæŒ‡å®šé•¿åº¦çš„æ•°æ®
 void clear(unsigned char *p,unsigned char num)
 {
  for(;num>0;num--)
@@ -5284,7 +5284,7 @@ void clear(unsigned char *p,unsigned char num)
     2568:	11 92       	st	Z+, r1
 uint16 freshTimeCount = 0;
 
-//Çå³ıÖ¸¶¨ÇøÓòÖ¸¶¨³¤¶ÈµÄÊı¾İ
+//æ¸…é™¤æŒ‡å®šåŒºåŸŸæŒ‡å®šé•¿åº¦çš„æ•°æ®
 void clear(unsigned char *p,unsigned char num)
 {
  for(;num>0;num--)
@@ -5299,7 +5299,7 @@ void clear(unsigned char *p,unsigned char num)
     2576:	11 92       	st	Z+, r1
 uint16 freshTimeCount = 0;
 
-//Çå³ıÖ¸¶¨ÇøÓòÖ¸¶¨³¤¶ÈµÄÊı¾İ
+//æ¸…é™¤æŒ‡å®šåŒºåŸŸæŒ‡å®šé•¿åº¦çš„æ•°æ®
 void clear(unsigned char *p,unsigned char num)
 {
  for(;num>0;num--)
@@ -5312,13 +5312,13 @@ void PCF8563_init(void)
  clear(write_buff,8);
  clear(read_buff,8);
  
- PCF8536_wt(0x00,0x20);//Ğ´¼Ä´æÆ÷1£¬Í£Ö¹¼ÆÊ±
+ PCF8536_wt(0x00,0x20);//å†™å¯„å­˜å™¨1ï¼Œåœæ­¢è®¡æ—¶
     2580:	80 e0       	ldi	r24, 0x00	; 0
     2582:	90 e0       	ldi	r25, 0x00	; 0
     2584:	60 e2       	ldi	r22, 0x20	; 32
     2586:	0e 94 0b 12 	call	0x2416	; 0x2416 <PCF8536_wt>
- //PCF8536_wt_p(0x02,time,7);//Éè¶¨Ê±¼ä
- PCF8536_wt(0x00,0x00);//Ğ´¼Ä´æÆ÷1£¬¿ªÊ¼¼ÆÊ±
+ //PCF8536_wt_p(0x02,time,7);//è®¾å®šæ—¶é—´
+ PCF8536_wt(0x00,0x00);//å†™å¯„å­˜å™¨1ï¼Œå¼€å§‹è®¡æ—¶
     258a:	80 e0       	ldi	r24, 0x00	; 0
     258c:	90 e0       	ldi	r25, 0x00	; 0
     258e:	60 e0       	ldi	r22, 0x00	; 0
@@ -5328,10 +5328,10 @@ void PCF8563_init(void)
 
 00002596 <Updata_time>:
 
-//Ë¢ĞÂÊ±¼ä¼Ä´æÆ÷¼°Ïà¹ØÊı×éÄÚÈİ
+//åˆ·æ–°æ—¶é—´å¯„å­˜å™¨åŠç›¸å…³æ•°ç»„å†…å®¹
 void Updata_time(void)
 {
-	PCF8536_rd(0x02,time,7);//¶ÁÈ¡Ê±¼ä
+	PCF8536_rd(0x02,time,7);//è¯»å–æ—¶é—´
     2596:	82 e0       	ldi	r24, 0x02	; 2
     2598:	90 e0       	ldi	r25, 0x00	; 0
     259a:	6d e7       	ldi	r22, 0x7D	; 125
@@ -5369,7 +5369,7 @@ void Updata_time(void)
     25e4:	6f 71       	andi	r22, 0x1F	; 31
     25e6:	60 93 82 00 	sts	0x0082, r22
 	//time_tmp[]="00:00:00",data_tmp[]="2008.01.01",*week_tmp;
-	//´¦ÀíÊ±¼ä
+	//å¤„ç†æ—¶é—´
 	SecondOne = time[0]&0x0F;
     25ea:	8f 70       	andi	r24, 0x0F	; 15
     25ec:	80 93 6d 00 	sts	0x006D, r24
@@ -5391,7 +5391,7 @@ void Updata_time(void)
     260c:	72 95       	swap	r23
     260e:	7f 70       	andi	r23, 0x0F	; 15
     2610:	70 93 68 00 	sts	0x0068, r23
-	//´¦ÀíÈÕÆÚ
+	//å¤„ç†æ—¥æœŸ
 	DayOne = time[3]&0x0F;
     2614:	ef 70       	andi	r30, 0x0F	; 15
     2616:	e0 93 67 00 	sts	0x0067, r30
@@ -5415,7 +5415,7 @@ void Updata_time(void)
     263c:	82 95       	swap	r24
     263e:	8f 70       	andi	r24, 0x0F	; 15
     2640:	80 93 62 00 	sts	0x0062, r24
-	//´¦ÀíĞÇÆÚ
+	//å¤„ç†æ˜ŸæœŸ
 	Week = (time[4]&0x0F)+1;
     2644:	ff 5f       	subi	r31, 0xFF	; 255
     2646:	f0 93 6e 00 	sts	0x006E, r31
@@ -5494,7 +5494,7 @@ void Write_time(void)
 void AjustTimerMonthly()
 {
     26d8:	1f 93       	push	r17
-	if(DayTen == 0 && DayOne == 1) // Ã¿¸öÔÂµÄÒ»ºÅ 
+	if(DayTen == 0 && DayOne == 1) // æ¯ä¸ªæœˆçš„ä¸€å· 
     26da:	80 91 66 00 	lds	r24, 0x0066
     26de:	88 23       	and	r24, r24
     26e0:	09 f0       	breq	.+2      	; 0x26e4 <AjustTimerMonthly+0xc>
@@ -5504,7 +5504,7 @@ void AjustTimerMonthly()
     26ea:	09 f0       	breq	.+2      	; 0x26ee <AjustTimerMonthly+0x16>
     26ec:	49 c0       	rjmp	.+146    	; 0x2780 <AjustTimerMonthly+0xa8>
 	{
-		if(HourTen == 0 && HourOne == 3) //Èıµã
+		if(HourTen == 0 && HourOne == 3) //ä¸‰ç‚¹
     26ee:	80 91 68 00 	lds	r24, 0x0068
     26f2:	88 23       	and	r24, r24
     26f4:	09 f0       	breq	.+2      	; 0x26f8 <AjustTimerMonthly+0x20>
@@ -5514,7 +5514,7 @@ void AjustTimerMonthly()
     26fe:	09 f0       	breq	.+2      	; 0x2702 <AjustTimerMonthly+0x2a>
     2700:	3f c0       	rjmp	.+126    	; 0x2780 <AjustTimerMonthly+0xa8>
 		{
-			if(MinuteTen  == 3 && MinuteOne  == 0) //30·Ö
+			if(MinuteTen  == 3 && MinuteOne  == 0) //30åˆ†
     2702:	80 91 6a 00 	lds	r24, 0x006A
     2706:	83 30       	cpi	r24, 0x03	; 3
     2708:	b9 f5       	brne	.+110    	; 0x2778 <AjustTimerMonthly+0xa0>
@@ -5522,7 +5522,7 @@ void AjustTimerMonthly()
     270e:	88 23       	and	r24, r24
     2710:	b9 f5       	brne	.+110    	; 0x2780 <AjustTimerMonthly+0xa8>
 			{
-				if(AjustTimeMode && !AjustTimeIsAjusted) //¼ÓÊ±¼ä
+				if(AjustTimeMode && !AjustTimeIsAjusted) //åŠ æ—¶é—´
     2712:	80 91 76 00 	lds	r24, 0x0076
     2716:	88 23       	and	r24, r24
     2718:	79 f0       	breq	.+30     	; 0x2738 <AjustTimerMonthly+0x60>
@@ -5546,7 +5546,7 @@ void AjustTimerMonthly()
 					Write_time();
 					AjustTimeIsAjusted = 1;
 				}
-				else if(!AjustTimeMode && !AjustTimeIsAjusted) //¼õÊ±¼ä
+				else if(!AjustTimeMode && !AjustTimeIsAjusted) //å‡æ—¶é—´
     2738:	80 91 79 00 	lds	r24, 0x0079
     273c:	88 23       	and	r24, r24
     273e:	01 f5       	brne	.+64     	; 0x2780 <AjustTimerMonthly+0xa8>
@@ -5716,7 +5716,7 @@ void SPEEK_Time()
 			TemperatureTen = 	2;
 			TemperatureOne = 	0;
 			TemperatureDecimal = 0;
-			³õÊ¼»¯²âÊÔ´úÂë
+			åˆå§‹åŒ–æµ‹è¯•ä»£ç 
 			*/
 			PLUSE_Number=25;
     284e:	89 e1       	ldi	r24, 0x19	; 25
@@ -5727,7 +5727,7 @@ void SPEEK_Time()
     2858:	82 e0       	ldi	r24, 0x02	; 2
     285a:	0e c0       	rjmp	.+28     	; 0x2878 <SPEEK_Time+0xea>
 		break;
-		case 2: //ÏÖÔÚÊ±¿Ì±±¾©Ê±¼ä
+		case 2: //ç°åœ¨æ—¶åˆ»åŒ—äº¬æ—¶é—´
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     285c:	80 91 9c 02 	lds	r24, 0x029C
     2860:	88 23       	and	r24, r24
@@ -5748,7 +5748,7 @@ void SPEEK_Time()
     287c:	08 95       	ret
 			}
 		break;
-		case 3: //ÉÏÎç	
+		case 3: //ä¸Šåˆ	
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     287e:	80 91 9c 02 	lds	r24, 0x029C
     2882:	88 23       	and	r24, r24
@@ -5816,7 +5816,7 @@ void SPEEK_Time()
 				}
 			}	
 		break;
-		case 4: //¶ş	
+		case 4: //äºŒ	
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     28d0:	80 91 9c 02 	lds	r24, 0x029C
     28d4:	88 23       	and	r24, r24
@@ -5846,7 +5846,7 @@ void SPEEK_Time()
 				}
 			}	
 		break;
-		case 5: //Ê®
+		case 5: //å
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     28f6:	80 91 9c 02 	lds	r24, 0x029C
     28fa:	88 23       	and	r24, r24
@@ -5877,7 +5877,7 @@ void SPEEK_Time()
 				}
 			}
 		break;
-		case 6: //Ò»
+		case 6: //ä¸€
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     291c:	80 91 9c 02 	lds	r24, 0x029C
     2920:	88 23       	and	r24, r24
@@ -5910,7 +5910,7 @@ void SPEEK_Time()
 				}
 			}
 		break;
-		case 7: //µã
+		case 7: //ç‚¹
 			 if(PLUSE_Status == 0 && VOICE_BUSY_H)
     294a:	80 91 9c 02 	lds	r24, 0x029C
     294e:	88 23       	and	r24, r24
@@ -5930,7 +5930,7 @@ void SPEEK_Time()
     2966:	88 cf       	rjmp	.-240    	; 0x2878 <SPEEK_Time+0xea>
 			}
 		break;
-		case 8: //Îå
+		case 8: //äº”
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     2968:	80 91 9c 02 	lds	r24, 0x029C
     296c:	88 23       	and	r24, r24
@@ -5973,7 +5973,7 @@ void SPEEK_Time()
 				}
 			}
 		break;
-		case 9: //Ê®
+		case 9: //å
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     299e:	80 91 9c 02 	lds	r24, 0x029C
     29a2:	88 23       	and	r24, r24
@@ -6016,7 +6016,7 @@ void SPEEK_Time()
 				}		
 			}
 		break;
-		case 10: //Èı
+		case 10: //ä¸‰
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     29d6:	80 91 9c 02 	lds	r24, 0x029C
     29da:	88 23       	and	r24, r24
@@ -6046,7 +6046,7 @@ void SPEEK_Time()
 				}
 			}
 		break;
-		case 11: //·Ö
+		case 11: //åˆ†
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     29fc:	80 91 9c 02 	lds	r24, 0x029C
     2a00:	88 23       	and	r24, r24
@@ -6079,7 +6079,7 @@ void SPEEK_Time()
 				}	
 			}
 		break;
-		case 12: //µÈ´ı
+		case 12: //ç­‰å¾…
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     2a2a:	80 91 9c 02 	lds	r24, 0x029C
     2a2e:	88 23       	and	r24, r24
@@ -6098,7 +6098,7 @@ void SPEEK_Time()
     2a46:	18 cf       	rjmp	.-464    	; 0x2878 <SPEEK_Time+0xea>
 			}
 		break;
-		case 13: //ÏÖÔÚÎÂ¶ÈÊÇ
+		case 13: //ç°åœ¨æ¸©åº¦æ˜¯
 			SPEEK_TIME_Delay --;
     2a48:	80 91 a8 02 	lds	r24, 0x02A8
     2a4c:	90 91 a9 02 	lds	r25, 0x02A9
@@ -6121,7 +6121,7 @@ void SPEEK_Time()
     2a6e:	04 cf       	rjmp	.-504    	; 0x2878 <SPEEK_Time+0xea>
 			}
 		break;
-		case 14: //¶ş
+		case 14: //äºŒ
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     2a70:	80 91 9c 02 	lds	r24, 0x029C
     2a74:	88 23       	and	r24, r24
@@ -6161,7 +6161,7 @@ void SPEEK_Time()
 				}
 			}
 		break;
-		case 15: //Ê®
+		case 15: //å
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     2aa6:	80 91 9c 02 	lds	r24, 0x029C
     2aaa:	88 23       	and	r24, r24
@@ -6193,7 +6193,7 @@ void SPEEK_Time()
 				}
 			}
 		break;
-		case 16: //Ò»
+		case 16: //ä¸€
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     2ad0:	80 91 9c 02 	lds	r24, 0x029C
     2ad4:	88 23       	and	r24, r24
@@ -6237,7 +6237,7 @@ void SPEEK_Time()
 				}
 			}
 		break;
-		case 17: //µã
+		case 17: //ç‚¹
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     2b0a:	80 91 9c 02 	lds	r24, 0x029C
     2b0e:	88 23       	and	r24, r24
@@ -6256,7 +6256,7 @@ void SPEEK_Time()
     2b24:	a9 ce       	rjmp	.-686    	; 0x2878 <SPEEK_Time+0xea>
 			}
 		break;
-		case 18: //Îå
+		case 18: //äº”
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     2b26:	80 91 9c 02 	lds	r24, 0x029C
     2b2a:	88 23       	and	r24, r24
@@ -6276,7 +6276,7 @@ void SPEEK_Time()
     2b44:	99 ce       	rjmp	.-718    	; 0x2878 <SPEEK_Time+0xea>
 			}
 		break;
-		case 19: //¶È
+		case 19: //åº¦
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
     2b46:	80 91 9c 02 	lds	r24, 0x029C
     2b4a:	88 23       	and	r24, r24
@@ -6306,7 +6306,7 @@ void SPEEK_Time()
 				SPEEK_TIME_Status = 0;		
 			}		
 		break;	
-		case 100: //°´¼üÒô
+		case 100: //æŒ‰é”®éŸ³
 			SPEEK_TIME_Status = 0;
     2b70:	10 92 af 02 	sts	0x02AF, r1
     2b74:	08 95       	ret
@@ -6508,7 +6508,7 @@ _delay_loop_2(uint16_t __count)
     2c64:	9e 99       	sbic	0x13, 6	; 19
     2c66:	1f c0       	rjmp	.+62     	; 0x2ca6 <Key_Operation+0x62>
 		{
-			SPEEK_TIME_Status = 100; //°´¼üÒô
+			SPEEK_TIME_Status = 100; //æŒ‰é”®éŸ³
     2c68:	84 e6       	ldi	r24, 0x64	; 100
     2c6a:	80 93 af 02 	sts	0x02AF, r24
 			KEY_Time_count = 0;
@@ -6563,7 +6563,7 @@ _delay_loop_2(uint16_t __count)
     2cb6:	9f 99       	sbic	0x13, 7	; 19
     2cb8:	21 c0       	rjmp	.+66     	; 0x2cfc <Key_Operation+0xb8>
 		{
-			SPEEK_TIME_Status = 100; //°´¼üÒô
+			SPEEK_TIME_Status = 100; //æŒ‰é”®éŸ³
     2cba:	84 e6       	ldi	r24, 0x64	; 100
     2cbc:	80 93 af 02 	sts	0x02AF, r24
 			KEY_Time_count = 0;
@@ -6624,7 +6624,7 @@ void StartAD()
 	ADMUX=0x40;
     2d0c:	80 e4       	ldi	r24, 0x40	; 64
     2d0e:	87 b9       	out	0x07, r24	; 7
-	ADCSRA=(1<<ADEN)|(1<<ADSC)|(1<<ADIF)|0x07;   //128·ÖÆµ£¬Á¬Ğø×ª»»
+	ADCSRA=(1<<ADEN)|(1<<ADSC)|(1<<ADIF)|0x07;   //128åˆ†é¢‘ï¼Œè¿ç»­è½¬æ¢
     2d10:	87 ed       	ldi	r24, 0xD7	; 215
     2d12:	86 b9       	out	0x06, r24	; 6
 }
@@ -6646,10 +6646,10 @@ void GetDispalyLight()
     2d1e:	30 e0       	ldi	r19, 0x00	; 0
     2d20:	82 2b       	or	r24, r18
     2d22:	93 2b       	or	r25, r19
-	adc_data0=adc_data0>>1;               //·ÅÆúÒ»Î»µÄ¾«¶È
+	adc_data0=adc_data0>>1;               //æ”¾å¼ƒä¸€ä½çš„ç²¾åº¦
     2d24:	96 95       	lsr	r25
     2d26:	87 95       	ror	r24
-	adc_data0-=35;                        //ĞŞÕı
+	adc_data0-=35;                        //ä¿®æ­£
 	ten_1=(adc_data0)/60;
 	display_light = 8 - ten_1;
     2d28:	83 97       	sbiw	r24, 0x23	; 35
@@ -6693,11 +6693,11 @@ void GetDispalyLight()
 
 void timer0_init(void)
 {
-	TCCR0=0x00;//Í£Ö¹
+	TCCR0=0x00;//åœæ­¢
     2d62:	13 be       	out	0x33, r1	; 51
-	TCNT0=0x00;//Çå³ı¶¨Ê±Æ÷Öµ
+	TCNT0=0x00;//æ¸…é™¤å®šæ—¶å™¨å€¼
     2d64:	12 be       	out	0x32, r1	; 50
-	TCCR0=0x79;//¿ìËÙPWMÄ£Ê½,Æ¥ÅäÊ±OC0ÇåÁã,topÊ±ÖÃÊı,ÏµÍ³Ê±ÖÓ1024·ÖÆµ,Êä³ö±È½ÏÆ¥ÅäÇå³ı¶¨Ê±Æ÷Öµ
+	TCCR0=0x79;//å¿«é€ŸPWMæ¨¡å¼,åŒ¹é…æ—¶OC0æ¸…é›¶,topæ—¶ç½®æ•°,ç³»ç»Ÿæ—¶é’Ÿ1024åˆ†é¢‘,è¾“å‡ºæ¯”è¾ƒåŒ¹é…æ¸…é™¤å®šæ—¶å™¨å€¼
     2d66:	89 e7       	ldi	r24, 0x79	; 121
     2d68:	83 bf       	out	0x33, r24	; 51
 	if(RunParameter[18] <= 8)
@@ -6705,7 +6705,7 @@ void timer0_init(void)
     2d6e:	89 30       	cpi	r24, 0x09	; 9
     2d70:	40 f4       	brcc	.+16     	; 0x2d82 <timer0_init+0x20>
 	{
-		SET_DISPLAY_LIGHT;//OCR0ÖÃ³õÖµ,Õ¼¿Õ±È50%£¬µ÷ÕûOCR0µÄÖµÓÃÀ´µ÷ÕûÕ¼¿Õ±È
+		SET_DISPLAY_LIGHT;//OCR0ç½®åˆå€¼,å ç©ºæ¯”50%ï¼Œè°ƒæ•´OCR0çš„å€¼ç”¨æ¥è°ƒæ•´å ç©ºæ¯”
     2d72:	80 91 73 00 	lds	r24, 0x0073
     2d76:	29 e1       	ldi	r18, 0x19	; 25
     2d78:	82 9f       	mul	r24, r18
@@ -6727,21 +6727,21 @@ void timer0_init(void)
 
 void timer2_init(void)
 {
-	TCCR2  = 0x00;//Í£Ö¹¶¨Ê±Æ÷
+	TCCR2  = 0x00;//åœæ­¢å®šæ—¶å™¨
     2d88:	15 bc       	out	0x25, r1	; 37
-	ASSR   = 0x00;//Òì²½Ê±ÖÓÄ£Ê½
+	ASSR   = 0x00;//å¼‚æ­¥æ—¶é’Ÿæ¨¡å¼
     2d8a:	12 bc       	out	0x22, r1	; 34
-	TCNT2  = 0x83;//³õÊ¼Öµ
+	TCNT2  = 0x83;//åˆå§‹å€¼
     2d8c:	83 e8       	ldi	r24, 0x83	; 131
     2d8e:	84 bd       	out	0x24, r24	; 36
-	OCR2   = 0x82;//Æ¥ÅäÖµ
+	OCR2   = 0x82;//åŒ¹é…å€¼
     2d90:	82 e8       	ldi	r24, 0x82	; 130
     2d92:	83 bd       	out	0x23, r24	; 35
-	TIMSK |= 0x40;//ÖĞ¶ÏÔÊĞí
+	TIMSK |= 0x40;//ä¸­æ–­å…è®¸
     2d94:	89 b7       	in	r24, 0x39	; 57
     2d96:	80 64       	ori	r24, 0x40	; 64
     2d98:	89 bf       	out	0x39, r24	; 57
-	TCCR2  = 0x04;//Æô¶¯¶¨Ê±Æ÷
+	TCCR2  = 0x04;//å¯åŠ¨å®šæ—¶å™¨
     2d9a:	84 e0       	ldi	r24, 0x04	; 4
     2d9c:	85 bd       	out	0x25, r24	; 37
 }
@@ -6749,7 +6749,7 @@ void timer2_init(void)
 
 00002da0 <__vector_4>:
 
-/*¶¨Ê±Æ÷2µÄÖĞ¶Ï·şÎñ³ÌĞò£¬ÓÃÓÚÏÔÊ¾´¦Àí*/
+/*å®šæ—¶å™¨2çš„ä¸­æ–­æœåŠ¡ç¨‹åºï¼Œç”¨äºæ˜¾ç¤ºå¤„ç†*/
 SIGNAL(SIG_OVERFLOW2)
 {
     2da0:	1f 92       	push	r1
@@ -6837,7 +6837,7 @@ void StartAD()
 	ADMUX=0x40;
     2e36:	80 e4       	ldi	r24, 0x40	; 64
     2e38:	87 b9       	out	0x07, r24	; 7
-	ADCSRA=(1<<ADEN)|(1<<ADSC)|(1<<ADIF)|0x07;   //128·ÖÆµ£¬Á¬Ğø×ª»»
+	ADCSRA=(1<<ADEN)|(1<<ADSC)|(1<<ADIF)|0x07;   //128åˆ†é¢‘ï¼Œè¿ç»­è½¬æ¢
     2e3a:	87 ed       	ldi	r24, 0xD7	; 215
     2e3c:	86 b9       	out	0x06, r24	; 6
     2e3e:	09 c0       	rjmp	.+18     	; 0x2e52 <__vector_4+0xb2>
@@ -6947,21 +6947,21 @@ void clearScreen()
 
 void init_devices()
 {
-	cli(); //¹Ø±ÕËùÓĞÖĞ¶Ï
+	cli(); //å…³é—­æ‰€æœ‰ä¸­æ–­
     2ec8:	f8 94       	cli
 	MCUCR  = 0x00;
     2eca:	15 be       	out	0x35, r1	; 53
-	//MCUCSR = 0x80;//½ûÖ¹JTAG
-	GICR   = 0x00;//¹Ø±ÕÍâ²¿ÖĞ¶Ï
+	//MCUCSR = 0x80;//ç¦æ­¢JTAG
+	GICR   = 0x00;//å…³é—­å¤–éƒ¨ä¸­æ–­
     2ecc:	1b be       	out	0x3b, r1	; 59
-	LED_SCREEN_INI(); //³õÊ¼»¯LEDµãÕó
+	LED_SCREEN_INI(); //åˆå§‹åŒ–LEDç‚¹é˜µ
     2ece:	0e 94 0c 09 	call	0x1218	; 0x1218 <LED_SCREEN_INI>
 	Key_Init();
     2ed2:	0e 94 19 16 	call	0x2c32	; 0x2c32 <Key_Init>
 	Voice_Init();
     2ed6:	0e 94 c2 13 	call	0x2784	; 0x2784 <Voice_Init>
 	//USART_Init();
-	timer0_init(); //³õÊ¼»¯¶¨Ê±Æ÷
+	timer0_init(); //åˆå§‹åŒ–å®šæ—¶å™¨
     2eda:	0e 94 b1 16 	call	0x2d62	; 0x2d62 <timer0_init>
 	timer2_init();
     2ede:	0e 94 c4 16 	call	0x2d88	; 0x2d88 <timer2_init>
@@ -7003,7 +7003,7 @@ void clearScreen()
     2f14:	30 40       	sbci	r19, 0x00	; 0
     2f16:	e1 f7       	brne	.-8      	; 0x2f10 <init_devices+0x48>
 	clearScreen();	
-	sei(); //Ê¹ÄÜÖĞ¶Ï
+	sei(); //ä½¿èƒ½ä¸­æ–­
     2f18:	78 94       	sei
 }
     2f1a:	08 95       	ret
@@ -7067,7 +7067,7 @@ void Show_welcome()
 	{
 		display();
     2f7a:	0e 94 64 0b 	call	0x16c8	; 0x16c8 <display>
-		s_10us(10); //ÑÓ³Ù10ms
+		s_10us(10); //å»¶è¿Ÿ10ms
     2f7e:	8a e0       	ldi	r24, 0x0A	; 10
     2f80:	90 e0       	ldi	r25, 0x00	; 0
     2f82:	0e 94 29 08 	call	0x1052	; 0x1052 <s_10us>
@@ -7100,7 +7100,7 @@ void clearScreen()
     2fa2:	e1 f7       	brne	.-8      	; 0x2f9c <Show_welcome+0x80>
 	{
 		display();
-		s_10us(10); //ÑÓ³Ù10ms
+		s_10us(10); //å»¶è¿Ÿ10ms
 	}
 	clearScreen();
 	Mode = 0;
@@ -7130,45 +7130,45 @@ void clearScreen()
 void FreshDisplayBufferNormal()
 {
 	clearScreen();
-	///// 10Äê 11ÔÂ 12ÖÜ 13¶È 14Ò» 15¶ş 16Èı 17ËÄ 18Îå 19Áù 20ÈÕ 21µã 22¿Õ¸ñ
+	///// 10å¹´ 11æœˆ 12å‘¨ 13åº¦ 14ä¸€ 15äºŒ 16ä¸‰ 17å›› 18äº” 19å…­ 20æ—¥ 21ç‚¹ 22ç©ºæ ¼
 	
-	wirteOneBigNumber(0,0,HourTen ); 	//8 Ê±Ê®Î»
+	wirteOneBigNumber(0,0,HourTen ); 	//8 æ—¶åä½
     2fc2:	80 e0       	ldi	r24, 0x00	; 0
     2fc4:	60 e0       	ldi	r22, 0x00	; 0
     2fc6:	40 91 68 00 	lds	r20, 0x0068
     2fca:	0e 94 50 0a 	call	0x14a0	; 0x14a0 <wirteOneBigNumber>
-	wirteOneBigNumber(2,0,HourOne );	//9 Ê±¸öÎ»
+	wirteOneBigNumber(2,0,HourOne );	//9 æ—¶ä¸ªä½
     2fce:	82 e0       	ldi	r24, 0x02	; 2
     2fd0:	60 e0       	ldi	r22, 0x00	; 0
     2fd2:	40 91 69 00 	lds	r20, 0x0069
     2fd6:	0e 94 50 0a 	call	0x14a0	; 0x14a0 <wirteOneBigNumber>
-	wirteOneBigNumber(4,3,MinuteTen );	//10 ·ÖÊ®Î»
+	wirteOneBigNumber(4,3,MinuteTen );	//10 åˆ†åä½
     2fda:	84 e0       	ldi	r24, 0x04	; 4
     2fdc:	63 e0       	ldi	r22, 0x03	; 3
     2fde:	40 91 6a 00 	lds	r20, 0x006A
     2fe2:	0e 94 50 0a 	call	0x14a0	; 0x14a0 <wirteOneBigNumber>
-	wirteOneBigNumber(6,3,MinuteOne );	//11 ·Ö¸öÎ»
+	wirteOneBigNumber(6,3,MinuteOne );	//11 åˆ†ä¸ªä½
     2fe6:	86 e0       	ldi	r24, 0x06	; 6
     2fe8:	63 e0       	ldi	r22, 0x03	; 3
     2fea:	40 91 6b 00 	lds	r20, 0x006B
     2fee:	0e 94 50 0a 	call	0x14a0	; 0x14a0 <wirteOneBigNumber>
 	
-	writeOneSCROLL(0,23,YearThousand );		//0 ÄêÇ§Î»
+	writeOneSCROLL(0,23,YearThousand );		//0 å¹´åƒä½
     2ff2:	80 e0       	ldi	r24, 0x00	; 0
     2ff4:	67 e1       	ldi	r22, 0x17	; 23
     2ff6:	40 91 60 00 	lds	r20, 0x0060
     2ffa:	0e 94 e8 09 	call	0x13d0	; 0x13d0 <writeOneSCROLL>
-	writeOneSCROLL(1,23,YearHundred );		//1 Äê°ÙÎ»
+	writeOneSCROLL(1,23,YearHundred );		//1 å¹´ç™¾ä½
     2ffe:	81 e0       	ldi	r24, 0x01	; 1
     3000:	67 e1       	ldi	r22, 0x17	; 23
     3002:	40 91 61 00 	lds	r20, 0x0061
     3006:	0e 94 e8 09 	call	0x13d0	; 0x13d0 <writeOneSCROLL>
-	writeOneSCROLL(2,23,YearTen );		//2 ÄêÊ®Î»
+	writeOneSCROLL(2,23,YearTen );		//2 å¹´åä½
     300a:	82 e0       	ldi	r24, 0x02	; 2
     300c:	67 e1       	ldi	r22, 0x17	; 23
     300e:	40 91 62 00 	lds	r20, 0x0062
     3012:	0e 94 e8 09 	call	0x13d0	; 0x13d0 <writeOneSCROLL>
-	writeOneSCROLL(3,23,YearOne );		//3 Äê¸öÎ»
+	writeOneSCROLL(3,23,YearOne );		//3 å¹´ä¸ªä½
     3016:	83 e0       	ldi	r24, 0x03	; 3
     3018:	67 e1       	ldi	r22, 0x17	; 23
     301a:	40 91 63 00 	lds	r20, 0x0063
@@ -7178,12 +7178,12 @@ void FreshDisplayBufferNormal()
     3024:	67 e1       	ldi	r22, 0x17	; 23
     3026:	4a e0       	ldi	r20, 0x0A	; 10
     3028:	0e 94 e8 09 	call	0x13d0	; 0x13d0 <writeOneSCROLL>
-	writeOneSCROLL(5,23,MonthTen );		//4 ÔÂÊ®Î»
+	writeOneSCROLL(5,23,MonthTen );		//4 æœˆåä½
     302c:	85 e0       	ldi	r24, 0x05	; 5
     302e:	67 e1       	ldi	r22, 0x17	; 23
     3030:	40 91 64 00 	lds	r20, 0x0064
     3034:	0e 94 e8 09 	call	0x13d0	; 0x13d0 <writeOneSCROLL>
-	writeOneSCROLL(6,23,MonthOne );		//5 ÔÂ¸öÎ»
+	writeOneSCROLL(6,23,MonthOne );		//5 æœˆä¸ªä½
     3038:	86 e0       	ldi	r24, 0x06	; 6
     303a:	67 e1       	ldi	r22, 0x17	; 23
     303c:	40 91 65 00 	lds	r20, 0x0065
@@ -7193,13 +7193,13 @@ void FreshDisplayBufferNormal()
     3046:	67 e1       	ldi	r22, 0x17	; 23
     3048:	4b e0       	ldi	r20, 0x0B	; 11
     304a:	0e 94 e8 09 	call	0x13d0	; 0x13d0 <writeOneSCROLL>
-	///// 10Äê 11ÔÂ 12ÖÜ 13¶È 14Ò» 15¶ş 16Èı 17ËÄ 18Îå 19Áù 20ÈÕ 21µã 22¿Õ¸ñ
-	writeOneSCROLL(0,24,DayTen );		//6 ÈÕÊ®Î»
+	///// 10å¹´ 11æœˆ 12å‘¨ 13åº¦ 14ä¸€ 15äºŒ 16ä¸‰ 17å›› 18äº” 19å…­ 20æ—¥ 21ç‚¹ 22ç©ºæ ¼
+	writeOneSCROLL(0,24,DayTen );		//6 æ—¥åä½
     304e:	80 e0       	ldi	r24, 0x00	; 0
     3050:	68 e1       	ldi	r22, 0x18	; 24
     3052:	40 91 66 00 	lds	r20, 0x0066
     3056:	0e 94 e8 09 	call	0x13d0	; 0x13d0 <writeOneSCROLL>
-	writeOneSCROLL(1,24,DayOne );		//7 ÈÕ¸öÎ»
+	writeOneSCROLL(1,24,DayOne );		//7 æ—¥ä¸ªä½
     305a:	81 e0       	ldi	r24, 0x01	; 1
     305c:	68 e1       	ldi	r22, 0x18	; 24
     305e:	40 91 67 00 	lds	r20, 0x0067
@@ -7214,18 +7214,18 @@ void FreshDisplayBufferNormal()
     3072:	68 e1       	ldi	r22, 0x18	; 24
     3074:	4c e0       	ldi	r20, 0x0C	; 12
     3076:	0e 94 e8 09 	call	0x13d0	; 0x13d0 <writeOneSCROLL>
-	writeOneSCROLL(5,24,Week +13); 		//14 ĞÇÆÚ
+	writeOneSCROLL(5,24,Week +13); 		//14 æ˜ŸæœŸ
     307a:	40 91 6e 00 	lds	r20, 0x006E
     307e:	43 5f       	subi	r20, 0xF3	; 243
     3080:	85 e0       	ldi	r24, 0x05	; 5
     3082:	68 e1       	ldi	r22, 0x18	; 24
     3084:	0e 94 e8 09 	call	0x13d0	; 0x13d0 <writeOneSCROLL>
-	writeOneSCROLL(7,24,TemperatureTen );		//15 ÎÂ¶ÈÊ®Î»
+	writeOneSCROLL(7,24,TemperatureTen );		//15 æ¸©åº¦åä½
     3088:	87 e0       	ldi	r24, 0x07	; 7
     308a:	68 e1       	ldi	r22, 0x18	; 24
     308c:	40 91 6f 00 	lds	r20, 0x006F
     3090:	0e 94 e8 09 	call	0x13d0	; 0x13d0 <writeOneSCROLL>
-	writeOneSCROLL(0,25,TemperatureOne );		//16 ÎÂ¶È¸öÎ»
+	writeOneSCROLL(0,25,TemperatureOne );		//16 æ¸©åº¦ä¸ªä½
     3094:	80 e0       	ldi	r24, 0x00	; 0
     3096:	69 e1       	ldi	r22, 0x19	; 25
     3098:	40 91 70 00 	lds	r20, 0x0070
@@ -7235,7 +7235,7 @@ void FreshDisplayBufferNormal()
     30a2:	69 e1       	ldi	r22, 0x19	; 25
     30a4:	45 e1       	ldi	r20, 0x15	; 21
     30a6:	0e 94 e8 09 	call	0x13d0	; 0x13d0 <writeOneSCROLL>
-	writeOneSCROLL(2,25,TemperatureDecimal );		//17 ÎÂ¶ÈĞ¡Êı	
+	writeOneSCROLL(2,25,TemperatureDecimal );		//17 æ¸©åº¦å°æ•°	
     30aa:	82 e0       	ldi	r24, 0x02	; 2
     30ac:	69 e1       	ldi	r22, 0x19	; 25
     30ae:	40 91 71 00 	lds	r20, 0x0071
@@ -7267,7 +7267,7 @@ void clearScreen()
     30d4:	e1 f7       	brne	.-8      	; 0x30ce <FreshDisplayBufferAjustProofTime+0xc>
 }
 
-void FreshDisplayBufferAjustProofTime() //Ğ£¶ÔÊ±¼äÄ£Ê½
+void FreshDisplayBufferAjustProofTime() //æ ¡å¯¹æ—¶é—´æ¨¡å¼
 {
 	clearScreen();
 	writeOneChinese(0, 0, 29);
@@ -7280,22 +7280,22 @@ void FreshDisplayBufferAjustProofTime() //Ğ£¶ÔÊ±¼äÄ£Ê½
     30e2:	60 e1       	ldi	r22, 0x10	; 16
     30e4:	4d e0       	ldi	r20, 0x0D	; 13
     30e6:	0e 94 9e 09 	call	0x133c	; 0x133c <writeOneChinese>
-	writeOneUnSCROLL(6,22,26); //Ã¿
+	writeOneUnSCROLL(6,22,26); //æ¯
     30ea:	86 e0       	ldi	r24, 0x06	; 6
     30ec:	66 e1       	ldi	r22, 0x16	; 22
     30ee:	4a e1       	ldi	r20, 0x1A	; 26
     30f0:	0e 94 c8 09 	call	0x1390	; 0x1390 <writeOneUnSCROLL>
-	writeOneUnSCROLL(7,22,11);	//ÔÂ
+	writeOneUnSCROLL(7,22,11);	//æœˆ
     30f4:	87 e0       	ldi	r24, 0x07	; 7
     30f6:	66 e1       	ldi	r22, 0x16	; 22
     30f8:	4b e0       	ldi	r20, 0x0B	; 11
     30fa:	0e 94 c8 09 	call	0x1390	; 0x1390 <writeOneUnSCROLL>
-	if(AjustTimeMode) // ¼Ó
+	if(AjustTimeMode) // åŠ 
     30fe:	80 91 76 00 	lds	r24, 0x0076
     3102:	88 23       	and	r24, r24
     3104:	21 f0       	breq	.+8      	; 0x310e <FreshDisplayBufferAjustProofTime+0x4c>
 	{
-		writeOneUnSCROLL(2,22,27);	 //¼Ó
+		writeOneUnSCROLL(2,22,27);	 //åŠ 
     3106:	82 e0       	ldi	r24, 0x02	; 2
     3108:	66 e1       	ldi	r22, 0x16	; 22
     310a:	4b e1       	ldi	r20, 0x1B	; 27
@@ -7303,7 +7303,7 @@ void FreshDisplayBufferAjustProofTime() //Ğ£¶ÔÊ±¼äÄ£Ê½
 	}
 	else
 	{
-		writeOneUnSCROLL(2,22,33);	//¼õ
+		writeOneUnSCROLL(2,22,33);	//å‡
     310e:	82 e0       	ldi	r24, 0x02	; 2
     3110:	66 e1       	ldi	r22, 0x16	; 22
     3112:	41 e2       	ldi	r20, 0x21	; 33
@@ -7319,7 +7319,7 @@ void FreshDisplayBufferAjustProofTime() //Ğ£¶ÔÊ±¼äÄ£Ê½
     3126:	60 e0       	ldi	r22, 0x00	; 0
     3128:	40 91 78 00 	lds	r20, 0x0078
     312c:	0e 94 50 0a 	call	0x14a0	; 0x14a0 <wirteOneBigNumber>
-	writeOneUnSCROLL(7,11,24); //·Ö
+	writeOneUnSCROLL(7,11,24); //åˆ†
     3130:	87 e0       	ldi	r24, 0x07	; 7
     3132:	6b e0       	ldi	r22, 0x0B	; 11
     3134:	48 e1       	ldi	r20, 0x18	; 24
@@ -7401,7 +7401,7 @@ void clearScreen()
     31a0:	e1 f7       	brne	.-8      	; 0x319a <FreshDisplayBufferAjustLightMode+0xc>
 }
 
-void FreshDisplayBufferAjustLightMode() //ÁÁ¶ÈÄ£Ê½
+void FreshDisplayBufferAjustLightMode() //äº®åº¦æ¨¡å¼
 {
 	clearScreen();
 	writeOneChinese(0, 0, 8);	
@@ -7429,7 +7429,7 @@ void FreshDisplayBufferAjustLightMode() //ÁÁ¶ÈÄ£Ê½
     31cc:	66 e1       	ldi	r22, 0x16	; 22
     31ce:	4e e1       	ldi	r20, 0x1E	; 30
     31d0:	0e 94 c8 09 	call	0x1390	; 0x1390 <writeOneUnSCROLL>
-	if(display_light_Mode) //ÊÖ¶¯
+	if(display_light_Mode) //æ‰‹åŠ¨
     31d4:	80 91 72 00 	lds	r24, 0x0072
     31d8:	88 23       	and	r24, r24
     31da:	21 f0       	breq	.+8      	; 0x31e4 <FreshDisplayBufferAjustLightMode+0x56>
@@ -7880,12 +7880,12 @@ void FreshDisplayBufferAjustYear()
     344e:	08 95       	ret
 
 00003450 <ReadRunParameter>:
-	sei(); //Ê¹ÄÜÖĞ¶Ï
+	sei(); //ä½¿èƒ½ä¸­æ–­
 }
 
 void ReadRunParameter()
 {
-	cli(); //¹Ø±ÕËùÓĞÖĞ¶Ï
+	cli(); //å…³é—­æ‰€æœ‰ä¸­æ–­
     3450:	f8 94       	cli
 	if(eeprom_is_ready())
     3452:	e1 99       	sbic	0x1c, 1	; 28
@@ -7954,7 +7954,7 @@ void ReadRunParameter()
     34da:	89 51       	subi	r24, 0x19	; 25
     34dc:	8c bf       	out	0x3c, r24	; 60
 	}
-	sei(); //Ê¹ÄÜÖĞ¶Ï
+	sei(); //ä½¿èƒ½ä¸­æ–­
     34de:	78 94       	sei
 }
     34e0:	08 95       	ret
@@ -7965,7 +7965,7 @@ void ReadRunParameter()
 
 void SaveRunParameter()
 {
-	cli(); //¹Ø±ÕËùÓĞÖĞ¶Ï
+	cli(); //å…³é—­æ‰€æœ‰ä¸­æ–­
     34e2:	f8 94       	cli
 	if(eeprom_is_ready())
     34e4:	e1 99       	sbic	0x1c, 1	; 28
@@ -8027,7 +8027,7 @@ void SaveRunParameter()
     3562:	60 91 7c 00 	lds	r22, 0x007C
     3566:	0e 94 90 1d 	call	0x3b20	; 0x3b20 <__eewr_byte_m16>
 	}
-	sei(); //Ê¹ÄÜÖĞ¶Ï
+	sei(); //ä½¿èƒ½ä¸­æ–­
     356a:	78 94       	sei
 }
     356c:	08 95       	ret
@@ -8057,10 +8057,10 @@ void Scan_Key()
 	{
 		Mode = 0;
     3598:	10 92 75 00 	sts	0x0075, r1
-		//±£´æÊ±¼äµ½Ê±ÖÓĞ¾Æ¬
+		//ä¿å­˜æ—¶é—´åˆ°æ—¶é’ŸèŠ¯ç‰‡
 		Write_time();
     359c:	0e 94 26 13 	call	0x264c	; 0x264c <Write_time>
-		//±£´æÔËĞĞ²ÎÊıµ½eepROM
+		//ä¿å­˜è¿è¡Œå‚æ•°åˆ°eepROM
 		SaveRunParameter();
     35a0:	0e 94 71 1a 	call	0x34e2	; 0x34e2 <SaveRunParameter>
 	moveSpeedTimerCount = 0;
@@ -8079,8 +8079,8 @@ void clearScreen()
     35b2:	21 50       	subi	r18, 0x01	; 1
     35b4:	30 40       	sbci	r19, 0x00	; 0
     35b6:	e1 f7       	brne	.-8      	; 0x35b0 <Scan_Key+0x42>
-		clearScreen(); //ÇåÆÁ
-		FreshDisplayBufferNormal(); //¼ÓÔØÕı³£×ßÊ±Ä£Ê½
+		clearScreen(); //æ¸…å±
+		FreshDisplayBufferNormal(); //åŠ è½½æ­£å¸¸èµ°æ—¶æ¨¡å¼
     35b8:	0e 94 d7 17 	call	0x2fae	; 0x2fae <FreshDisplayBufferNormal>
 	}
 	
@@ -8101,12 +8101,12 @@ void clearScreen()
     35d4:	10 92 75 00 	sts	0x0075, r1
 			SaveRunParameter();
     35d8:	0e 94 71 1a 	call	0x34e2	; 0x34e2 <SaveRunParameter>
-			FreshDisplayBufferNormal(); //¼ÓÔØÕı³£×ßÊ±Ä£Ê½
+			FreshDisplayBufferNormal(); //åŠ è½½æ­£å¸¸èµ°æ—¶æ¨¡å¼
     35dc:	0e 94 d7 17 	call	0x2fae	; 0x2fae <FreshDisplayBufferNormal>
 		}
 	}
 
-	if(KEY_DISPLAY_COLOR_L) //ÏÔÊ¾ÑÕÉ«µ÷½Ú
+	if(KEY_DISPLAY_COLOR_L) //æ˜¾ç¤ºé¢œè‰²è°ƒèŠ‚
     35e0:	81 99       	sbic	0x10, 1	; 16
     35e2:	16 c0       	rjmp	.+44     	; 0x3610 <Scan_Key+0xa2>
     35e4:	80 e2       	ldi	r24, 0x20	; 32
@@ -8141,7 +8141,7 @@ void clearScreen()
     360e:	fe cf       	rjmp	.-4      	; 0x360c <Scan_Key+0x9e>
 	}
 
-	if(Mode == 0 || Mode== 27 || Mode == 26) //Õı³£ÔËĞĞÄ£Ê½ µ÷½ÚËÙ¶ÈºÍÁÁ¶ÈÄ£Ê½
+	if(Mode == 0 || Mode== 27 || Mode == 26) //æ­£å¸¸è¿è¡Œæ¨¡å¼ è°ƒèŠ‚é€Ÿåº¦å’Œäº®åº¦æ¨¡å¼
     3610:	80 91 75 00 	lds	r24, 0x0075
     3614:	88 23       	and	r24, r24
     3616:	29 f0       	breq	.+10     	; 0x3622 <Scan_Key+0xb4>
@@ -8152,7 +8152,7 @@ void clearScreen()
     3620:	4d c0       	rjmp	.+154    	; 0x36bc <Scan_Key+0x14e>
 	{
 
-		if(KEY_UP_L) //ÁÁ¶Èµ÷½Ú
+		if(KEY_UP_L) //äº®åº¦è°ƒèŠ‚
     3622:	9e 99       	sbic	0x13, 6	; 19
     3624:	2a c0       	rjmp	.+84     	; 0x367a <Scan_Key+0x10c>
     3626:	80 e2       	ldi	r24, 0x20	; 32
@@ -8165,10 +8165,10 @@ void clearScreen()
     362e:	9e 99       	sbic	0x13, 6	; 19
     3630:	22 c0       	rjmp	.+68     	; 0x3676 <Scan_Key+0x108>
 			{
-				SPEEK_TIME_Status = 100; //°´¼üÒô
+				SPEEK_TIME_Status = 100; //æŒ‰é”®éŸ³
     3632:	84 e6       	ldi	r24, 0x64	; 100
     3634:	80 93 af 02 	sts	0x02AF, r24
-				if(display_light_Mode) //ÊÖ¶¯µ÷½ÚÁÁ¶ÈÄ£Ê½
+				if(display_light_Mode) //æ‰‹åŠ¨è°ƒèŠ‚äº®åº¦æ¨¡å¼
     3638:	80 91 72 00 	lds	r24, 0x0072
     363c:	88 23       	and	r24, r24
     363e:	91 f0       	breq	.+36     	; 0x3664 <Scan_Key+0xf6>
@@ -8185,7 +8185,7 @@ void clearScreen()
     364e:	81 e0       	ldi	r24, 0x01	; 1
     3650:	80 93 73 00 	sts	0x0073, r24
 					}
-					SET_DISPLAY_LIGHT;//OCR0ÖÃ³õÖµ,Õ¼¿Õ±È50%£¬µ÷ÕûOCR0µÄÖµÓÃÀ´µ÷ÕûÕ¼¿Õ±È
+					SET_DISPLAY_LIGHT;//OCR0ç½®åˆå€¼,å ç©ºæ¯”50%ï¼Œè°ƒæ•´OCR0çš„å€¼ç”¨æ¥è°ƒæ•´å ç©ºæ¯”
     3654:	80 91 73 00 	lds	r24, 0x0073
     3658:	29 e1       	ldi	r18, 0x19	; 25
     365a:	82 9f       	mul	r24, r18
@@ -8194,7 +8194,7 @@ void clearScreen()
     3660:	89 51       	subi	r24, 0x19	; 25
     3662:	8c bf       	out	0x3c, r24	; 60
 				}
-				else //×Ô¶¯µ÷½ÚÁÁ¶ÈÄ£Ê½
+				else //è‡ªåŠ¨è°ƒèŠ‚äº®åº¦æ¨¡å¼
 				{
 				
 				}
@@ -8212,7 +8212,7 @@ void clearScreen()
     3678:	fe cf       	rjmp	.-4      	; 0x3676 <Scan_Key+0x108>
 		}
 	
-		if(KEY_DOWN_L) //ËÙ¶Èµ÷½Ú
+		if(KEY_DOWN_L) //é€Ÿåº¦è°ƒèŠ‚
     367a:	9f 99       	sbic	0x13, 7	; 19
     367c:	d7 c0       	rjmp	.+430    	; 0x382c <Scan_Key+0x2be>
     367e:	80 e2       	ldi	r24, 0x20	; 32
@@ -8225,7 +8225,7 @@ void clearScreen()
     3686:	9f 99       	sbic	0x13, 7	; 19
     3688:	16 c0       	rjmp	.+44     	; 0x36b6 <Scan_Key+0x148>
 			{
-				SPEEK_TIME_Status = 100; //°´¼üÒô
+				SPEEK_TIME_Status = 100; //æŒ‰é”®éŸ³
     368a:	84 e6       	ldi	r24, 0x64	; 100
     368c:	80 93 af 02 	sts	0x02AF, r24
 				moveSpeed ++;
@@ -8255,7 +8255,7 @@ void clearScreen()
     36ba:	b8 c0       	rjmp	.+368    	; 0x382c <Scan_Key+0x2be>
 		}
 	}
-	else if(Mode == 1) //µ÷½ÚÄê
+	else if(Mode == 1) //è°ƒèŠ‚å¹´
     36bc:	81 30       	cpi	r24, 0x01	; 1
     36be:	49 f4       	brne	.+18     	; 0x36d2 <Scan_Key+0x164>
 	{
@@ -8270,7 +8270,7 @@ void clearScreen()
     36ce:	1a e1       	ldi	r17, 0x1A	; 26
     36d0:	ab c0       	rjmp	.+342    	; 0x3828 <Scan_Key+0x2ba>
 	}
-	else if(Mode == 2) //µ÷½ÚÔÂ
+	else if(Mode == 2) //è°ƒèŠ‚æœˆ
     36d2:	82 30       	cpi	r24, 0x02	; 2
     36d4:	49 f4       	brne	.+18     	; 0x36e8 <Scan_Key+0x17a>
 	{
@@ -8285,7 +8285,7 @@ void clearScreen()
     36e4:	1a e1       	ldi	r17, 0x1A	; 26
     36e6:	a0 c0       	rjmp	.+320    	; 0x3828 <Scan_Key+0x2ba>
 	}
-	else if(Mode == 3) //µ÷½ÚÈÕ
+	else if(Mode == 3) //è°ƒèŠ‚æ—¥
     36e8:	83 30       	cpi	r24, 0x03	; 3
     36ea:	49 f4       	brne	.+18     	; 0x36fe <Scan_Key+0x190>
 	{
@@ -8300,7 +8300,7 @@ void clearScreen()
     36fa:	1a e1       	ldi	r17, 0x1A	; 26
     36fc:	95 c0       	rjmp	.+298    	; 0x3828 <Scan_Key+0x2ba>
 	}
-	else if(Mode == 4) //µ÷½ÚÊ±
+	else if(Mode == 4) //è°ƒèŠ‚æ—¶
     36fe:	84 30       	cpi	r24, 0x04	; 4
     3700:	49 f4       	brne	.+18     	; 0x3714 <Scan_Key+0x1a6>
 	{
@@ -8315,7 +8315,7 @@ void clearScreen()
     3710:	1a e1       	ldi	r17, 0x1A	; 26
     3712:	8a c0       	rjmp	.+276    	; 0x3828 <Scan_Key+0x2ba>
 	}
-	else if(Mode == 5) //µ÷½Ú·Ö
+	else if(Mode == 5) //è°ƒèŠ‚åˆ†
     3714:	85 30       	cpi	r24, 0x05	; 5
     3716:	49 f4       	brne	.+18     	; 0x372a <Scan_Key+0x1bc>
 	{
@@ -8330,7 +8330,7 @@ void clearScreen()
     3726:	19 e1       	ldi	r17, 0x19	; 25
     3728:	7f c0       	rjmp	.+254    	; 0x3828 <Scan_Key+0x2ba>
 	}
-	else if(Mode == 6) //µ÷½ÚĞÇÆÚ
+	else if(Mode == 6) //è°ƒèŠ‚æ˜ŸæœŸ
     372a:	86 30       	cpi	r24, 0x06	; 6
     372c:	59 f4       	brne	.+22     	; 0x3744 <Scan_Key+0x1d6>
 	{
@@ -8348,7 +8348,7 @@ void clearScreen()
     3740:	19 e1       	ldi	r17, 0x19	; 25
     3742:	72 c0       	rjmp	.+228    	; 0x3828 <Scan_Key+0x2ba>
 	}
-	else if(Mode == 7) //µ÷½ÚÁÁ¶ÈÄ£Ê½
+	else if(Mode == 7) //è°ƒèŠ‚äº®åº¦æ¨¡å¼
     3744:	87 30       	cpi	r24, 0x07	; 7
     3746:	59 f4       	brne	.+22     	; 0x375e <Scan_Key+0x1f0>
 	{
@@ -8366,7 +8366,7 @@ void clearScreen()
     375a:	18 e1       	ldi	r17, 0x18	; 24
     375c:	65 c0       	rjmp	.+202    	; 0x3828 <Scan_Key+0x2ba>
 	}
-	else if(Mode == 8) //ÉèÖÃ×ÖÌå
+	else if(Mode == 8) //è®¾ç½®å­—ä½“
     375e:	88 30       	cpi	r24, 0x08	; 8
     3760:	59 f4       	brne	.+22     	; 0x3778 <Scan_Key+0x20a>
 	{
@@ -8384,7 +8384,7 @@ void clearScreen()
     3774:	18 e1       	ldi	r17, 0x18	; 24
     3776:	58 c0       	rjmp	.+176    	; 0x3828 <Scan_Key+0x2ba>
 	}
-	else if(Mode == 9) //µ÷½ÚĞ£¶ÔÊ±¼ä
+	else if(Mode == 9) //è°ƒèŠ‚æ ¡å¯¹æ—¶é—´
     3778:	89 30       	cpi	r24, 0x09	; 9
     377a:	09 f0       	breq	.+2      	; 0x377e <Scan_Key+0x210>
     377c:	49 c0       	rjmp	.+146    	; 0x3810 <Scan_Key+0x2a2>
@@ -8405,7 +8405,7 @@ void clearScreen()
 				KEY_Time_count = 0;
     378e:	10 92 9e 02 	sts	0x029E, r1
     3792:	10 92 9d 02 	sts	0x029D, r1
-				SPEEK_TIME_Status = 100; //°´¼üÒô
+				SPEEK_TIME_Status = 100; //æŒ‰é”®éŸ³
     3796:	84 e6       	ldi	r24, 0x64	; 100
     3798:	80 93 af 02 	sts	0x02AF, r24
 				uint8 value = AjustTimeTen*10 + AjustTimeOne;
@@ -8457,7 +8457,7 @@ void clearScreen()
 				KEY_Time_count = 0;
     37e4:	10 92 9e 02 	sts	0x029E, r1
     37e8:	10 92 9d 02 	sts	0x029D, r1
-				SPEEK_TIME_Status = 100; //°´¼üÒô
+				SPEEK_TIME_Status = 100; //æŒ‰é”®éŸ³
     37ec:	84 e6       	ldi	r24, 0x64	; 100
     37ee:	80 93 af 02 	sts	0x02AF, r24
 				if(AjustTimeMode)
@@ -8484,7 +8484,7 @@ void clearScreen()
     380e:	0e c0       	rjmp	.+28     	; 0x382c <Scan_Key+0x2be>
 		}
 	}
-	else if(Mode == 10) //±¨Ê±
+	else if(Mode == 10) //æŠ¥æ—¶
     3810:	8a 30       	cpi	r24, 0x0A	; 10
     3812:	61 f4       	brne	.+24     	; 0x382c <Scan_Key+0x2be>
 	{
@@ -8503,7 +8503,7 @@ void clearScreen()
     3828:	0e 94 22 16 	call	0x2c44	; 0x2c44 <Key_Operation>
 	}
 	//////////////////////////////////////////////////////////
-	if(KEY_MODE_L) //Ä£Ê½µ÷½Ú
+	if(KEY_MODE_L) //æ¨¡å¼è°ƒèŠ‚
     382c:	80 99       	sbic	0x10, 0	; 16
     382e:	51 c0       	rjmp	.+162    	; 0x38d2 <Scan_Key+0x364>
     3830:	80 e2       	ldi	r24, 0x20	; 32
@@ -8516,7 +8516,7 @@ void clearScreen()
     3838:	80 99       	sbic	0x10, 0	; 16
     383a:	49 c0       	rjmp	.+146    	; 0x38ce <Scan_Key+0x360>
 		{
-			SPEEK_TIME_Status = 100; //°´¼üÒô
+			SPEEK_TIME_Status = 100; //æŒ‰é”®éŸ³
     383c:	84 e6       	ldi	r24, 0x64	; 100
     383e:	80 93 af 02 	sts	0x02AF, r24
 			KEY_Time_count = 0;
@@ -8543,11 +8543,11 @@ void clearScreen()
     386a:	e6 5c       	subi	r30, 0xC6	; 198
     386c:	ff 4f       	sbci	r31, 0xFF	; 255
     386e:	0c 94 7b 1d 	jmp	0x3af6	; 0x3af6 <__tablejump2__>
-				case 0:	//Õı³£ÔËĞĞ
-					//±£´æÊ±¼äµ½Ê±ÖÓĞ¾Æ¬
+				case 0:	//æ­£å¸¸è¿è¡Œ
+					//ä¿å­˜æ—¶é—´åˆ°æ—¶é’ŸèŠ¯ç‰‡
 					Write_time();
     3872:	0e 94 26 13 	call	0x264c	; 0x264c <Write_time>
-					//±£´æÔËĞĞ²ÎÊıµ½eepROM
+					//ä¿å­˜è¿è¡Œå‚æ•°åˆ°eepROM
 					SaveRunParameter();
     3876:	0e 94 71 1a 	call	0x34e2	; 0x34e2 <SaveRunParameter>
     387a:	80 e0       	ldi	r24, 0x00	; 0
@@ -8560,57 +8560,57 @@ void clearScreen()
     3888:	21 50       	subi	r18, 0x01	; 1
     388a:	30 40       	sbci	r19, 0x00	; 0
     388c:	e1 f7       	brne	.-8      	; 0x3886 <Scan_Key+0x318>
-					clearScreen(); //ÇåÆÁ
-					FreshDisplayBufferNormal(); //¼ÓÔØÕı³£×ßÊ±Ä£Ê½
+					clearScreen(); //æ¸…å±
+					FreshDisplayBufferNormal(); //åŠ è½½æ­£å¸¸èµ°æ—¶æ¨¡å¼
     388e:	0e 94 d7 17 	call	0x2fae	; 0x2fae <FreshDisplayBufferNormal>
     3892:	1d c0       	rjmp	.+58     	; 0x38ce <Scan_Key+0x360>
 					break; 
-				case 1:	//µ÷½ÚÄê
+				case 1:	//è°ƒèŠ‚å¹´
 					FreshDisplayBufferAjustYear();
     3894:	0e 94 1f 1a 	call	0x343e	; 0x343e <FreshDisplayBufferAjustYear>
     3898:	1a c0       	rjmp	.+52     	; 0x38ce <Scan_Key+0x360>
 					break; 
-				case 2:	//µ÷½ÚÔÂ
+				case 2:	//è°ƒèŠ‚æœˆ
 					FreshDisplayBufferAjustMonth();
     389a:	0e 94 16 1a 	call	0x342c	; 0x342c <FreshDisplayBufferAjustMonth>
     389e:	17 c0       	rjmp	.+46     	; 0x38ce <Scan_Key+0x360>
 					break; 
-				case 3:	//µ÷½ÚÈÕ
+				case 3:	//è°ƒèŠ‚æ—¥
 					FreshDisplayBufferAjustDay();
     38a0:	0e 94 0d 1a 	call	0x341a	; 0x341a <FreshDisplayBufferAjustDay>
     38a4:	14 c0       	rjmp	.+40     	; 0x38ce <Scan_Key+0x360>
 					break; 
-				case 4:	//µ÷½ÚÊ±
+				case 4:	//è°ƒèŠ‚æ—¶
 					FreshDisplayBufferAjustHour();
     38a6:	0e 94 04 1a 	call	0x3408	; 0x3408 <FreshDisplayBufferAjustHour>
     38aa:	11 c0       	rjmp	.+34     	; 0x38ce <Scan_Key+0x360>
 					break; 
-				case 5:	//µ÷½Ú·Ö
+				case 5:	//è°ƒèŠ‚åˆ†
 					FreshDisplayBufferAjustMinute();
     38ac:	0e 94 fb 19 	call	0x33f6	; 0x33f6 <FreshDisplayBufferAjustMinute>
     38b0:	0e c0       	rjmp	.+28     	; 0x38ce <Scan_Key+0x360>
 					break;
-				case 6:	//µ÷½ÚĞÇÆÚ
+				case 6:	//è°ƒèŠ‚æ˜ŸæœŸ
 					FreshDisplayBufferAjustWeek();
     38b2:	0e 94 9e 19 	call	0x333c	; 0x333c <FreshDisplayBufferAjustWeek>
     38b6:	0b c0       	rjmp	.+22     	; 0x38ce <Scan_Key+0x360>
 					break;  
-				case 7:	//µ÷½ÚÁÁ¶ÈÄ£Ê½
+				case 7:	//è°ƒèŠ‚äº®åº¦æ¨¡å¼
 					FreshDisplayBufferAjustLightMode();
     38b8:	0e 94 c7 18 	call	0x318e	; 0x318e <FreshDisplayBufferAjustLightMode>
     38bc:	08 c0       	rjmp	.+16     	; 0x38ce <Scan_Key+0x360>
 					break;
-				case 8:	//ÉèÖÃ×ÖÌå
+				case 8:	//è®¾ç½®å­—ä½“
 					FreshDisplayBufferChangeFont();
     38be:	0e 94 9e 18 	call	0x313c	; 0x313c <FreshDisplayBufferChangeFont>
     38c2:	05 c0       	rjmp	.+10     	; 0x38ce <Scan_Key+0x360>
 					break;
-				case 9:	//µ÷½ÚĞ£¶ÓÊ±¼ä
+				case 9:	//è°ƒèŠ‚æ ¡é˜Ÿæ—¶é—´
 					FreshDisplayBufferAjustProofTime();
     38c4:	0e 94 61 18 	call	0x30c2	; 0x30c2 <FreshDisplayBufferAjustProofTime>
     38c8:	02 c0       	rjmp	.+4      	; 0x38ce <Scan_Key+0x360>
 					break; 
-				case 10://µ÷½ÚÓïÒô±¨Ê±
+				case 10://è°ƒèŠ‚è¯­éŸ³æŠ¥æ—¶
 					FreshDisplayBufferVoiceMode();
     38ca:	0e 94 2e 19 	call	0x325c	; 0x325c <FreshDisplayBufferVoiceMode>
 					break;
@@ -8636,7 +8636,7 @@ int main()
     38de:	ff 92       	push	r15
     38e0:	0f 93       	push	r16
     38e2:	1f 93       	push	r17
-	uint8 currentlyHourVoice;//µ±Ç°Ğ¡Ê±Êı£¬ÓÃÓÚÓïÒô±¨Ê±
+	uint8 currentlyHourVoice;//å½“å‰å°æ—¶æ•°ï¼Œç”¨äºè¯­éŸ³æŠ¥æ—¶
 	uint8 needFreshDisplayBuffer = 1; //used in fresh disply buffer
 	uint8 secondPointFreshFlag = 0; //used for check whether to fresh the second dot
 	
@@ -8651,7 +8651,7 @@ int main()
     38f0:	0e 94 33 08 	call	0x1066	; 0x1066 <_delay_100ms>
 	ReadTemputer();
     38f4:	0e 94 ac 08 	call	0x1158	; 0x1158 <ReadTemputer>
-	if(KEY_MODE_L) //ÅĞ¶ÏÊÇ·ñ¼ÓÔØ³õÊ¼»¯²ÎÊı
+	if(KEY_MODE_L) //åˆ¤æ–­æ˜¯å¦åŠ è½½åˆå§‹åŒ–å‚æ•°
     38f8:	80 99       	sbic	0x10, 0	; 16
     38fa:	1c c0       	rjmp	.+56     	; 0x3934 <main+0x5a>
     38fc:	80 e2       	ldi	r24, 0x20	; 32
@@ -8705,14 +8705,14 @@ int main()
     394e:	10 e0       	ldi	r17, 0x00	; 0
 				}
 			}
-			else if(Voice_Mode == 1) //ÎğÈÅÄ£Ê½
+			else if(Voice_Mode == 1) //å‹¿æ‰°æ¨¡å¼
 			{
 				currentlyHourVoice = HourTen*10 + HourOne;
 				if(currentlyHourVoice > 6 && currentlyHourVoice <= 23)
     3950:	fa e0       	ldi	r31, 0x0A	; 10
     3952:	df 2e       	mov	r13, r31
-			//ÓïÒô±¨Ê±¿ªÊ¼
-			if(Voice_Mode == 0)//Õı³£Ä£Ê½
+			//è¯­éŸ³æŠ¥æ—¶å¼€å§‹
+			if(Voice_Mode == 0)//æ­£å¸¸æ¨¡å¼
 			{
 				if(MinuteTen == 0 && MinuteOne == 0 && SecondTen == 0 && SecondOne < 10 && inVoice == 0)
 				{
@@ -8792,8 +8792,8 @@ int main()
 				secondPointFreshFlag = SecondOne;
     39b6:	f0 90 6d 00 	lds	r15, 0x006D
 			}
-			//ÓïÒô±¨Ê±¿ªÊ¼
-			if(Voice_Mode == 0)//Õı³£Ä£Ê½
+			//è¯­éŸ³æŠ¥æ—¶å¼€å§‹
+			if(Voice_Mode == 0)//æ­£å¸¸æ¨¡å¼
     39ba:	30 91 7c 00 	lds	r19, 0x007C
     39be:	33 23       	and	r19, r19
     39c0:	c9 f4       	brne	.+50     	; 0x39f4 <main+0x11a>
@@ -8822,7 +8822,7 @@ int main()
     39f2:	25 c0       	rjmp	.+74     	; 0x3a3e <main+0x164>
 				}
 			}
-			else if(Voice_Mode == 1) //ÎğÈÅÄ£Ê½
+			else if(Voice_Mode == 1) //å‹¿æ‰°æ¨¡å¼
     39f4:	31 30       	cpi	r19, 0x01	; 1
     39f6:	19 f5       	brne	.+70     	; 0x3a3e <main+0x164>
 			{
@@ -8861,7 +8861,7 @@ int main()
     3a3a:	30 93 af 02 	sts	0x02AF, r19
 			
 			}
-			//ÓïÒô±¨Ê±½áÊø
+			//è¯­éŸ³æŠ¥æ—¶ç»“æŸ
 
 		}
 		display();	

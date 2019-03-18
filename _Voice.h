@@ -1,31 +1,31 @@
 /***************************************************************************/
-// ³ÌĞò£ºLED3264µç×ÓÈÕÀú
-// Ä£¿é£ºÓïÒô
-// ÎÄ¼ş£º_Voice.h
-// ×÷Õß£º²·Ïş•D
-// °æ±¾£º1.9.7
-// ÈÕÆÚ£º2012Äê2ÔÂ10ÈÕ
-// ¹¦ÄÜ£ºÊ±·ÖÊı×Ö¾²Ì¬ÏÔÊ¾£¬ÄêÔÂÈÕÖÜÎÂ¶È¹ö¶¯ÏÔÊ¾¡£¿ÉÑ¡ÁÁ¶ÈÄ£Ê½£¬Ê±¼ä²¹³¥¡£
-// Ğ¾Æ¬£ºAtmega16
-// ÈİË¿£ºµÍÎ»0xA4 10100100 ¸ßÎ»0xD1 11010001
-// ±àÒë£ºAVR GCC
-// Òı½Å¶¨Òå£º	PD0£º°´¼üMODE 
-//				PD1: °´¼üÏÔÊ¾Ä£Ê½
-//				PD2£ºÏÔÊ¾ÆÁ¿ØÖÆLAT
-//				PD3£ºÏÔÊ¾ÆÁ¿ØÖÆSCK
-//				PD4£ºÏÔÊ¾ÆÁĞÅºÅR1
-//				PD5£ºÏÔÊ¾ÆÁĞÅºÅR2
-// 				PD7£ºÎÂ¶È´«¸ĞÆ÷DS18B20
-//				PC6£º°´¼üUP
-//				PC7£º°´¼üDOWN
-//				PB0£ºÏÔÊ¾ÆÁ¿ØÖÆA
-//				PB1£ºÏÔÊ¾ÆÁ¿ØÖÆB
-//				PB2£ºÏÔÊ¾ÆÁ¿ØÖÆC
-//				PB3£ºÏÔÊ¾ÆÁ¿ØÖÆEN
-//				PB4£ºÏÔÊ¾ÆÁ¿ØÖÆD
-//				PB6£ºÏÔÊ¾ÆÁÊı¾İG1
-//				PB7£ºÏÔÊ¾ÆÁÊı¾İG2
-//				PA0: ¹âÃôµç×è
+// ç¨‹åºï¼šLED3264ç”µå­æ—¥å†
+// æ¨¡å—ï¼šè¯­éŸ³
+// æ–‡ä»¶ï¼š_Voice.h
+// ä½œè€…ï¼šåœæ™“æ—¸
+// ç‰ˆæœ¬ï¼š1.9.7
+// æ—¥æœŸï¼š2012å¹´2æœˆ10æ—¥
+// åŠŸèƒ½ï¼šæ—¶åˆ†æ•°å­—é™æ€æ˜¾ç¤ºï¼Œå¹´æœˆæ—¥å‘¨æ¸©åº¦æ»šåŠ¨æ˜¾ç¤ºã€‚å¯é€‰äº®åº¦æ¨¡å¼ï¼Œæ—¶é—´è¡¥å¿ã€‚
+// èŠ¯ç‰‡ï¼šAtmega16
+// å®¹ä¸ï¼šä½ä½0xA4 10100100 é«˜ä½0xD1 11010001
+// ç¼–è¯‘ï¼šAVR GCC
+// å¼•è„šå®šä¹‰ï¼š	PD0ï¼šæŒ‰é”®MODE 
+//				PD1: æŒ‰é”®æ˜¾ç¤ºæ¨¡å¼
+//				PD2ï¼šæ˜¾ç¤ºå±æ§åˆ¶LAT
+//				PD3ï¼šæ˜¾ç¤ºå±æ§åˆ¶SCK
+//				PD4ï¼šæ˜¾ç¤ºå±ä¿¡å·R1
+//				PD5ï¼šæ˜¾ç¤ºå±ä¿¡å·R2
+// 				PD7ï¼šæ¸©åº¦ä¼ æ„Ÿå™¨DS18B20
+//				PC6ï¼šæŒ‰é”®UP
+//				PC7ï¼šæŒ‰é”®DOWN
+//				PB0ï¼šæ˜¾ç¤ºå±æ§åˆ¶A
+//				PB1ï¼šæ˜¾ç¤ºå±æ§åˆ¶B
+//				PB2ï¼šæ˜¾ç¤ºå±æ§åˆ¶C
+//				PB3ï¼šæ˜¾ç¤ºå±æ§åˆ¶EN
+//				PB4ï¼šæ˜¾ç¤ºå±æ§åˆ¶D
+//				PB6ï¼šæ˜¾ç¤ºå±æ•°æ®G1
+//				PB7ï¼šæ˜¾ç¤ºå±æ•°æ®G2
+//				PA0: å…‰æ•ç”µé˜»
 /***************************************************************************/
 
 #ifndef _VOICE_H_
@@ -78,9 +78,9 @@ void SPEEK_Time()
 		case 0:
 			inVoice = 0;
 		break;
-		case 1: //»ğ³µÕ¾²¥ÒôÉù¶£¶£¶£
+		case 1: //ç«è½¦ç«™æ’­éŸ³å£°å®å®å®
 			/*
-			³õÊ¼»¯²âÊÔ´úÂë
+			åˆå§‹åŒ–æµ‹è¯•ä»£ç 
 			HourTen = 			0;
 			HourOne = 			8;
 			MinuteTen = 		3;
@@ -88,13 +88,13 @@ void SPEEK_Time()
 			TemperatureTen = 	2;
 			TemperatureOne = 	0;
 			TemperatureDecimal = 0;
-			³õÊ¼»¯²âÊÔ´úÂë
+			åˆå§‹åŒ–æµ‹è¯•ä»£ç 
 			*/
 			PLUSE_Number=25;
 			PLUSE_Status=1;
 			SPEEK_TIME_Status = 2;
 		break;
-		case 2: //ÏÖÔÚÊ±¿Ì±±¾©Ê±¼ä
+		case 2: //ç°åœ¨æ—¶åˆ»åŒ—äº¬æ—¶é—´
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				PLUSE_Number=22;
@@ -102,7 +102,7 @@ void SPEEK_Time()
 				SPEEK_TIME_Status = 3;		
 			}
 		break;
-		case 3: //ÉÏÎç	
+		case 3: //ä¸Šåˆ	
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				nowHours = HourTen*10 + HourOne;
@@ -134,7 +134,7 @@ void SPEEK_Time()
 				}
 			}	
 		break;
-		case 4: //¶ş	
+		case 4: //äºŒ	
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				if(HourTen > 1)
@@ -149,7 +149,7 @@ void SPEEK_Time()
 				}
 			}	
 		break;
-		case 5: //Ê®
+		case 5: //å
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				if(HourTen != 0)
@@ -165,7 +165,7 @@ void SPEEK_Time()
 				}
 			}
 		break;
-		case 6: //Ò»
+		case 6: //ä¸€
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				if(HourOne == 0 && HourTen != 0)
@@ -181,7 +181,7 @@ void SPEEK_Time()
 				}
 			}
 		break;
-		case 7: //µã
+		case 7: //ç‚¹
 			 if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				PLUSE_Number=13;
@@ -189,7 +189,7 @@ void SPEEK_Time()
 				SPEEK_TIME_Status =8;		
 			}
 		break;
-		case 8: //Îå
+		case 8: //äº”
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				if(MinuteTen == 0 && MinuteOne == 0)
@@ -210,7 +210,7 @@ void SPEEK_Time()
 				}
 			}
 		break;
-		case 9: //Ê®
+		case 9: //å
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				if(MinuteTen == 0 && MinuteOne == 0)
@@ -231,7 +231,7 @@ void SPEEK_Time()
 				}		
 			}
 		break;
-		case 10: //Èı
+		case 10: //ä¸‰
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				if(MinuteOne == 0 && MinuteTen == 0)
@@ -250,7 +250,7 @@ void SPEEK_Time()
 				}
 			}
 		break;
-		case 11: //·Ö
+		case 11: //åˆ†
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				if(MinuteTen == 0 && MinuteOne == 0)
@@ -265,14 +265,14 @@ void SPEEK_Time()
 				}	
 			}
 		break;
-		case 12: //µÈ´ı
+		case 12: //ç­‰å¾…
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				SPEEK_TIME_Delay = 1000;
 				SPEEK_TIME_Status = 13;		
 			}
 		break;
-		case 13: //ÏÖÔÚÎÂ¶ÈÊÇ
+		case 13: //ç°åœ¨æ¸©åº¦æ˜¯
 			SPEEK_TIME_Delay --;
 			if(SPEEK_TIME_Delay == 0)
 			{
@@ -281,7 +281,7 @@ void SPEEK_Time()
 				SPEEK_TIME_Status = 14;		
 			}
 		break;
-		case 14: //¶ş
+		case 14: //äºŒ
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				if(TemperatureTen > 1 && TemperatureTen < 10)
@@ -302,7 +302,7 @@ void SPEEK_Time()
 				}
 			}
 		break;
-		case 15: //Ê®
+		case 15: //å
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				if(TemperatureTen != 0 && TemperatureTen != 14)
@@ -317,7 +317,7 @@ void SPEEK_Time()
 				}
 			}
 		break;
-		case 16: //Ò»
+		case 16: //ä¸€
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				if(TemperatureOne != 0)
@@ -338,7 +338,7 @@ void SPEEK_Time()
 				}
 			}
 		break;
-		case 17: //µã
+		case 17: //ç‚¹
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				PLUSE_Number=13;
@@ -346,7 +346,7 @@ void SPEEK_Time()
 				SPEEK_TIME_Status = 18;		
 			}
 		break;
-		case 18: //Îå
+		case 18: //äº”
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				PLUSE_Number=TemperatureDecimal+1;
@@ -354,7 +354,7 @@ void SPEEK_Time()
 				SPEEK_TIME_Status =19;		
 			}
 		break;
-		case 19: //¶È
+		case 19: //åº¦
 			if(PLUSE_Status == 0 && VOICE_BUSY_H)
 			{
 				PLUSE_Number=20;
@@ -368,7 +368,7 @@ void SPEEK_Time()
 				SPEEK_TIME_Status = 0;		
 			}		
 		break;	
-		case 100: //°´¼üÒô
+		case 100: //æŒ‰é”®éŸ³
 			SPEEK_TIME_Status = 0;
 			/*
 			PLUSE_Number = 32;

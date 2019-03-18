@@ -1,17 +1,17 @@
 /***************************************************************************/
-// ³ÌĞò£ºLED3264µç×ÓÈÕÀú
-// Ä£¿é£ºEEPROM ¶ÁĞ´
-// ÎÄ¼ş£º_EEPROM.h
-// ×÷Õß£º²·Ïş•D
-// °æ±¾£º1.9.7
-// ÈÕÆÚ£º2012Äê2ÔÂ10ÈÕ
+// ç¨‹åºï¼šLED3264ç”µå­æ—¥å†
+// æ¨¡å—ï¼šEEPROM è¯»å†™
+// æ–‡ä»¶ï¼š_EEPROM.h
+// ä½œè€…ï¼šåœæ™“æ—¸
+// ç‰ˆæœ¬ï¼š1.9.7
+// æ—¥æœŸï¼š2012å¹´2æœˆ10æ—¥
 /***************************************************************************/
 #ifndef _EEPROM_SELF_H_
 #define _EEPROM_SELF_H_
 
 void SaveRunParameter()
 {
-	cli(); //¹Ø±ÕËùÓĞÖĞ¶Ï
+	cli(); //å…³é—­æ‰€æœ‰ä¸­æ–­
 	if(eeprom_is_ready())
 	{
 		eeprom_write_byte(0x00, 0xCC);
@@ -26,12 +26,12 @@ void SaveRunParameter()
 		eeprom_write_byte(0x09, Display_BigNumber_Font);
 		eeprom_write_byte(0x10, Voice_Mode);
 	}
-	sei(); //Ê¹ÄÜÖĞ¶Ï
+	sei(); //ä½¿èƒ½ä¸­æ–­
 }
 
 void ReadRunParameter()
 {
-	cli(); //¹Ø±ÕËùÓĞÖĞ¶Ï
+	cli(); //å…³é—­æ‰€æœ‰ä¸­æ–­
 	if(eeprom_is_ready())
 	{
 		if(eeprom_read_byte(0x00) == 0xCC)
@@ -49,7 +49,7 @@ void ReadRunParameter()
 		}
 		SET_DISPLAY_LIGHT;
 	}
-	sei(); //Ê¹ÄÜÖĞ¶Ï
+	sei(); //ä½¿èƒ½ä¸­æ–­
 }
 
 #endif

@@ -1,18 +1,18 @@
 /***************************************************************************/
-// ³ÌĞò£ºLED3264µç×ÓÈÕÀú
-// Ä£¿é£ºµãÕóÆÁÏÔÊ¾Ä£¿é	
-// ÎÄ¼ş£º_Display.h
-// ×÷Õß£º²·Ïş•D
-// °æ±¾£º1.9.7
-// ÈÕÆÚ£º2012Äê2ÔÂ10ÈÕ
+// ç¨‹åºï¼šLED3264ç”µå­æ—¥å†
+// æ¨¡å—ï¼šç‚¹é˜µå±æ˜¾ç¤ºæ¨¡å—	
+// æ–‡ä»¶ï¼š_Display.h
+// ä½œè€…ï¼šåœæ™“æ—¸
+// ç‰ˆæœ¬ï¼š1.9.7
+// æ—¥æœŸï¼š2012å¹´2æœˆ10æ—¥
 /***************************************************************************/
 
 #ifndef _DISPLAY_H_
 #define _DISPLAY_H_
 
-volatile uint8 display_cnt; /*ÓÃÓÚ¶¨Ê±ÏÔÊ¾ÊıÂë¹ÜµÄÎ»Êı*/
+volatile uint8 display_cnt; /*ç”¨äºå®šæ—¶æ˜¾ç¤ºæ•°ç ç®¡çš„ä½æ•°*/
 
-uint8 display_buffer[496]; 	/*ÏÔÊ¾»º³åÇø*/
+uint8 display_buffer[496]; 	/*æ˜¾ç¤ºç¼“å†²åŒº*/
 uint8 display_buffer_second[20]; //second buffer
 uint8 display_buffer_temp[8];
 uint8 	isSecondCountShow;
@@ -261,7 +261,7 @@ void FreshDisplayBufferVoiceMode()
 	}
 }
 
-void FreshDisplayBufferAjustLightMode() //ÁÁ¶ÈÄ£Ê½
+void FreshDisplayBufferAjustLightMode() //äº®åº¦æ¨¡å¼
 {
 	clearScreen();
 	writeOneChinese(0, 0, 8);	
@@ -269,7 +269,7 @@ void FreshDisplayBufferAjustLightMode() //ÁÁ¶ÈÄ£Ê½
 	writeOneChinese(0, 16, 12);
 	writeOneChinese(2, 16, 11);
 	writeOneUnSCROLL(4,22,30);
-	if(display_light_Mode) //ÊÖ¶¯
+	if(display_light_Mode) //æ‰‹åŠ¨
 	{
 		writeOneChinese(6, 0, 25);
 	}
@@ -309,54 +309,54 @@ void FreshDisplayBufferChangeFont()
 	wirteOneBigNumber(5,0,3);
 }
 
-void FreshDisplayBufferAjustProofTime() //Ğ£¶ÔÊ±¼äÄ£Ê½
+void FreshDisplayBufferAjustProofTime() //æ ¡å¯¹æ—¶é—´æ¨¡å¼
 {
 	clearScreen();
 	writeOneChinese(0, 0, 29);
 	writeOneChinese(0, 16,13);	
-	writeOneUnSCROLL(6,22,26); //Ã¿
-	writeOneUnSCROLL(7,22,11);	//ÔÂ
-	if(AjustTimeMode) // ¼Ó
+	writeOneUnSCROLL(6,22,26); //æ¯
+	writeOneUnSCROLL(7,22,11);	//æœˆ
+	if(AjustTimeMode) // åŠ 
 	{
-		writeOneUnSCROLL(2,22,27);	 //¼Ó
+		writeOneUnSCROLL(2,22,27);	 //åŠ 
 	}
 	else
 	{
-		writeOneUnSCROLL(2,22,33);	//¼õ
+		writeOneUnSCROLL(2,22,33);	//å‡
 	}
 	wirteOneBigNumber(3,0,AjustTimeTen); 
 	wirteOneBigNumber(5,0,AjustTimeOne);
-	writeOneUnSCROLL(7,11,24); //·Ö
+	writeOneUnSCROLL(7,11,24); //åˆ†
 }
 
 void FreshDisplayBufferNormal()
 {
 	clearScreen();
-	///// 10Äê 11ÔÂ 12ÖÜ 13¶È 14Ò» 15¶ş 16Èı 17ËÄ 18Îå 19Áù 20ÈÕ 21µã 22¿Õ¸ñ
+	///// 10å¹´ 11æœˆ 12å‘¨ 13åº¦ 14ä¸€ 15äºŒ 16ä¸‰ 17å›› 18äº” 19å…­ 20æ—¥ 21ç‚¹ 22ç©ºæ ¼
 	
-	wirteOneBigNumber(0,0,HourTen ); 	//8 Ê±Ê®Î»
-	wirteOneBigNumber(2,0,HourOne );	//9 Ê±¸öÎ»
-	wirteOneBigNumber(4,3,MinuteTen );	//10 ·ÖÊ®Î»
-	wirteOneBigNumber(6,3,MinuteOne );	//11 ·Ö¸öÎ»
+	wirteOneBigNumber(0,0,HourTen ); 	//8 æ—¶åä½
+	wirteOneBigNumber(2,0,HourOne );	//9 æ—¶ä¸ªä½
+	wirteOneBigNumber(4,3,MinuteTen );	//10 åˆ†åä½
+	wirteOneBigNumber(6,3,MinuteOne );	//11 åˆ†ä¸ªä½
 	
-	writeOneSCROLL(0,23,YearThousand );		//0 ÄêÇ§Î»
-	writeOneSCROLL(1,23,YearHundred );		//1 Äê°ÙÎ»
-	writeOneSCROLL(2,23,YearTen );		//2 ÄêÊ®Î»
-	writeOneSCROLL(3,23,YearOne );		//3 Äê¸öÎ»
+	writeOneSCROLL(0,23,YearThousand );		//0 å¹´åƒä½
+	writeOneSCROLL(1,23,YearHundred );		//1 å¹´ç™¾ä½
+	writeOneSCROLL(2,23,YearTen );		//2 å¹´åä½
+	writeOneSCROLL(3,23,YearOne );		//3 å¹´ä¸ªä½
 	writeOneSCROLL(4,23,10);
-	writeOneSCROLL(5,23,MonthTen );		//4 ÔÂÊ®Î»
-	writeOneSCROLL(6,23,MonthOne );		//5 ÔÂ¸öÎ»
+	writeOneSCROLL(5,23,MonthTen );		//4 æœˆåä½
+	writeOneSCROLL(6,23,MonthOne );		//5 æœˆä¸ªä½
 	writeOneSCROLL(7,23,11);	
-	///// 10Äê 11ÔÂ 12ÖÜ 13¶È 14Ò» 15¶ş 16Èı 17ËÄ 18Îå 19Áù 20ÈÕ 21µã 22¿Õ¸ñ
-	writeOneSCROLL(0,24,DayTen );		//6 ÈÕÊ®Î»
-	writeOneSCROLL(1,24,DayOne );		//7 ÈÕ¸öÎ»
+	///// 10å¹´ 11æœˆ 12å‘¨ 13åº¦ 14ä¸€ 15äºŒ 16ä¸‰ 17å›› 18äº” 19å…­ 20æ—¥ 21ç‚¹ 22ç©ºæ ¼
+	writeOneSCROLL(0,24,DayTen );		//6 æ—¥åä½
+	writeOneSCROLL(1,24,DayOne );		//7 æ—¥ä¸ªä½
 	writeOneSCROLL(2,24,20);
 	writeOneSCROLL(4,24,12);
-	writeOneSCROLL(5,24,Week +13); 		//14 ĞÇÆÚ
-	writeOneSCROLL(7,24,TemperatureTen );		//15 ÎÂ¶ÈÊ®Î»
-	writeOneSCROLL(0,25,TemperatureOne );		//16 ÎÂ¶È¸öÎ»
+	writeOneSCROLL(5,24,Week +13); 		//14 æ˜ŸæœŸ
+	writeOneSCROLL(7,24,TemperatureTen );		//15 æ¸©åº¦åä½
+	writeOneSCROLL(0,25,TemperatureOne );		//16 æ¸©åº¦ä¸ªä½
 	writeOneSCROLL(1,25,21);	
-	writeOneSCROLL(2,25,TemperatureDecimal );		//17 ÎÂ¶ÈĞ¡Êı	
+	writeOneSCROLL(2,25,TemperatureDecimal );		//17 æ¸©åº¦å°æ•°	
 	writeOneSCROLL(3,25,13);	
 }
 
@@ -427,7 +427,7 @@ void display()
 	if(Mode == 0)
 	{
 		halfSecondCount ++;
-		if(halfSecondCount > 940) //µ½0.5s
+		if(halfSecondCount > 940) //åˆ°0.5s
 		{
 			halfSecondCount = 0;
 			if(isSecondCountShow)
@@ -445,7 +445,7 @@ void display()
 	*/
 	if(display_cnt > 5)
 	{
-		if(Mode == 0) //Õı³£ÏÔÊ¾Ä£Ê½ ÈÕÆÚÎÂ¶È¹ö¶¯
+		if(Mode == 0) //æ­£å¸¸æ˜¾ç¤ºæ¨¡å¼ æ—¥æœŸæ¸©åº¦æ»šåŠ¨
 		{
 			uint8 temp1 = currentMoveLeft>>3;
 			uint8 temp2 = currentMoveLeft<<5;
@@ -461,7 +461,7 @@ void display()
 			display_buffer_temp[7] = display_buffer_second[display_cnt+4];
 			ptr1 = display_buffer_temp;
 		}
-		else //ÉèÖÃÄ£Ê½ ²»¹ö¶¯
+		else //è®¾ç½®æ¨¡å¼ ä¸æ»šåŠ¨
 		{
 			ptr0 = &display_buffer[0+display_cnt*8];
 			ptr1 = &display_buffer[128+display_cnt*8];
@@ -687,7 +687,7 @@ void display()
 	}
 	else if(Display_color == 7)
 	{
-	/* ºì£¬ÂÌ£¬»Æ */
+	/* çº¢ï¼Œç»¿ï¼Œé»„ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -735,7 +735,7 @@ void display()
 	}
 	else if(Display_color == 8)
 	{
-	/*ºì£¬ÂÌ£¬À¶ */
+	/*çº¢ï¼Œç»¿ï¼Œè“ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -782,7 +782,7 @@ void display()
 	}
 	else if(Display_color == 9)
 	{
-	/* ÂÌ£¬À¶£¬×Ï */
+	/* ç»¿ï¼Œè“ï¼Œç´« */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -830,7 +830,7 @@ void display()
 	}
 	else if(Display_color == 10)
 	{
-	/* ÂÌ£¬À¶£¬»Æ */
+	/* ç»¿ï¼Œè“ï¼Œé»„ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -878,7 +878,7 @@ void display()
 	}
 	else if(Display_color == 11)
 	{
-	/* À¶£¬×Ï£¬»Æ */
+	/* è“ï¼Œç´«ï¼Œé»„ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -927,7 +927,7 @@ void display()
 	}
 	else if(Display_color == 12)
 	{
-	/* À¶£¬×Ï£¬Çà */
+	/* è“ï¼Œç´«ï¼Œé’ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -976,7 +976,7 @@ void display()
 	}
 	else if(Display_color == 13)
 	{
-	/* ×Ï£¬»Æ£¬Çà */
+	/* ç´«ï¼Œé»„ï¼Œé’ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -1027,7 +1027,7 @@ void display()
 	}
 	else if(Display_color == 14)
 	{
-	/* ×Ï£¬À¶£¬°× */
+	/* ç´«ï¼Œè“ï¼Œç™½ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -1078,7 +1078,7 @@ void display()
 	}
 	else if(Display_color == 15)
 	{
-	/* »Æ£¬Çà£¬°× */
+	/* é»„ï¼Œé’ï¼Œç™½ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -1130,7 +1130,7 @@ void display()
 	}
 	else if(Display_color == 16)
 	{
-	/* »Æ£¬ºì£¬ÂÌ */
+	/* é»„ï¼Œçº¢ï¼Œç»¿ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -1179,7 +1179,7 @@ void display()
 	}
 	else if(Display_color == 17)
 	{
-	/* Çà£¬°×£¬×Ï */
+	/* é’ï¼Œç™½ï¼Œç´« */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -1231,7 +1231,7 @@ void display()
 	}
 	else if(Display_color == 18)
 	{
-	/* Çà£¬À¶£¬ÂÌ */
+	/* é’ï¼Œè“ï¼Œç»¿ */
 		for(i=0;i<8;i++)
 		{
 			for(j=7;j>=0;j--)
@@ -1355,7 +1355,7 @@ void Show_welcome()
 	for(timer_count=0; timer_count< 5000; timer_count++)
 	{
 		display();
-		s_10us(10); //ÑÓ³Ù10ms
+		s_10us(10); //å»¶è¿Ÿ10ms
 	}
 	clearScreen();
 	Mode = 0;
