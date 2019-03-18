@@ -6466,13 +6466,13 @@ void Key_Init()
 	KEY_DOWN_DDR  &= ~(1<<KEY_DOWN_BIT);
     2c38:	a7 98       	cbi	0x14, 7	; 20
 	KEY_MODE_PORT |= 1<<KEY_MODE_BIT;
-    2c3a:	90 9a       	sbi	0x12, 0	; 18
+    2c3a:	ad 9a       	sbi	0x15, 5	; 21
 	KEY_MODE_DDR  &= ~(1<<KEY_MODE_BIT);
-    2c3c:	88 98       	cbi	0x11, 0	; 17
+    2c3c:	a5 98       	cbi	0x14, 5	; 20
 	KEY_DISPLAY_COLOR_PORT |= 1<<KEY_DISPLAY_COLOR_BIT;
-    2c3e:	91 9a       	sbi	0x12, 1	; 18
+    2c3e:	96 9a       	sbi	0x12, 6	; 18
 	KEY_DISPLAY_COLOR_DDR  &= ~(1<<KEY_DISPLAY_COLOR_BIT);
-    2c40:	89 98       	cbi	0x11, 1	; 17
+    2c40:	8e 98       	cbi	0x11, 6	; 17
 }
     2c42:	08 95       	ret
 
@@ -8107,7 +8107,7 @@ void clearScreen()
 	}
 
 	if(KEY_DISPLAY_COLOR_L) //显示颜色调节
-    35e0:	81 99       	sbic	0x10, 1	; 16
+    35e0:	86 99       	sbic	0x10, 6	; 16
     35e2:	16 c0       	rjmp	.+44     	; 0x3610 <Scan_Key+0xa2>
     35e4:	80 e2       	ldi	r24, 0x20	; 32
     35e6:	9e e4       	ldi	r25, 0x4E	; 78
@@ -8116,7 +8116,7 @@ void clearScreen()
 	{
 		_delay_ms(10);
 		if(KEY_DISPLAY_COLOR_L)
-    35ec:	81 99       	sbic	0x10, 1	; 16
+    35ec:	86 99       	sbic	0x10, 6	; 16
     35ee:	0e c0       	rjmp	.+28     	; 0x360c <Scan_Key+0x9e>
 		{
 			SPEEK_TIME_Status = 1;
@@ -8137,7 +8137,7 @@ void clearScreen()
     3608:	0e 94 71 1a 	call	0x34e2	; 0x34e2 <SaveRunParameter>
 		}
 		while(KEY_DISPLAY_COLOR_L);	
-    360c:	81 9b       	sbis	0x10, 1	; 16
+    360c:	86 9b       	sbis	0x10, 6	; 16
     360e:	fe cf       	rjmp	.-4      	; 0x360c <Scan_Key+0x9e>
 	}
 
@@ -8504,7 +8504,7 @@ void clearScreen()
 	}
 	//////////////////////////////////////////////////////////
 	if(KEY_MODE_L) //模式调节
-    382c:	80 99       	sbic	0x10, 0	; 16
+    382c:	9d 99       	sbic	0x13, 5	; 19
     382e:	51 c0       	rjmp	.+162    	; 0x38d2 <Scan_Key+0x364>
     3830:	80 e2       	ldi	r24, 0x20	; 32
     3832:	9e e4       	ldi	r25, 0x4E	; 78
@@ -8513,7 +8513,7 @@ void clearScreen()
 	{
 		_delay_ms(10);
 		if(KEY_MODE_L)
-    3838:	80 99       	sbic	0x10, 0	; 16
+    3838:	9d 99       	sbic	0x13, 5	; 19
     383a:	49 c0       	rjmp	.+146    	; 0x38ce <Scan_Key+0x360>
 		{
 			SPEEK_TIME_Status = 100; //按键音
@@ -8619,7 +8619,7 @@ void clearScreen()
 			} 
 		}
 		while(KEY_MODE_L);	
-    38ce:	80 9b       	sbis	0x10, 0	; 16
+    38ce:	9d 9b       	sbis	0x13, 5	; 19
     38d0:	fe cf       	rjmp	.-4      	; 0x38ce <Scan_Key+0x360>
 	}
 }
@@ -8652,7 +8652,7 @@ int main()
 	ReadTemputer();
     38f4:	0e 94 ac 08 	call	0x1158	; 0x1158 <ReadTemputer>
 	if(KEY_MODE_L) //判断是否加载初始化参数
-    38f8:	80 99       	sbic	0x10, 0	; 16
+    38f8:	9d 99       	sbic	0x13, 5	; 19
     38fa:	1c c0       	rjmp	.+56     	; 0x3934 <main+0x5a>
     38fc:	80 e2       	ldi	r24, 0x20	; 32
     38fe:	9e e4       	ldi	r25, 0x4E	; 78
@@ -8661,7 +8661,7 @@ int main()
 	{
 		_delay_ms(10);
 		if(KEY_MODE_L)
-    3904:	80 99       	sbic	0x10, 0	; 16
+    3904:	9d 99       	sbic	0x13, 5	; 19
     3906:	16 c0       	rjmp	.+44     	; 0x3934 <main+0x5a>
 		{
 			display_light_Mode = 	1;
